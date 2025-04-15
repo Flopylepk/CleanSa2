@@ -1,15 +1,20 @@
 import javax.swing.JOptionPane;
 
 import enums.Opcion1;
+import enums.OpcionAdmin;
 import enums.OpcionCliente;
 import enums.OpcionClientes;
+import enums.OpcionEnvios;
 import enums.OpcionGeneral;
+import enums.OpcionGeneralAD;
+import enums.OpcionVenta;
 
 public class Main {
 
 	public static void main(String[] args) {
 		int opcion1=0;
 		int opciongeneral=0;
+		int opciongeneralad=0;
 		int opcioncliente=0;
 		int opcionadmin=0;
 		int opcionclientes=0;
@@ -163,7 +168,107 @@ public class Main {
 			case 1:
 				//Admins
 				do {
-					
+					opcionadmin=JOptionPane.showOptionDialog(null, "Elija que tipo de admin quiere ser", null, 0, 0, null, OpcionAdmin.values(), OpcionAdmin.values());
+					switch (opcionadmin) {
+					case 0:
+						//ventas
+						JOptionPane.showMessageDialog(null, "Bienvenido al registro y login de los administradores de ventas");
+						do {
+							opciongeneralad=JOptionPane.showOptionDialog(null, "Elija una opcion", null, 0, 0, null, OpcionGeneralAD.values(), OpcionGeneralAD.values());
+							switch (opciongeneralad) {
+							case 0:
+								JOptionPane.showMessageDialog(null, "aca va el login de ventas");
+								JOptionPane.showMessageDialog(null, "cuando el login es correcto pasa al menu principal");
+								do {
+									opcionadminventas=JOptionPane.showOptionDialog(null, "Menu principal, elija una opcion", null, 0, 0, null, OpcionVenta.values(), OpcionVenta.values());
+									switch (opcionadminventas) {
+									case 0:
+										//Cargar_productos
+										JOptionPane.showMessageDialog(null, "le vendedor podra cargar productos nuevos distinguendolos entre peligrosos y no peligrosos");
+										break;
+									case 1:
+										//Rellenar_stock
+										JOptionPane.showMessageDialog(null, "el vendedor podra cargar estock al ya existente");
+										break;
+									case 2:
+										//Eliminar_productos
+										JOptionPane.showMessageDialog(null, "el vendedor podra eliminar productos a la lista ya existente");
+										break;
+									case 3:
+										//Modificar_productos
+										JOptionPane.showMessageDialog(null, "el vendedor podra modificar productos a la lista ya existente");
+										break;
+									case 4:
+										//Ver_clientes
+										JOptionPane.showMessageDialog(null, "el vendedor podra ver a los clientes distinguiendolos entre empresas y generales");
+										break;
+									case 5:
+										//Ver_historial
+										JOptionPane.showMessageDialog(null, "el vendedor podra ver el historial de compras distingiendolo entre en proceso, cancelador y realizados");
+										break;
+									case 6:
+										JOptionPane.showMessageDialog(null, "nos vemos la proxima, gracias por usar CleanSA");
+										break;
+
+									}
+								} while (opcionadminventas!=6);
+								break;
+							case 1:
+								JOptionPane.showMessageDialog(null, "nos vemos la proxima, gracias por usar CleanSA");
+								break;
+
+							}
+						} while (opciongeneralad!=1);
+						break;
+					case 1:
+						//envios
+						
+						JOptionPane.showMessageDialog(null, "Bienvenido al registro y login de los administradores de Envios");
+						do {
+							opciongeneralad=JOptionPane.showOptionDialog(null, "Elija una opcion", null, 0, 0, null, OpcionGeneralAD.values(), OpcionGeneralAD.values());
+							switch (opciongeneralad) {
+							
+							case 0:
+								JOptionPane.showMessageDialog(null, "aca va el login de Envios");
+								JOptionPane.showMessageDialog(null, "cuando el login es correcto pasa al menu principal");
+								do {
+									opcionadminenvios=JOptionPane.showOptionDialog(null, "Menu principal, elija una opcion", null, 0, 0, null, OpcionEnvios.values(), OpcionEnvios.values());
+									switch (opcionadminenvios) {
+									case 0:
+										//Cargar_Camion
+										JOptionPane.showMessageDialog(null, "el de envios va a poder cargar el camion simpre que los pedidos sean realizados y no hallas sido enviados");
+										break;
+									case 1:
+										//Enviar_camion
+										JOptionPane.showMessageDialog(null, "el de ventas va a poder enviar el camion siempre que este tenga algo y el carrito cambiara a enviado");
+										break;
+									case 2:
+										//Ver_estado_de_envio
+										JOptionPane.showMessageDialog(null, "el de ventas podra ver si los pedidos realizados estan enviados o no");
+										break;
+									case 3:
+										//Ver_camion
+										JOptionPane.showMessageDialog(null, "el de ventas va a poder ver los dartos del camion");
+										break;
+									case 4:
+										JOptionPane.showMessageDialog(null, "nos vemos la proxima, gracias por usar CleanSA");
+										break;
+
+									}
+								} while (opcionadminenvios!=4);
+								break;
+							case 1:
+								JOptionPane.showMessageDialog(null, "nos vemos la proxima, gracias por usar CleanSA");
+								break;
+
+							}
+						} while (opciongeneralad!=1);
+						
+						break;
+					case 2:
+						JOptionPane.showMessageDialog(null, "gracias por entrar a la parte de administrador, nos vemos la proxima");
+						break;
+					}
 				} while (opcionadmin!=2);
 				break;
 			case 2:
