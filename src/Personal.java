@@ -1,11 +1,13 @@
+import javax.swing.JOptionPane;
 
 public class Personal extends Cliente{
 	private String dni;
 
-	public Personal(String nombre, String apellido, String direccion, Boolean tipo, String dni) {
-		super(nombre, apellido, direccion, tipo);
+	public Personal(String nombre, String apellido, String contrasena ,String direccion,String dni ,Boolean tipo) {
+		super(nombre, apellido,contrasena,direccion);
 		this.dni = dni;
 	}
+			
 
 	public String getDni() {
 		return dni;
@@ -14,6 +16,21 @@ public class Personal extends Cliente{
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
+
+
+	@Override
+	public void Registro_Cliente(Cliente cliente) {
+		
+		String nombre = JOptionPane.showInputDialog(null, "Ingrese su nombre:");
+	 	String apellido = JOptionPane.showInputDialog(null, "Ingrese su apellido:");
+	 	String contrasena = JOptionPane.showInputDialog(null, "Ingrese su contraseña:");
+		String direccion = JOptionPane.showInputDialog(null, "Ingrese su dirección:");
+		String dni = JOptionPane.showInputDialog(null, "Ingrese su DNI:");
+		Boolean tipo = false;
+		Personal nuevoClienteP = new Personal(nombre, apellido,contrasena,direccion,dni,tipo);
+		Cliente.getClientes().add(nuevoClienteP);
+	}
 	
 
 }
+

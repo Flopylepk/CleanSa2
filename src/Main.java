@@ -20,7 +20,9 @@ public class Main {
 		int opcionclientes=0;
 		int opcionadminenvios=0;
 		int opcionadminventas=0;
-		
+		Cliente cliente = new Cliente("", "", "", ""); 
+		Personal personal = new Personal("","","","","",null);
+		Empresa empresa = new Empresa("","","","","",null);
 		do {
 			opcion1=JOptionPane.showOptionDialog(null, "Elija una opcion", null, 0, 0, null, Opcion1.values(), Opcion1.values());
 			switch (opcion1) {
@@ -37,7 +39,9 @@ public class Main {
 							switch (opciongeneral) {
 							case 0:
 								//registrogeneral
-								JOptionPane.showMessageDialog(null, "aca va el registro del cliente general");
+								personal.Registro_Cliente(cliente);
+								
+								
 								break;
 							case 1:
 								//logingeneral
@@ -102,7 +106,9 @@ public class Main {
 							switch (opciongeneral) {
 							case 0:
 								//registroempresas
-								JOptionPane.showMessageDialog(null, "aca va el registro de las empresas");
+							
+								empresa.Registro_Cliente(cliente);
+								
 								break;
 							case 1:
 								//loginempresas

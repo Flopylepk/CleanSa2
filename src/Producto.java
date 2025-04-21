@@ -1,4 +1,4 @@
-
+import java.util.LinkedList;
 
 public class Producto {
 	private String nombre;
@@ -6,7 +6,7 @@ public class Producto {
 	private double precio;
 	private String categoria;
 	private boolean peligroso;
-	private LinkedList<Producto> producto;
+	private static LinkedList<Producto> producto = new LinkedList<Producto>() ;
 	public Producto(String nombre, int stcok, double precio, String categoria, boolean peligroso) {
 		super();
 		this.nombre = nombre;
@@ -45,11 +45,11 @@ public class Producto {
 	public void setPeligroso(boolean peligroso) {
 		this.peligroso = peligroso;
 	}
-	public LinkedList<Producto> getProducto() {
+	public static LinkedList<Producto> getProducto() {
 		return producto;
 	}
-	public void setProducto(LinkedList<Producto> producto) {
-		this.producto = producto;
+	public static void setProducto(LinkedList<Producto> producto) {
+		Producto.producto = producto;
 	}
 	
 	
