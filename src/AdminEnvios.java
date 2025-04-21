@@ -1,6 +1,6 @@
-import javax.swing.JOptionPane;
 
-public class AdminEnvios extends Administrador {
+
+public class AdminEnvios extends Administrador implements Validador{
 
 	private String id_envios;
 
@@ -17,10 +17,10 @@ public class AdminEnvios extends Administrador {
 		this.id_envios = id_envios;
 	}
 
-	@Override
-	public boolean logIn() {
+	
+	public boolean logIn(AdminEnvios admin) {
 		String numero="";
-		numero=JOptionPane.showInputDialog("Ingrese su numero");
+		numero=admin.validarCaracteres("Ingrese su numero");
 		if (numero.equalsIgnoreCase(id_envios)) {
 			return true;
 		}else {

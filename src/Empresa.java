@@ -1,6 +1,6 @@
 import javax.swing.JOptionPane;
 
-public class Empresa extends Cliente {
+public class Empresa extends Cliente implements Validador {
 	private String gerente;
 
 	public Empresa(String nombre, String apellido,String contrasena ,String direccion,String gerente ,Boolean tipo, String dni) {
@@ -24,13 +24,13 @@ public class Empresa extends Cliente {
 
 	@Override
 	public void Registro_Cliente(Cliente cliente) {
-		String nombre = JOptionPane.showInputDialog(null, "Ingrese su nombre:");
-	 	String apellido = JOptionPane.showInputDialog(null, "Ingrese su apellido:");
-	 	String contrasena = JOptionPane.showInputDialog(null, "Ingrese su contraseña:");
-		String direccion = JOptionPane.showInputDialog(null, "Ingrese su dirección:");
-		String gerente = JOptionPane.showInputDialog(null, "Ingrese su GERENTE:");
+		String nombre = cliente.validarCaracteres("Ingrese nombre");
+	 	String apellido = cliente.validarCaracteres("Ingrese apellido");
+	 	String contrasena = cliente.validarCaracteres("Ingrese contraseña");
+		String direccion = cliente.validarCaracteres("Ingrese su dirección");
+		String gerente = cliente.validarCaracteres("Ingrese nombre de su gerente");
 		Boolean tipo = true;
-		String dni = JOptionPane.showInputDialog("Ingrese su DNI");
+		String dni = cliente.validarCaracteres("Ingrese DNI");
 		Empresa nuevoClienteE = new Empresa(nombre, apellido,contrasena,direccion,gerente,tipo,dni);
 		
 		

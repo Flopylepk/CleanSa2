@@ -50,7 +50,7 @@ public class Main {
 							case 1:
 								//logingeneral
 								
-								logear=personal.LogIn();
+								logear=personal.LogIn(cliente);
 								if (logear=false) {
 									JOptionPane.showMessageDialog(null, "Error 404");
 								} else {
@@ -119,7 +119,7 @@ public class Main {
 								break;
 							case 1:
 								//loginempresas
-								logear=empresa.LogIn();
+								logear=empresa.LogIn(cliente);
 								if (logear=false) {
 									JOptionPane.showMessageDialog(null, "Error 404");
 								} else {

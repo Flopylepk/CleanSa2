@@ -2,7 +2,7 @@ import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
-public class Cliente {
+public class Cliente implements Validador {
 	
 	private String nombre;
 	
@@ -76,11 +76,11 @@ public class Cliente {
 	
 	}
 	
-	public boolean LogIn () {
+	public boolean LogIn (Cliente cliente) {
 	 String DNI="";
 	 String pass= "";
-	 DNI =JOptionPane.showInputDialog("Ingrese su dni");
-	 pass = JOptionPane.showInputDialog("Ingrese su contraseña");
+	 DNI =cliente.validarCaracteres("Ingrese su DNI");
+	 pass = cliente.validarCaracteres("Ingrese contraseña");
 	 if (Cliente.getClientes().isEmpty()) {
 		JOptionPane.showMessageDialog(null, "NO hay clientes registrados");
 			return false;

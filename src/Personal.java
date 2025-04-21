@@ -1,6 +1,6 @@
 import javax.swing.JOptionPane;
 
-public class Personal extends Cliente{
+public class Personal extends Cliente {
 	private String apellido;
 
 	public Personal(String nombre, String apellido, String contrasena ,String direccion,String dni ,Boolean tipo) {
