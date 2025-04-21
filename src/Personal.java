@@ -28,7 +28,16 @@ public class Personal extends Cliente{
 		String dni = JOptionPane.showInputDialog(null, "Ingrese su DNI:");
 		Boolean tipo = false;
 		Personal nuevoClienteP = new Personal(nombre, apellido,contrasena,direccion,dni,tipo);
+		for (Cliente item  : Cliente.getClientes()) {
+			if (item.getNombre().equals(nuevoClienteP.getNombre()) && item.getApellido().equals(nuevoClienteP.getApellido())
+					&& item.getDireccion().equals(nuevoClienteP.getDireccion())) {
+				JOptionPane.showMessageDialog(null, "Ya estas registrado");
+				
+			}
+			
+		}
 		Cliente.getClientes().add(nuevoClienteP);
+		
 	}
 	
 
