@@ -1,19 +1,23 @@
 import java.util.LinkedList;
 
+import javax.swing.JOptionPane;
+
 public class Cliente {
 	
 	private String nombre;
-	private String apellido;
+	
 	private String contrasena;
 	private String direccion;
+	private String dni;
 	private static LinkedList<Cliente>  clientes = new LinkedList<Cliente>();
 	private Boolean tipo;
 		
-	public Cliente(String nombre, String apellido, String contrasena,String direccion) {
+	public Cliente(String nombre, String contrasena,String direccion,String dni) {
 		this.nombre = nombre;
-		this.apellido = apellido;
+	
 		this.direccion = direccion;
 		this.contrasena = contrasena;
+		this.dni= dni;
 		
 		}
 	
@@ -25,13 +29,6 @@ public class Cliente {
 		this.nombre = nombre;
 	}
 
-	public String getApellido() {
-		return apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
 
 	public String getContrasena() {
 		return contrasena;
@@ -65,12 +62,48 @@ public class Cliente {
 		this.tipo = tipo;
 	}
 
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+	
+	
 	public void Registro_Cliente(Cliente cliente) {
 		   
 	
+	}
+	
+	public boolean LogIn () {
+	 String DNI="";
+	 String pass= "";
+	 DNI =JOptionPane.showInputDialog("Ingrese su dni");
+	 pass = JOptionPane.showInputDialog("Ingrese su contraseña");
+	 if (Cliente.getClientes().isEmpty()) {
+		JOptionPane.showMessageDialog(null, "NO hay clientes registrados");
+			return false;
+		}else {
+			for (Cliente item  : Cliente.getClientes()) {
+				if (item.getDni().equalsIgnoreCase(dni) && item.getContrasena().equals(pass) ) {
+					JOptionPane.showMessageDialog(null, "Bienvenido al menu");
+					return true;
+					
+				}
+				
+			}
+			
+			return false;
+		}
+	 
+	 
+		
+		
+	}
 
 	
-	}
+	
 	
 	
 	

@@ -1,3 +1,4 @@
+import javax.swing.JOptionPane;
 
 public class AdminVentas extends Administrador {
 	
@@ -13,15 +14,20 @@ public class AdminVentas extends Administrador {
 		this.id_ventas = id_ventas;
 	}
 	@Override
-	public void logIn() {
-		// TODO Auto-generated method stub
-		super.logIn();
-	}
+	public boolean logIn() {
+		String numero="";
+		numero=JOptionPane.showInputDialog("Ingrese su numero");
+		if (numero.equalsIgnoreCase(id_ventas)) {
+			return true;
+		}else {
+			
+			return false;
+		}
 	
 	
 	
 	
 
-	
+	}
 
 }

@@ -20,9 +20,13 @@ public class Main {
 		int opcionclientes=0;
 		int opcionadminenvios=0;
 		int opcionadminventas=0;
-		Cliente cliente = new Cliente("", "", "", ""); 
+		Boolean logear;
+		Cliente cliente = new Cliente("", "", "", "");
 		Personal personal = new Personal("","","","","",null);
-		Empresa empresa = new Empresa("","","","","",null);
+		Empresa empresa = new Empresa("","","","",null, null, null);
+		AdminVentas ventas = new AdminVentas ("Franco", "Gaggero", "43");
+
+		AdminEnvios envios = new AdminEnvios ("Geronimo", "Giliberti", "20");
 		do {
 			opcion1=JOptionPane.showOptionDialog(null, "Elija una opcion", null, 0, 0, null, Opcion1.values(), Opcion1.values());
 			switch (opcion1) {
@@ -45,9 +49,11 @@ public class Main {
 								break;
 							case 1:
 								//logingeneral
-								JOptionPane.showMessageDialog(null, "aca va el login del cliente general");
-								JOptionPane.showMessageDialog(null, "cuando el login es correcto pasa al menu principal");
 								
+								logear=personal.LogIn();
+								if (logear=false) {
+									JOptionPane.showMessageDialog(null, "Error 404");
+								} else {
 								do {
 									opcionclientes=JOptionPane.showOptionDialog(null, "Menu principal, elija una opcion", null, 0, 0, null, OpcionClientes.values(), OpcionClientes.values());
 									switch (opcionclientes) {
@@ -89,6 +95,7 @@ public class Main {
 										break;
 									}
 								} while (opcionclientes!=8);
+							}
 								
 								break;
 
@@ -112,8 +119,11 @@ public class Main {
 								break;
 							case 1:
 								//loginempresas
-								JOptionPane.showMessageDialog(null, "aca va el login de las empresas");
-								JOptionPane.showMessageDialog(null, "cuando el login es correcto pasa al menu principal");
+								logear=empresa.LogIn();
+								if (logear=false) {
+									JOptionPane.showMessageDialog(null, "Error 404");
+								} else {
+									
 								do {
 									opcionclientes=JOptionPane.showOptionDialog(null, "Menu principal, elija una opcion", null, 0, 0, null, OpcionClientes.values(), OpcionClientes.values());
 									switch (opcionclientes) {
@@ -155,6 +165,7 @@ public class Main {
 										break;
 									}
 								} while (opcionclientes!=8);
+							}
 								break;
 
 							case 2:
@@ -178,17 +189,20 @@ public class Main {
 					switch (opcionadmin) {
 					case 0:
 						//ventas
-						JOptionPane.showMessageDialog(null, "Bienvenido al registro y login de los administradores de ventas");
 						do {
 							opciongeneralad=JOptionPane.showOptionDialog(null, "Elija una opcion", null, 0, 0, null, OpcionGeneralAD.values(), OpcionGeneralAD.values());
 							switch (opciongeneralad) {
 							case 0:
-								JOptionPane.showMessageDialog(null, "aca va el login de ventas");
-								JOptionPane.showMessageDialog(null, "cuando el login es correcto pasa al menu principal");
+								logear=ventas.logIn();
+								if (logear=false) {
+									JOptionPane.showMessageDialog(null, "Error 404");
+								}else {
+									
+									
 								do {
 									opcionadminventas=JOptionPane.showOptionDialog(null, "Menu principal, elija una opcion", null, 0, 0, null, OpcionVenta.values(), OpcionVenta.values());
 									switch (opcionadminventas) {
-									case 0:
+								 	case 0:
 										//Cargar_productos
 										JOptionPane.showMessageDialog(null, "le vendedor podra cargar productos nuevos distinguendolos entre peligrosos y no peligrosos");
 										break;
@@ -218,6 +232,7 @@ public class Main {
 
 									}
 								} while (opcionadminventas!=6);
+							}
 								break;
 							case 1:
 								JOptionPane.showMessageDialog(null, "nos vemos la proxima, gracias por usar CleanSA");
@@ -235,8 +250,11 @@ public class Main {
 							switch (opciongeneralad) {
 							
 							case 0:
-								JOptionPane.showMessageDialog(null, "aca va el login de Envios");
-								JOptionPane.showMessageDialog(null, "cuando el login es correcto pasa al menu principal");
+								logear=envios.logIn();
+								if (logear=false) {
+									JOptionPane.showMessageDialog(null, "Error 404");
+								}else {
+									
 								do {
 									opcionadminenvios=JOptionPane.showOptionDialog(null, "Menu principal, elija una opcion", null, 0, 0, null, OpcionEnvios.values(), OpcionEnvios.values());
 									switch (opcionadminenvios) {
@@ -262,6 +280,7 @@ public class Main {
 
 									}
 								} while (opcionadminenvios!=4);
+							}
 								break;
 							case 1:
 								JOptionPane.showMessageDialog(null, "nos vemos la proxima, gracias por usar CleanSA");

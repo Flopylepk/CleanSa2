@@ -1,21 +1,25 @@
 import javax.swing.JOptionPane;
 
 public class Personal extends Cliente{
-	private String dni;
+	private String apellido;
 
 	public Personal(String nombre, String apellido, String contrasena ,String direccion,String dni ,Boolean tipo) {
-		super(nombre, apellido,contrasena,direccion);
-		this.dni = dni;
+		super(nombre, dni,contrasena,direccion);
+		this.apellido = apellido;
 	}
 			
+ 
 
-	public String getDni() {
-		return dni;
+
+	public String getApellido() {
+		return apellido;
 	}
 
-	public void setDni(String dni) {
-		this.dni = dni;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
+
+
 
 
 	@Override
@@ -28,15 +32,22 @@ public class Personal extends Cliente{
 		String dni = JOptionPane.showInputDialog(null, "Ingrese su DNI:");
 		Boolean tipo = false;
 		Personal nuevoClienteP = new Personal(nombre, apellido,contrasena,direccion,dni,tipo);
-		for (Cliente item  : Cliente.getClientes()) {
-			if (item.getNombre().equals(nuevoClienteP.getNombre()) && item.getApellido().equals(nuevoClienteP.getApellido())
-					&& item.getDireccion().equals(nuevoClienteP.getDireccion())) {
-				JOptionPane.showMessageDialog(null, "Ya estas registrado");
+		if (Cliente.getClientes().isEmpty()) {
+			Cliente.getClientes().add(nuevoClienteP);
+			return;
+		}else {
+			for (Cliente item  : Cliente.getClientes()) {
+				if (item.getDni().equalsIgnoreCase(dni) ) {
+					JOptionPane.showMessageDialog(null, "Ya estas registrado");
+					return;
+					
+				}
 				
 			}
-			
+			Cliente.getClientes().add(nuevoClienteP);
 		}
-		Cliente.getClientes().add(nuevoClienteP);
+	
+		
 		
 	}
 	

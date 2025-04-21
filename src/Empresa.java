@@ -1,20 +1,26 @@
 import javax.swing.JOptionPane;
 
 public class Empresa extends Cliente {
-	private String nro;
+	private String gerente;
 
-	public Empresa(String nombre, String apellido,String contrasena ,String direccion,String nro ,Boolean tipo) {
-		super(nombre, apellido, contrasena ,direccion);
-		this.nro = nro;
+	public Empresa(String nombre, String apellido,String contrasena ,String direccion,String gerente ,Boolean tipo, String dni) {
+		super(nombre,  contrasena ,direccion, dni);
+		this.gerente = gerente;
 	}
 
-	public String getNro() {
-		return nro;
+ 
+
+	public String getGerente() {
+		return gerente;
 	}
 
-	public void setNro(String nro) {
-		this.nro = nro;
+
+
+	public void setGerente(String gerente) {
+		this.gerente = gerente;
 	}
+
+
 
 	@Override
 	public void Registro_Cliente(Cliente cliente) {
@@ -22,10 +28,26 @@ public class Empresa extends Cliente {
 	 	String apellido = JOptionPane.showInputDialog(null, "Ingrese su apellido:");
 	 	String contrasena = JOptionPane.showInputDialog(null, "Ingrese su contraseña:");
 		String direccion = JOptionPane.showInputDialog(null, "Ingrese su dirección:");
-		String nro = JOptionPane.showInputDialog(null, "Ingrese su CUIT:");
+		String gerente = JOptionPane.showInputDialog(null, "Ingrese su GERENTE:");
 		Boolean tipo = true;
-		Empresa nuevoClienteE = new Empresa(nombre, apellido,contrasena,direccion,nro,tipo);
-		Cliente.getClientes().add(nuevoClienteE);
+		String dni = JOptionPane.showInputDialog("Ingrese su DNI");
+		Empresa nuevoClienteE = new Empresa(nombre, apellido,contrasena,direccion,gerente,tipo,dni);
+		
+		
+		if (Cliente.getClientes().isEmpty()) {
+			Cliente.getClientes().add(nuevoClienteE);
+			return;
+		}else {
+			for (Cliente item  : Cliente.getClientes()) {
+				if (item.getDni().equalsIgnoreCase(dni) ) {
+					JOptionPane.showMessageDialog(null, "Ya estas registrado");
+					return;
+					
+				}
+				
+			}
+			Cliente.getClientes().add(nuevoClienteE);
+		}
 	}
 	
 	
