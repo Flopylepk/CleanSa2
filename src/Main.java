@@ -196,7 +196,7 @@ public class Main {
 							opciongeneralad=JOptionPane.showOptionDialog(null, "Elija una opcion", null, 0, 0, null, OpcionGeneralAD.values(), OpcionGeneralAD.values());
 							switch (opciongeneralad) {
 							case 0:
-								logear=ventas.logIn();
+								logear=ventas.logIn(ventas);
 								if (logear=false) {
 									JOptionPane.showMessageDialog(null, "Error 404");
 								}else
@@ -253,8 +253,8 @@ public class Main {
 							switch (opciongeneralad) {
 							
 							case 0:
-								logear=envios.logIn();
-								if (logear=false) {
+								logear=envios.logIn(envios);
+								if (logear==false) {
 									JOptionPane.showMessageDialog(null, "Error 404");
 								}else {
 									

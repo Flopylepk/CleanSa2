@@ -44,9 +44,10 @@ public interface Validador {
 	//////VALIDADOR PASSWORD MEJORAR!!!
 	default String validarPassword(String mensaje) {
 	    String palabra = mensaje; ///ESTA SERIA LA CONTRA
-	    boolean tieneNumero = false;
-	    boolean tieneMayuscula = false;
-	    boolean tieneEspecial = false;
+	    boolean error = false;
+	    int tieneNumero=0;
+	    int tieneMayuscula=0;
+	    int tieneEspecial=0;
 	    
 	   
 	    
@@ -56,36 +57,47 @@ public interface Validador {
 
 	    if (palabra.length() < 8) {
 	        JOptionPane.showMessageDialog(null, "Debe tener 8 o más caracteres");
-	        return palabra;
+	        error=false;
 	    }else {
-			
+	    	for (char c : palabra.toCharArray()) {
+		        if (Character.isDigit(c)) {
+		        	tieneNumero++;
+		        } else if (Character.isUpperCase(c)) {
+		        	tieneMayuscula++;
+		        } else if (!Character.isLetterOrDigit(c)) {
+		        	tieneEspecial++;
+		        }
+		        
+		    }
+
+		    if (tieneNumero==0|| tieneMayuscula==0 || tieneEspecial==0) {
+		        JOptionPane.showMessageDialog(null, "se produjo un  error");
+		        error=false;
+		       
+		    }else {
+		    	error=true;
+			}
+		    
+		    if (tieneNumero==0) {
+		        JOptionPane.showMessageDialog(null, "Debe contener al menos un número");
+		        
+		    }
+		    if (tieneMayuscula==0) {
+		        JOptionPane.showMessageDialog(null, "Debe contener al menos una letra mayúscula");
+		        
+		    }
+		    
+		    if (tieneEspecial==0) {
+		        JOptionPane.showMessageDialog(null, "Debe contener al menos un carácter especial");
+		    }
 		}
 
-	    for (char c : palabra.toCharArray()) {
-	        if (Character.isDigit(c)) {
-	            tieneNumero = true;
-	        } else if (Character.isUpperCase(c)) {
-	            tieneMayuscula = true;
-	        } else if (!Character.isLetterOrDigit(c)) {
-	            tieneEspecial = true;
-	        }
-	        
-	    }
+	    if (error==false) {
+			mensaje="se produjo un error, ingrese la contraseña nuevamente";
+		}
+	    
 
-	    if (!tieneNumero) {
-	        JOptionPane.showMessageDialog(null, "Debe contener al menos un número");
-	       
-	    }
-	    if (!tieneMayuscula) {
-	        JOptionPane.showMessageDialog(null, "Debe contener al menos una letra mayúscula");
-	        
-	    }
-	    if (!tieneEspecial) {
-	        JOptionPane.showMessageDialog(null, "Debe contener al menos un carácter especial");
-	        
-	    }
-
-		} while (tieneNumero==true || tieneMayuscula == true || tieneEspecial == true );
+		} while (error==false);
 	    JOptionPane.showMessageDialog(null, "La contraseña es válida");
 	    return palabra; 
 	}

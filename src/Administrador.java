@@ -20,8 +20,6 @@ public class Administrador {
 		this.apellido = apellido;
 	}
 	
-	public boolean logIn () {
-	return false;	
-	}
+	
 
 }
