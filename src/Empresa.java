@@ -24,14 +24,14 @@ public class Empresa extends Cliente implements Validador {
 
 	@Override
 	public void Registro_Cliente(Cliente cliente) {
-		String nombre = cliente.validarCaracteres("Ingrese nombre");
-	 	String apellido = cliente.validarCaracteres("Ingrese apellido");
+		String nombre =validarCaracteres("Ingrese nombre");
+	 	String apellido = validarCaracteres("Ingrese apellido");
 	 	/////CAMBIAR POR VALIDADOR ESPECIFICO DE LA PASSWORD
-	 	String contrasena = cliente.validarPassword("Ingrese contraseña");
-		String direccion = cliente.validarCaracteres("Ingrese su dirección");
-		String gerente = cliente.validarCaracteres("Ingrese nombre de su gerente");
+	 	String contrasena = validarPassword("Ingrese contraseña");
+		String direccion = validarCaracteres("Ingrese su dirección");
+		String gerente = validarCaracteres("Ingrese nombre de su gerente");
 		Boolean tipo = true;
-		String dni = cliente.validarCaracteres("Ingrese DNI");
+		String dni = validarCaracteres("Ingrese DNI");
 		Empresa nuevoClienteE = new Empresa(nombre, apellido,contrasena,direccion,gerente,tipo,dni);
 		
 		

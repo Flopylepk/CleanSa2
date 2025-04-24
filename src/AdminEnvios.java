@@ -20,7 +20,7 @@ public class AdminEnvios extends Administrador implements Validador{
 	
 	public boolean logIn(AdminEnvios admin) {
 		String numero="";
-		numero=admin.validarCaracteres("Ingrese su numero");
+		numero=validarCaracteres("Ingrese su numero");
 		if (numero.equalsIgnoreCase(id_envios)) {
 			return true;
 		}else {
