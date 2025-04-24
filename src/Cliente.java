@@ -80,6 +80,7 @@ public class Cliente implements Validador {
 	 String DNI="";
 	 String pass= "";
 	 DNI =cliente.validarCaracteres("Ingrese su DNI");
+	 ///LUEGO HAY QUE REEMPLAZAR ESTA POR LA FUNCION ESPECIFICA PARA LA PASSWORD
 	 pass = cliente.validarCaracteres("Ingrese contraseña");
 	 if (Cliente.getClientes().isEmpty()) {
 		JOptionPane.showMessageDialog(null, "NO hay clientes registrados");

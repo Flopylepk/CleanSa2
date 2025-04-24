@@ -26,6 +26,7 @@ public class Empresa extends Cliente implements Validador {
 	public void Registro_Cliente(Cliente cliente) {
 		String nombre = cliente.validarCaracteres("Ingrese nombre");
 	 	String apellido = cliente.validarCaracteres("Ingrese apellido");
+	 	/////CAMBIAR POR VALIDADOR ESPECIFICO DE LA PASSWORD
 	 	String contrasena = cliente.validarCaracteres("Ingrese contraseña");
 		String direccion = cliente.validarCaracteres("Ingrese su dirección");
 		String gerente = cliente.validarCaracteres("Ingrese nombre de su gerente");

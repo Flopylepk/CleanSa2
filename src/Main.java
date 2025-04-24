@@ -12,6 +12,9 @@ import enums.OpcionVenta;
 public class Main {
 
 	public static void main(String[] args) {
+		
+	 
+		
 		int opcion1=0;
 		int opciongeneral=0;
 		int opciongeneralad=0;
@@ -23,7 +26,7 @@ public class Main {
 		Boolean logear;
 		Cliente cliente = new Cliente("", "", "", "");
 		Personal personal = new Personal("","","","","",null);
-		Empresa empresa = new Empresa("","","","",null, null, null);
+		Empresa empresa = new Empresa("","","","",null, null, null); 
 		AdminVentas ventas = new AdminVentas ("Franco", "Gaggero", "43");
 
 		AdminEnvios envios = new AdminEnvios ("Geronimo", "Giliberti", "20");
@@ -196,7 +199,7 @@ public class Main {
 								logear=ventas.logIn();
 								if (logear=false) {
 									JOptionPane.showMessageDialog(null, "Error 404");
-								}else {
+								}else
 									
 									
 								do {
@@ -232,14 +235,14 @@ public class Main {
 
 									}
 								} while (opcionadminventas!=6);
-							}
-								break;
+							
 							case 1:
+								
 								JOptionPane.showMessageDialog(null, "nos vemos la proxima, gracias por usar CleanSA");
 								break;
 
 							}
-						} while (opciongeneralad!=1);
+					} while (opciongeneralad!=1);
 						break;
 					case 1:
 						//envios

@@ -39,15 +39,55 @@ public interface Validador {
 		return palabra;
 	}
 	
+	 
 	
-	default int validarPassword (String mensaje) {
-		String palabra = "";
-		if (palabra.length()<8) {
-			JOptionPane.showMessageDialog(null, "Debe tener 8 o más caracteres");
+	//////VALIDADOR PASSWORD MEJORAR!!!
+	default String validarPassword(String mensaje) {
+	    String palabra = mensaje; ///ESTA SERIA LA CONTRA
+	    boolean tieneNumero = false;
+	    boolean tieneMayuscula = false;
+	    boolean tieneEspecial = false;
+	    
+	   
+	    
+	    do {
+
+	    	palabra= JOptionPane.showInputDialog(mensaje);
+
+	    if (palabra.length() < 8) {
+	        JOptionPane.showMessageDialog(null, "Debe tener 8 o más caracteres");
+	        return palabra;
+	    }else {
+			
 		}
-	
-		
-		return 0;		
+
+	    for (char c : palabra.toCharArray()) {
+	        if (Character.isDigit(c)) {
+	            tieneNumero = true;
+	        } else if (Character.isUpperCase(c)) {
+	            tieneMayuscula = true;
+	        } else if (!Character.isLetterOrDigit(c)) {
+	            tieneEspecial = true;
+	        }
+	        
+	    }
+
+	    if (!tieneNumero) {
+	        JOptionPane.showMessageDialog(null, "Debe contener al menos un número");
+	       
+	    }
+	    if (!tieneMayuscula) {
+	        JOptionPane.showMessageDialog(null, "Debe contener al menos una letra mayúscula");
+	        
+	    }
+	    if (!tieneEspecial) {
+	        JOptionPane.showMessageDialog(null, "Debe contener al menos un carácter especial");
+	        
+	    }
+
+		} while (tieneNumero==true || tieneMayuscula == true || tieneEspecial == true );
+	    JOptionPane.showMessageDialog(null, "La contraseña es válida");
+	    return palabra; 
 	}
 	
 	
