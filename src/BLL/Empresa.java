@@ -1,3 +1,4 @@
+package BLL;
 import javax.swing.JOptionPane;
 
 public class Empresa extends Cliente implements Validador {

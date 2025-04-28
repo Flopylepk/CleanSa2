@@ -25,8 +25,8 @@ public class Main {
 		int opcionadminventas=0;
 		Boolean logear;
 		Cliente cliente = new Cliente("", "", "", "");
-		Personal personal = new Personal("","","","","",null);
-		Empresa empresa = new Empresa("","","","",null, null, null); 
+		Personal personal = new Personal("","","","",null);
+		Empresa empresa = new Empresa("","","",null, ""); 
 		AdminVentas ventas = new AdminVentas ("Franco", "Gaggero", "43");
 
 		AdminEnvios envios = new AdminEnvios ("Geronimo", "Giliberti", "20");
