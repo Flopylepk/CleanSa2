@@ -10,7 +10,7 @@ public class Cliente implements Validador {
 	private String direccion;
 	private String dni;
 	private static LinkedList<Cliente>  clientes = new LinkedList<Cliente>();
-	private Boolean tipo;
+	private int tipo;
 		
 	public Cliente(String nombre, String contrasena,String direccion,String dni) {
 		this.nombre = nombre;
@@ -54,11 +54,11 @@ public class Cliente implements Validador {
 		Cliente.clientes = clientes;
 	}
 
-	public Boolean getTipo() {
+	public int getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(Boolean tipo) {
+	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
 

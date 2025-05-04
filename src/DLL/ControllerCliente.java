@@ -1,0 +1,90 @@
+package DLL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import javax.print.attribute.standard.JobPrioritySupported;
+import javax.swing.JOptionPane;
+
+import BLL.Usuario;
+import repositorio.ClienteRepository;
+
+public class ControllerCliente <T extends Cliente> implements ClienteRepository{
+	 private static Connection con = Conexion.getInstance().getConnection();
+	 
+	 @Override
+	    public T login() {
+	        T cliente = null;
+	        try {
+	            PreparedStatement stmt = con.prepareStatement(
+	                "SELECT * FROM cliente WHERE dni = ? AND contrasena = ?"
+	            );
+	            String DNI=validarCaracteres("Ingrese su DNI");
+	       	 	String contrasena=validarPassword("Ingrese contraseña");
+	            stmt.setString(1, DNI);
+	            stmt.setString(2, contrasena);
+	            
+	            ResultSet rs = stmt.executeQuery();
+
+	            if (rs.next()) {
+	                int id = rs.getInt("id");
+	                String nombre = rs.getString("email");
+	                String dirreccion = rs.getString("tipo");
+	                int tipo=rs.getInt("fk_categoria_usuarios");
+
+	                switch (tipo) {
+	                    case 1:
+	                        cliente = (T) new Personal(nombre,contrasena, direccion, dni,tipo);
+	                        break;
+	                    case 2:
+	                        cliente = (T) new Empresa(nombre,contrasena, direccion, dni,tipo);
+	                        break;
+	                    default:
+	                        System.out.println("Tipo de cliente desconocido: " + tipo);
+	                        break;
+	                }
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return cliente;
+	    }
+	 
+	 @Override
+	    public void agregarCliente() {
+	        try {
+	            PreparedStatement statement = con.prepareStatement(
+	                "INSERT INTO cliente (nombre, apellido, direccion, dni, contrasena, fk_categoria_usuarios) VALUES (?, ?, ?, ?, ?, ?)"
+	            );
+	            String nombre = validarCaracteres("Ingrese su nombre");	 	
+	    	 	String contrasena = validarPassword("Ingrese contraseña");
+	    		String direccion = validarCaracteres("Ingrese su dirección");
+	    		String dni = validarCaracteres("Ingrese DNI");
+	    		int tipo=0;
+	    		do {
+	    			String tipo1=validarCaracteres("Ingrese su tipo de ususario (Personal o empresa)");
+		    		if (tipo1.equalsIgnoreCase("personal")) {
+						tipo=1;
+					} else if(tipo1.equalsIgnoreCase("empresa")){
+						tipo=2;
+					}
+		    		if (tipo==0) {
+						JOptionPane.showMessageDialog(null, "el tipo de usuario es incorrecto, ingreselo nuevamente");
+					}
+				} while (tipo==0);
+	    		
+	            statement.setString(1, nombre );
+	            statement.setString(2, null);
+	            statement.setString(3, direccion);
+	            statement.setString(4, dni);
+	            statement.setInt(4, tipo);
+
+	            int filas = statement.executeUpdate();
+	            if (filas > 0) {
+	                System.out.println("Cliente agregado correctamente.");
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+}
