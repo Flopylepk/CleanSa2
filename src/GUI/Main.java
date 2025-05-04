@@ -1,5 +1,11 @@
+package GUI;
 import javax.swing.JOptionPane;
 
+import AdminEnvios;
+import AdminVentas;
+import Cliente;
+import Empresa;
+import Personal;
 import enums.Opcion1;
 import enums.OpcionAdmin;
 import enums.OpcionCliente;

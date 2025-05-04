@@ -1,6 +1,8 @@
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+import GUI.Main;
+
 public class AdminVentas extends Administrador implements Validador {
 	
 	private String id_ventas;
