@@ -27,10 +27,9 @@ tiene que coincidir dentro de " " */
 	                String nombre = rs.getString("nombre");
 	                int stock = rs.getInt("precio");
 	                int precio = rs.getInt("stock");
-	                int peligoso = rs.getInt("stock");
-	                int categoria = rs.getInt("stock");
+	                int peligoso = rs.getInt("fk_peligoso");
+	                int categoria = rs.getInt("fk_categoria");
 	               
-	                
 	                
 	                /*	this.nombre = nombre;
 		this.stcok = stcok;
