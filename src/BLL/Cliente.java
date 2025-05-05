@@ -1,7 +1,10 @@
+package BLL;
 
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
+
+import repositorio.Validador;
 
 public class Cliente implements Validador {
 	
@@ -11,14 +14,21 @@ public class Cliente implements Validador {
 	private String dni;
 	private static LinkedList<Cliente>  clientes = new LinkedList<Cliente>();
 	private int tipo;
+	private int id;
 		
-	public Cliente(String nombre, String contrasena,String direccion,String dni) {
+	public Cliente(String nombre, String contrasena,String direccion, String DNI, int tipo) {
 		this.nombre = nombre;
-	
 		this.direccion = direccion;
 		this.contrasena = contrasena;
-		this.dni= dni;
-		
+		this.dni= DNI;
+		}
+	public Cliente(String nombre, String contrasena,String direccion, String DNI, int id, int tipo) {
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.contrasena = contrasena;
+		this.dni= DNI;
+		this.id = id;
+		this.tipo = tipo;
 		}
 	
 	public String getNombre() {
@@ -65,43 +75,21 @@ public class Cliente implements Validador {
 	public String getDni() {
 		return dni;
 	}
-
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
-	
-	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public void Registro_Cliente(Cliente cliente) {
 		   
 	
 	}
 	
-	public boolean LogIn (Cliente cliente) {
-	 String DNI="";
-	 String pass= "";
-	 DNI =cliente.validarCaracteres("Ingrese su DNI");
-	 ///LUEGO HAY QUE REEMPLAZAR ESTA POR LA FUNCION ESPECIFICA PARA LA PASSWORD
-	 pass = cliente.validarCaracteres("Ingrese contraseña");
-	 if (Cliente.getClientes().isEmpty()) {
-		JOptionPane.showMessageDialog(null, "NO hay clientes registrados");
-			return false;
-		}else {
-			for (Cliente item  : Cliente.getClientes()) {
-				if (item.getDni().equalsIgnoreCase(dni) && item.getContrasena().equals(pass) ) {
-					JOptionPane.showMessageDialog(null, "Bienvenido al menu");
-					return true;
-					
-				}
-				
-			}
-			
-			return false;
-		}
-	 
-	 
-		
-		
-	}
+	
 
 	
 	

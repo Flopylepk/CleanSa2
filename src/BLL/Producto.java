@@ -1,3 +1,4 @@
+package BLL;
 
 import java.util.LinkedList;
 
@@ -5,10 +6,10 @@ public class Producto {
 	private String nombre;
 	private int stcok;
 	private double precio;
-	private String categoria;
-	private boolean peligroso;
+	private int categoria;
+	private int peligroso;
 	private static LinkedList<Producto> producto = new LinkedList<Producto>() ;
-	public Producto(String nombre, int stcok, double precio, String categoria, boolean peligroso) {
+	public Producto(String nombre, int stcok, double precio, int categoria, int peligroso) {
 		super();
 		this.nombre = nombre;
 		this.stcok = stcok;
@@ -34,16 +35,17 @@ public class Producto {
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
-	public String getCategoria() {
+	
+	public int getCategoria() {
 		return categoria;
 	}
-	public void setCategoria(String categoria) {
+	public void setCategoria(int categoria) {
 		this.categoria = categoria;
 	}
-	public boolean isPeligroso() {
+	public int getPeligroso() {
 		return peligroso;
 	}
-	public void setPeligroso(boolean peligroso) {
+	public void setPeligroso(int peligroso) {
 		this.peligroso = peligroso;
 	}
 	public static LinkedList<Producto> getProducto() {

@@ -1,12 +1,13 @@
+package BLL;
 import javax.swing.JOptionPane;
+
+import repositorio.Validador;
 
 public class Personal extends Cliente implements Validador{
 
-	public Personal(String nombre, String contrasena ,String direccion,String dni ,Boolean tipo) {
-		super(nombre, dni,contrasena,direccion);
+	public Personal(String nombre, String contrasena ,String direccion,String dni ,int tipo) {
+		super(nombre, contrasena, direccion, dni, tipo);
 	}
-			
-
 	@Override
 	public void Registro_Cliente(Cliente cliente) {
 		
@@ -14,7 +15,7 @@ public class Personal extends Cliente implements Validador{
 	 	String contrasena = cliente.validarPassword("Ingrese contraseña");
 	 	String direccion = cliente.validarCaracteres("Ingrese su dirección");
 		String dni = cliente.validarCaracteres("Ingrese su dni");
-		Boolean tipo = false;
+		int tipo = 0;
 		Personal nuevoClienteP = new Personal(nombre,contrasena,direccion,dni,tipo);
 		if (Cliente.getClientes().isEmpty()) {
 			Cliente.getClientes().add(nuevoClienteP);

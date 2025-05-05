@@ -1,11 +1,11 @@
 package GUI;
 import javax.swing.JOptionPane;
 
-import AdminEnvios;
-import AdminVentas;
-import Cliente;
-import Empresa;
-import Personal;
+import BLL.AdminEnvios;
+import BLL.AdminVentas;
+import BLL.Cliente;
+import BLL.Empresa;
+import BLL.Personal;
 import enums.Opcion1;
 import enums.OpcionAdmin;
 import enums.OpcionCliente;
@@ -30,9 +30,9 @@ public class Main {
 		int opcionadminenvios=0;
 		int opcionadminventas=0;
 		Boolean logear;
-		Cliente cliente = new Cliente("", "", "", "");
-		Personal personal = new Personal("","","","",null);
-		Empresa empresa = new Empresa("","","",null, ""); 
+		Cliente cliente = new Cliente("", "", "", "", 0);
+		Personal personal = new Personal("","","","",0);
+		Empresa empresa = new Empresa("","","","", 0); 
 		AdminVentas ventas = new AdminVentas ("Franco", "Gaggero", "43");
 
 		AdminEnvios envios = new AdminEnvios ("Geronimo", "Giliberti", "20");

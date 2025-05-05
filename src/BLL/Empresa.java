@@ -1,9 +1,12 @@
+package BLL;
 import javax.swing.JOptionPane;
+
+import repositorio.Validador;
 
 public class Empresa extends Cliente implements Validador {
 
-	public Empresa(String nombre,String contrasena ,String direccion ,Boolean tipo, String dni) {
-		super(nombre,  contrasena ,direccion, dni);
+	public Empresa(String nombre,String contrasena ,String direccion ,String dni, int tipo) {
+		super(nombre, contrasena, direccion, dni, tipo);
 	}
 
 
@@ -14,9 +17,9 @@ public class Empresa extends Cliente implements Validador {
 		String nombre =validarCaracteres("Ingrese nombre");	 	
 	 	String contrasena = validarPassword("Ingrese contraseña");
 		String direccion = validarCaracteres("Ingrese su dirección");
-		Boolean tipo = true;
+		int tipo = 0;
 		String dni = validarCaracteres("Ingrese DNI");
-		Empresa nuevoClienteE = new Empresa(nombre,contrasena,direccion,tipo,dni);
+		Empresa nuevoClienteE = new Empresa(nombre,contrasena,direccion,dni,tipo);
 		
 		
 		if (Cliente.getClientes().isEmpty()) {

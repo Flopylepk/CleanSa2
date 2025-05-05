@@ -1,3 +1,4 @@
+package repositorio;
 import javax.swing.JOptionPane;
 
 public interface Validador {

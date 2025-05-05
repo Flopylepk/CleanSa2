@@ -1,7 +1,9 @@
+package BLL;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import GUI.Main;
+import repositorio.Validador;
 
 public class AdminVentas extends Administrador implements Validador {
 	

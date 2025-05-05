@@ -1,4 +1,6 @@
+package BLL;
 
+import repositorio.Validador;
 
 public class AdminEnvios extends Administrador implements Validador{
 

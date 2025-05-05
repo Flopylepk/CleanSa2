@@ -2,15 +2,17 @@ package DLL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+import java.util.List;
 import javax.print.attribute.standard.JobPrioritySupported;
 import javax.swing.JOptionPane;
-
-import BLL.Usuario;
+import BLL.Cliente;
+import BLL.Personal;
+import BLL.Empresa;
 import repositorio.ClienteRepository;
+import repositorio.Validador;
 
-public class ControllerCliente <T extends Cliente> implements ClienteRepository{
-	 private static Connection con = Conexion.getInstance().getConnection();
+public class ControllerCliente <T extends Cliente> implements ClienteRepository, Validador{
+	 private static Connection con = Conexion.getInstance().getConnection();// Poner esto en todos los controladores
 	 
 	 @Override
 	    public T login() {
@@ -18,14 +20,13 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository{
 	        try {
 	            PreparedStatement stmt = con.prepareStatement(
 	                "SELECT * FROM cliente WHERE dni = ? AND contrasena = ?"
-	            );
+	            );//copiar consulta de insert para producto
 	            String DNI=validarCaracteres("Ingrese su DNI");
 	       	 	String contrasena=validarPassword("Ingrese contraseña");
 	            stmt.setString(1, DNI);
 	            stmt.setString(2, contrasena);
 	            
 	            ResultSet rs = stmt.executeQuery();
-
 	            if (rs.next()) {
 	                int id = rs.getInt("id");
 	                String nombre = rs.getString("email");
@@ -34,10 +35,10 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository{
 
 	                switch (tipo) {
 	                    case 1:
-	                        cliente = (T) new Personal(nombre,contrasena, direccion, dni,tipo);
+	                        cliente = (T) new Personal(nombre,contrasena, dirreccion, DNI,tipo);
 	                        break;
 	                    case 2:
-	                        cliente = (T) new Empresa(nombre,contrasena, direccion, dni,tipo);
+	                        cliente = (T) new Empresa(nombre,contrasena, dirreccion, DNI,tipo);
 	                        break;
 	                    default:
 	                        System.out.println("Tipo de cliente desconocido: " + tipo);
@@ -87,4 +88,10 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository{
 	            e.printStackTrace();
 	        }
 	    }
+
+	@Override
+	public List<Cliente> mostrarUsuarios() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
