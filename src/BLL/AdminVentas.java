@@ -72,21 +72,21 @@ public class AdminVentas extends Administrador implements Validador {
 		
 		double precio=(double) validarNumeros("ingrese un numero");
 		
-		Producto nuevo = new Producto (nombre, stock,precio ,categoria,peligroso);
-		
-		if (Producto.getProducto().isEmpty()) {
-			Producto.getProducto().add(nuevo);
-			return;
-		} else {
-			for (Producto x : Producto.getProducto()) {
-				if (x.getNombre().equals(nuevo.getNombre())) {
-					JOptionPane.showMessageDialog(null, "El clienet ya existe");
-					return;
-				}
-			}
-			Producto.getProducto().add(nuevo);
-			return;
-		}
+//		Producto nuevo = new Producto (nombre, stock,precio ,categoria,peligroso);
+//		
+//		if (Producto.getProducto().isEmpty()) {
+//			Producto.getProducto().add(nuevo);
+//			return;
+//		} else {
+//			for (Producto x : Producto.getProducto()) {
+//				if (x.getNombre().equals(nuevo.getNombre())) {
+//					JOptionPane.showMessageDialog(null, "El clienet ya existe");
+//					return;
+//				}
+//			}
+//			Producto.getProducto().add(nuevo);
+//			return;
+//		}
 		
 		
 		}

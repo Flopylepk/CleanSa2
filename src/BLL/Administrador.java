@@ -1,5 +1,8 @@
 package BLL;
-public class Administrador {
+
+import repositorio.Validador;
+
+public class Administrador implements Validador {
 	
 	private String nombre;
 	private String apellido;
@@ -20,6 +23,9 @@ public class Administrador {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
+	
+	
+	
 	
 	
 

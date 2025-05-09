@@ -19,7 +19,7 @@ public class Personal extends Cliente implements Validador{
 		Personal nuevoClienteP = new Personal(nombre,contrasena,direccion,dni,tipo);
 		if (Cliente.getClientes().isEmpty()) {
 			Cliente.getClientes().add(nuevoClienteP);
-			return;
+			return; 
 		}else {
 			for (Cliente item  : Cliente.getClientes()) {
 				if (item.getDni().equalsIgnoreCase(dni) ) {
