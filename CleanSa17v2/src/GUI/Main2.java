@@ -12,10 +12,11 @@ public class Main2 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
 		Cliente cliente = new Cliente("", "", "", "", 0,0);
 		Administrador admin=new Administrador("","",0,0,"");
-		ControllerCliente controlercliente = null;
-		ControllerAdmin controleradmin = null;
+		ControllerCliente controlercliente = new ControllerCliente();
+		ControllerAdmin controleradmin = new ControllerAdmin();
 		int opcion1=0;
 		int opciongeneral=0;
 		do {
@@ -29,19 +30,22 @@ public class Main2 {
 				switch (opciongeneral) {
 				case 0:
 					controlercliente.agregarCliente();
+					JOptionPane.showMessageDialog(null, "registrado");
 					break;
 
 				case 1:
 					cliente=controlercliente.login();
 					if (cliente.getTipo()==1) {
-						
+						JOptionPane.showMessageDialog(null, "Bienvenido al menu de Personal");
+					}else {
+						JOptionPane.showMessageDialog(null, "Bienvenido al menu de Empresa");
 					}
 					break;
 				case 2:
 					JOptionPane.showMessageDialog(null, "nos vemos la proxima");
 					break;
 				}
-				} while (opciongeneral!=0);
+				} while (opciongeneral!=2);
 				break;
 			case 1:
 				JOptionPane.showMessageDialog(null, "Bienvenido al Administrador");

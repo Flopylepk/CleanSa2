@@ -9,6 +9,11 @@ import repositorio.ClienteRepository;
 import repositorio.Validador;
 
 public class ControllerAdmin <T extends Administrador> implements AdministradorRepository, Validador {
+
+	public ControllerAdmin() {
+		super();
+	}
+
 	private static Connection con = Conexion.getInstance().getConnection();// Poner esto en todos los controladores
 
 	@Override

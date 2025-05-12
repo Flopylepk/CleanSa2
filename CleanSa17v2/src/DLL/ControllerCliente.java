@@ -9,9 +9,15 @@ import repositorio.ClienteRepository;
 import repositorio.Validador;
 
 public class ControllerCliente <T extends Cliente> implements ClienteRepository, Validador{
-	 private static Connection con = Conexion.getInstance().getConnection();// Poner esto en todos los controladores
+	
+	private static Connection con = Conexion.getInstance().getConnection();// Poner esto en todos los controladores
 	 
-	 @Override
+	
+	 public ControllerCliente() {
+		super();
+	}
+
+	@Override
 	    public T login() {
 	        T cliente = null;
 	        try {
@@ -56,17 +62,19 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	            );
 	            Cliente prueba=null;
 	            String nombre ="";
+	            String apellido ="";
 	            String contrasena ="";
 	            String direccion ="";
 	            String dni ="";
 	            do {
 					
-	            nombre = validarCaracteres("Ingrese su nombre");	 	
+	            nombre = validarCaracteres("Ingrese su nombre");
+	            apellido = validarCaracteres("Ingrese su apellido");
 	    	 	contrasena = validarPassword("Ingrese contraseña");
 	    	 	direccion = validarCaracteres("Ingrese su dirección");
 	    		dni = validarCaracteres("Ingrese DNI");
 	    		prueba=validar(dni,contrasena);
-	            } while (prueba==null);
+	            } while (prueba!=null);
 	    		int tipo=0;
 	    		do {
 	    			String tipo1=validarCaracteres("Ingrese su tipo de ususario (Personal o empresa)");
@@ -81,10 +89,11 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 				} while (tipo==0);
 	    		
 	            statement.setString(1, nombre );
-	            statement.setString(2, null);
+	            statement.setString(2, apellido);
 	            statement.setString(3, direccion);
 	            statement.setString(4, dni);
-	            statement.setInt(4, tipo);
+	            statement.setString(5, contrasena);
+	            statement.setInt(6, tipo);
 
 	            int filas = statement.executeUpdate();
 	            if (filas > 0) {
