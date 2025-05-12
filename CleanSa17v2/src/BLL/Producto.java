@@ -54,6 +54,11 @@ public class Producto {
 	public static void setProducto(LinkedList<Producto> producto) {
 		Producto.producto = producto;
 	}
+	@Override
+	public String toString() {
+		return "Producto Nombre: " + nombre + " Stcok: " + stcok + " Precio:" + precio + " Categoria: " + categoria
+				+ " Peligroso=" + peligroso;
+	}
 	
 	
 

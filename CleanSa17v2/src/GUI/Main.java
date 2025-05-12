@@ -1,5 +1,7 @@
 package GUI;
 import javax.swing.JOptionPane;
+
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import BLL.AdminEnvios;
@@ -23,9 +25,11 @@ public class Main {
 	public static void main(String[] args) {
 		
 		ControllerProducto control = new ControllerProducto();
-		control.mostrarProductos();
-		
-		JOptionPane.showMessageDialog(null, 	control.mostrarProductos());
+		LinkedList<Producto> productos = control.mostrarProductos();
+		for (Producto producto : productos) {
+			
+			JOptionPane.showMessageDialog(null, 	producto);
+		}
 		int opcion1=0;
 		int opciongeneral=0;
 		int opciongeneralad=0;

@@ -6,7 +6,7 @@ import com.mysql.jdbc.Connection;
 
 
 public class Conexion {
-	private static String URL ="jdbc:mysql://localhost:3306/clearsa";
+	private static String URL ="jdbc:mysql://localhost:3306/cleansa";
 	private static String USER = "root";
 	private static String PASSWORD ="";
 	
