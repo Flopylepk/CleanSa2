@@ -1,5 +1,14 @@
+package GUI;
 import javax.swing.JOptionPane;
+import java.util.LinkedList;
 
+import BLL.AdminEnvios;
+import BLL.AdminVentas;
+import BLL.Cliente;
+import BLL.Empresa;
+import BLL.Personal;
+import BLL.Producto;
+import DLL.ControllerProducto;
 import enums.Opcion1;
 import enums.OpcionAdmin;
 import enums.OpcionCliente;
@@ -12,6 +21,11 @@ import enums.OpcionVenta;
 public class Main {
 
 	public static void main(String[] args) {
+		
+		ControllerProducto control = new ControllerProducto();
+		control.mostrarProductos();
+		
+		JOptionPane.showMessageDialog(null, 	control.mostrarProductos());
 		int opcion1=0;
 		int opciongeneral=0;
 		int opciongeneralad=0;
@@ -20,7 +34,13 @@ public class Main {
 		int opcionclientes=0;
 		int opcionadminenvios=0;
 		int opcionadminventas=0;
-		
+		Boolean logear;
+		Cliente cliente = new Cliente("", "", "", "", 0);
+		Personal personal = new Personal("","","","",0);
+		Empresa empresa = new Empresa("","","","", 0); 
+		AdminVentas ventas = new AdminVentas ("Franco", "Gaggero", "43");
+
+		AdminEnvios envios = new AdminEnvios ("Geronimo", "Giliberti", "20");
 		do {
 			opcion1=JOptionPane.showOptionDialog(null, "Elija una opcion", null, 0, 0, null, Opcion1.values(), Opcion1.values());
 			switch (opcion1) {
@@ -37,13 +57,18 @@ public class Main {
 							switch (opciongeneral) {
 							case 0:
 								//registrogeneral
-								JOptionPane.showMessageDialog(null, "aca va el registro del cliente general");
+								personal.Registro_Cliente(cliente);
+								
+								
 								break;
 							case 1:
 								//logingeneral
-								JOptionPane.showMessageDialog(null, "aca va el login del cliente general");
-								JOptionPane.showMessageDialog(null, "cuando el login es correcto pasa al menu principal");
 								
+								//COMENTE ESTO PORQUE ROMPIA TODO - ABRIL-
+								//logear=personal.LogIn(cliente);
+								if (logear=false) {
+									JOptionPane.showMessageDialog(null, "Error 404");
+								} else {
 								do {
 									opcionclientes=JOptionPane.showOptionDialog(null, "Menu principal, elija una opcion", null, 0, 0, null, OpcionClientes.values(), OpcionClientes.values());
 									switch (opcionclientes) {
@@ -85,6 +110,7 @@ public class Main {
 										break;
 									}
 								} while (opcionclientes!=8);
+							}
 								
 								break;
 
@@ -102,12 +128,17 @@ public class Main {
 							switch (opciongeneral) {
 							case 0:
 								//registroempresas
-								JOptionPane.showMessageDialog(null, "aca va el registro de las empresas");
+							
+								empresa.Registro_Cliente(cliente);
+								
 								break;
 							case 1:
 								//loginempresas
-								JOptionPane.showMessageDialog(null, "aca va el login de las empresas");
-								JOptionPane.showMessageDialog(null, "cuando el login es correcto pasa al menu principal");
+							//	logear=empresa.LogIn(cliente);
+								if (logear=false) {
+									JOptionPane.showMessageDialog(null, "Error 404");
+								} else {
+									
 								do {
 									opcionclientes=JOptionPane.showOptionDialog(null, "Menu principal, elija una opcion", null, 0, 0, null, OpcionClientes.values(), OpcionClientes.values());
 									switch (opcionclientes) {
@@ -149,6 +180,7 @@ public class Main {
 										break;
 									}
 								} while (opcionclientes!=8);
+							}
 								break;
 
 							case 2:
@@ -172,17 +204,20 @@ public class Main {
 					switch (opcionadmin) {
 					case 0:
 						//ventas
-						JOptionPane.showMessageDialog(null, "Bienvenido al registro y login de los administradores de ventas");
 						do {
 							opciongeneralad=JOptionPane.showOptionDialog(null, "Elija una opcion", null, 0, 0, null, OpcionGeneralAD.values(), OpcionGeneralAD.values());
 							switch (opciongeneralad) {
 							case 0:
-								JOptionPane.showMessageDialog(null, "aca va el login de ventas");
-								JOptionPane.showMessageDialog(null, "cuando el login es correcto pasa al menu principal");
+								logear=ventas.logIn(ventas);
+								if (logear=false) {
+									JOptionPane.showMessageDialog(null, "Error 404");
+								}else
+									
+									
 								do {
 									opcionadminventas=JOptionPane.showOptionDialog(null, "Menu principal, elija una opcion", null, 0, 0, null, OpcionVenta.values(), OpcionVenta.values());
 									switch (opcionadminventas) {
-									case 0:
+								 	case 0:
 										//Cargar_productos
 										JOptionPane.showMessageDialog(null, "le vendedor podra cargar productos nuevos distinguendolos entre peligrosos y no peligrosos");
 										break;
@@ -212,13 +247,14 @@ public class Main {
 
 									}
 								} while (opcionadminventas!=6);
-								break;
+							
 							case 1:
+								
 								JOptionPane.showMessageDialog(null, "nos vemos la proxima, gracias por usar CleanSA");
 								break;
 
 							}
-						} while (opciongeneralad!=1);
+					} while (opciongeneralad!=1);
 						break;
 					case 1:
 						//envios
@@ -229,8 +265,11 @@ public class Main {
 							switch (opciongeneralad) {
 							
 							case 0:
-								JOptionPane.showMessageDialog(null, "aca va el login de Envios");
-								JOptionPane.showMessageDialog(null, "cuando el login es correcto pasa al menu principal");
+								logear=envios.logIn(envios);
+								if (logear==false) {
+									JOptionPane.showMessageDialog(null, "Error 404");
+								}else {
+									
 								do {
 									opcionadminenvios=JOptionPane.showOptionDialog(null, "Menu principal, elija una opcion", null, 0, 0, null, OpcionEnvios.values(), OpcionEnvios.values());
 									switch (opcionadminenvios) {
@@ -256,6 +295,7 @@ public class Main {
 
 									}
 								} while (opcionadminenvios!=4);
+							}
 								break;
 							case 1:
 								JOptionPane.showMessageDialog(null, "nos vemos la proxima, gracias por usar CleanSA");
