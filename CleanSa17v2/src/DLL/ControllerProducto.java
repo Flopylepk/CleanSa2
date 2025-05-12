@@ -10,6 +10,7 @@ import BLL.Producto;
 
 public class ControllerProducto {
 	 private static Connection con = Conexion.getInstance().getConnection();// Poner esto en todos los controladores
+	 
 
 	 public LinkedList<Producto> mostrarProductos() {
 		 
@@ -46,7 +47,13 @@ public class ControllerProducto {
 	        }
 	        return productos;
 	    }
-	 
-	 
-	 
+
+	public void agregarProducto (Producto producto) {
+	
+	
+		}
+
+
+
 }
+	 

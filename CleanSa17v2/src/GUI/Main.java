@@ -1,5 +1,7 @@
 package GUI;
 import javax.swing.JOptionPane;
+
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import BLL.AdminEnvios;
@@ -23,9 +25,11 @@ public class Main {
 	public static void main(String[] args) {
 		
 		ControllerProducto control = new ControllerProducto();
-		control.mostrarProductos();
-		
-		JOptionPane.showMessageDialog(null, 	control.mostrarProductos());
+		LinkedList<Producto> productos = control.mostrarProductos();
+		for (Producto producto : productos) {
+			
+			JOptionPane.showMessageDialog(null, 	producto);
+		}
 		int opcion1=0;
 		int opciongeneral=0;
 		int opciongeneralad=0;
@@ -36,7 +40,7 @@ public class Main {
 		int opcionadminventas=0;
 		Boolean logear;
 		Cliente cliente = new Cliente("", "", "", "", 0);
-		Administrador admin=new Administrador("","",0,0,"");
+		//Administrador admin=new Administrador("","",0,0,"");
 		do {
 			opcion1=JOptionPane.showOptionDialog(null, "Elija una opcion", null, 0, 0, null, Opcion1.values(), Opcion1.values());
 			switch (opcion1) {
@@ -53,15 +57,14 @@ public class Main {
 							switch (opciongeneral) {
 							case 0:
 								//registrogeneral
-								personal.Registro_Cliente(cliente);
+							//	personal.Registro_Cliente(cliente);
 								
 								
 								break;
 							case 1:
 								//logingeneral
 								
-								//COMENTE ESTO PORQUE ROMPIA TODO - ABRIL-
-								//logear=personal.LogIn(cliente);
+						//		logear=personal.LogIn(cliente);
 								if (logear=false) {
 									JOptionPane.showMessageDialog(null, "Error 404");
 								} else {
@@ -125,7 +128,7 @@ public class Main {
 							case 0:
 								//registroempresas
 							
-								empresa.Registro_Cliente(cliente);
+						//		empresa.Registro_Cliente(cliente);
 								
 								break;
 							case 1:
@@ -204,7 +207,7 @@ public class Main {
 							opciongeneralad=JOptionPane.showOptionDialog(null, "Elija una opcion", null, 0, 0, null, OpcionGeneralAD.values(), OpcionGeneralAD.values());
 							switch (opciongeneralad) {
 							case 0:
-								logear=ventas.logIn(ventas);
+						//		logear=ventas.logIn(ventas);
 								if (logear=false) {
 									JOptionPane.showMessageDialog(null, "Error 404");
 								}else
@@ -261,37 +264,37 @@ public class Main {
 							switch (opciongeneralad) {
 							
 							case 0:
-								logear=envios.logIn(envios);
-								if (logear==false) {
-									JOptionPane.showMessageDialog(null, "Error 404");
-								}else {
-									
-								do {
-									opcionadminenvios=JOptionPane.showOptionDialog(null, "Menu principal, elija una opcion", null, 0, 0, null, OpcionEnvios.values(), OpcionEnvios.values());
-									switch (opcionadminenvios) {
-									case 0:
-										//Cargar_Camion
-										JOptionPane.showMessageDialog(null, "el de envios va a poder cargar el camion simpre que los pedidos sean realizados y no hallas sido enviados");
-										break;
-									case 1:
-										//Enviar_camion
-										JOptionPane.showMessageDialog(null, "el de ventas va a poder enviar el camion siempre que este tenga algo y el carrito cambiara a enviado");
-										break;
-									case 2:
-										//Ver_estado_de_envio
-										JOptionPane.showMessageDialog(null, "el de ventas podra ver si los pedidos realizados estan enviados o no");
-										break;
-									case 3:
-										//Ver_camion
-										JOptionPane.showMessageDialog(null, "el de ventas va a poder ver los dartos del camion");
-										break;
-									case 4:
-										JOptionPane.showMessageDialog(null, "nos vemos la proxima, gracias por usar CleanSA");
-										break;
-
-									}
-								} while (opcionadminenvios!=4);
-							}
+//		logear=envios.logIn(envios);
+//								if (logear==false) {
+//									JOptionPane.showMessageDialog(null, "Error 404");
+//								}else {
+//									
+//								do {
+//									opcionadminenvios=JOptionPane.showOptionDialog(null, "Menu principal, elija una opcion", null, 0, 0, null, OpcionEnvios.values(), OpcionEnvios.values());
+//									switch (opcionadminenvios) {
+//									case 0:
+//										//Cargar_Camion
+//										JOptionPane.showMessageDialog(null, "el de envios va a poder cargar el camion simpre que los pedidos sean realizados y no hallas sido enviados");
+//										break;
+//									case 1:
+//										//Enviar_camion
+//										JOptionPane.showMessageDialog(null, "el de ventas va a poder enviar el camion siempre que este tenga algo y el carrito cambiara a enviado");
+//										break;
+//									case 2:
+//										//Ver_estado_de_envio
+//										JOptionPane.showMessageDialog(null, "el de ventas podra ver si los pedidos realizados estan enviados o no");
+//										break;
+//									case 3:
+//										//Ver_camion
+//										JOptionPane.showMessageDialog(null, "el de ventas va a poder ver los dartos del camion");
+//										break;
+//									case 4:
+//										JOptionPane.showMessageDialog(null, "nos vemos la proxima, gracias por usar CleanSA");
+//										break;
+//
+//									}
+//								} while (opcionadminenvios!=4);
+//							}
 								break;
 							case 1:
 								JOptionPane.showMessageDialog(null, "nos vemos la proxima, gracias por usar CleanSA");
