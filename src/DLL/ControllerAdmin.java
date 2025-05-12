@@ -3,15 +3,12 @@ package DLL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import BLL.Cliente;
-import BLL.Empresa;
-import BLL.Personal;
+import BLL.*;
 import repositorio.AdministradorRepository;
 import repositorio.ClienteRepository;
 import repositorio.Validador;
 
-public class ControllerAdmin <T extends Cliente> implements AdministradorRepository, Validador {
+public class ControllerAdmin <T extends Administrador> implements AdministradorRepository, Validador {
 	private static Connection con = Conexion.getInstance().getConnection();// Poner esto en todos los controladores
 
 	@Override
@@ -19,29 +16,28 @@ public class ControllerAdmin <T extends Cliente> implements AdministradorReposit
         T administrador = null;
         try {
             PreparedStatement stmt = con.prepareStatement(
-                "SELECT * FROM administrador WHERE  apellido = ? AND 	nro_empleado = ?"
+                "SELECT * FROM administrador WHERE  nombre = ? AND contrasena=?"
             );
-            String apellido=validarCaracteres("Ingrese su Apellido");
-       	 	String numeroEmpleado=validarPassword("Ingrese su Numero de Empleado");
-            stmt.setString(1, apellido);
-            stmt.setString(2, numeroEmpleado);
+            String nombre=validarCaracteres("Ingrese su nombre");
+            String contrasena=validarPassword("ingrese su contraseña");
+            stmt.setString(1, nombre);
+            stmt.setString(2, contrasena);
             
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                int id = rs.getInt("id_administrador");
-                String nombre = rs.getString("nombre");
-//                String dirreccion = rs.getString("tipo");
-                int tipo=rs.getInt("id_categoria_administrasdor");
+                String apellido = rs.getString("apellido");
+                int tipo=rs.getInt("fk_categoria_administrasdor");
 
                 switch (tipo) {
                     case 1:
-                    	administrador = (T) new AdminEnvios (nombre,apellido,numeroEmpleado);
+                    	administrador = (T) new AdminEnvios (nombre,apellido, id, tipo, contrasena );
                         break;
                     case 2:
-                    	administrador = (T) new AdminVentas(nombre,apellido,numeroEmpleado);
+                    	administrador = (T) new AdminVentas(nombre,apellido, id, tipo, contrasena);
                         break;
                     default:
-                        System.out.println("Tipo de cliente desconocido: " + tipo);
+                        System.out.println("Tipo de administrador desconocido: " + tipo);
                         break;
                 }
             }

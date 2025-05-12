@@ -31,11 +31,7 @@ public class Main {
 		int opcionadminventas=0;
 		Boolean logear;
 		Cliente cliente = new Cliente("", "", "", "", 0);
-		Personal personal = new Personal("","","","",0);
-		Empresa empresa = new Empresa("","","","", 0); 
-		AdminVentas ventas = new AdminVentas ("Franco", "Gaggero", "43");
-
-		AdminEnvios envios = new AdminEnvios ("Geronimo", "Giliberti", "20");
+		Administrador admin=new Administrador("","",0,0,"");
 		do {
 			opcion1=JOptionPane.showOptionDialog(null, "Elija una opcion", null, 0, 0, null, Opcion1.values(), Opcion1.values());
 			switch (opcion1) {

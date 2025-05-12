@@ -3,11 +3,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
-import javax.print.attribute.standard.JobPrioritySupported;
 import javax.swing.JOptionPane;
-import BLL.Cliente;
-import BLL.Personal;
-import BLL.Empresa;
+import BLL.*;
 import repositorio.ClienteRepository;
 import repositorio.Validador;
 
