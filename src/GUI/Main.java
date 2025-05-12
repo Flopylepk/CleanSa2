@@ -1,11 +1,14 @@
 package GUI;
 import javax.swing.JOptionPane;
+import java.util.LinkedList;
 
 import BLL.AdminEnvios;
 import BLL.AdminVentas;
 import BLL.Cliente;
 import BLL.Empresa;
 import BLL.Personal;
+import BLL.Producto;
+import DLL.ControllerProducto;
 import enums.Opcion1;
 import enums.OpcionAdmin;
 import enums.OpcionCliente;
@@ -19,8 +22,10 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-	 
+		ControllerProducto control = new ControllerProducto();
+		control.mostrarProductos();
 		
+		JOptionPane.showMessageDialog(null, 	control.mostrarProductos());
 		int opcion1=0;
 		int opciongeneral=0;
 		int opciongeneralad=0;
@@ -59,7 +64,8 @@ public class Main {
 							case 1:
 								//logingeneral
 								
-								logear=personal.LogIn(cliente);
+								//COMENTE ESTO PORQUE ROMPIA TODO - ABRIL-
+								//logear=personal.LogIn(cliente);
 								if (logear=false) {
 									JOptionPane.showMessageDialog(null, "Error 404");
 								} else {
@@ -128,7 +134,7 @@ public class Main {
 								break;
 							case 1:
 								//loginempresas
-								logear=empresa.LogIn(cliente);
+							//	logear=empresa.LogIn(cliente);
 								if (logear=false) {
 									JOptionPane.showMessageDialog(null, "Error 404");
 								} else {
