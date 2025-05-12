@@ -54,10 +54,19 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	            PreparedStatement statement = con.prepareStatement(
 	                "INSERT INTO cliente (nombre, apellido, direccion, dni, contrasena, fk_categoria_usuarios) VALUES (?, ?, ?, ?, ?, ?)"
 	            );
-	            String nombre = validarCaracteres("Ingrese su nombre");	 	
-	    	 	String contrasena = validarPassword("Ingrese contraseña");
-	    		String direccion = validarCaracteres("Ingrese su dirección");
-	    		String dni = validarCaracteres("Ingrese DNI");
+	            Cliente prueba=null;
+	            String nombre ="";
+	            String contrasena ="";
+	            String direccion ="";
+	            String dni ="";
+	            do {
+					
+	            nombre = validarCaracteres("Ingrese su nombre");	 	
+	    	 	contrasena = validarPassword("Ingrese contraseña");
+	    	 	direccion = validarCaracteres("Ingrese su dirección");
+	    		dni = validarCaracteres("Ingrese DNI");
+	    		prueba=validar(dni,contrasena);
+	            } while (prueba==null);
 	    		int tipo=0;
 	    		do {
 	    			String tipo1=validarCaracteres("Ingrese su tipo de ususario (Personal o empresa)");
@@ -90,5 +99,41 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	public List<Cliente> mostrarUsuarios() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public <T> T validar(String dni, String contrasena) {
+		 T cliente = null;
+		try {
+            PreparedStatement stmt = con.prepareStatement(
+                "SELECT * FROM cliente WHERE dni = ? AND contrasena = ?"
+            );//copiar consulta de insert para producto
+            stmt.setString(1, dni);
+            stmt.setString(2, contrasena);
+            
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String nombre = rs.getString("email");
+                String dirreccion = rs.getString("tipo");
+                int tipo=rs.getInt("fk_categoria_usuarios");
+
+                switch (tipo) {
+                    case 1:
+                        cliente = (T) new Personal(nombre,contrasena, dirreccion, dni,tipo);
+                        break;
+                    case 2:
+                        cliente = (T) new Empresa(nombre,contrasena, dirreccion, dni,tipo);
+                        break;
+                    default:
+                        System.out.println("Tipo de cliente desconocido: " + tipo);
+                        break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            cliente=null;
+        }
+        return cliente;
 	}
 }

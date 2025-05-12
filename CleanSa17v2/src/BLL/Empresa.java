@@ -9,7 +9,7 @@ public class Empresa extends Cliente implements Validador {
 		super(nombre, contrasena, direccion, dni, tipo);
 	}
 
-
+	
 
 
 	@Override
