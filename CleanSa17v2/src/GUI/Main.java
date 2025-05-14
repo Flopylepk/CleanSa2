@@ -219,6 +219,7 @@ public class Main {
 								 	case 0:
 										//Cargar_productos
 										JOptionPane.showMessageDialog(null, "le vendedor podra cargar productos nuevos distinguendolos entre peligrosos y no peligrosos");
+										//Controller prodcuto, controller categoria
 										break;
 									case 1:
 										//Rellenar_stock
