@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class Producto {
 	private String nombre;
-	private int stcok;
+	private int stock;
 	private double precio;
 	private int categoria;
 	private int peligroso;
@@ -12,7 +12,7 @@ public class Producto {
 	public Producto(String nombre, int stcok, double precio, int categoria, int peligroso) {
 		super();
 		this.nombre = nombre;
-		this.stcok = stcok;
+		this.stock = stcok;
 		this.precio = precio;
 		this.categoria = categoria;
 		this.peligroso = peligroso;
@@ -24,10 +24,10 @@ public class Producto {
 		this.nombre = nombre;
 	}
 	public int getStcok() {
-		return stcok;
+		return stock;
 	}
 	public void setStcok(int stcok) {
-		this.stcok = stcok;
+		this.stock = stcok;
 	}
 	public double getPrecio() {
 		return precio;
@@ -56,7 +56,7 @@ public class Producto {
 	}
 	@Override
 	public String toString() {
-		return "Producto Nombre: " + nombre + " Stcok: " + stcok + " Precio:" + precio + " Categoria: " + categoria
+		return "Producto Nombre: " + nombre + " Stcok: " + stock + " Precio:" + precio + " Categoria: " + categoria
 				+ " Peligroso=" + peligroso;
 	}
 	

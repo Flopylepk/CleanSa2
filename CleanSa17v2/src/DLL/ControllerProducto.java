@@ -28,8 +28,8 @@ public class ControllerProducto {
 	            	
 	                int id = rs.getInt("id_producto");
 	                String nombre = rs.getString("nombre");
-	                int stock = rs.getInt("precio");
-	                int precio = rs.getInt("stock");
+	                int stock = rs.getInt("stock");
+	                int precio = rs.getInt("precio");
 	                int peligoso = rs.getInt("peligroso");
 	                int categoria = rs.getInt("fk_categoria");
 	               
@@ -40,7 +40,7 @@ public class ControllerProducto {
 						this.categoria = categoria;
 						this.peligroso = peligroso;*/
 	                productos.add(new Producto(nombre, stock, precio, peligoso, categoria));
-	               
+	              //crea objeto con los datos de una mima fila d la base de datos
 	            }
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -49,6 +49,25 @@ public class ControllerProducto {
 	    }
 
 	public void agregarProducto (Producto producto) {
+		try {
+			PreparedStatement stmt = con.prepareStatement("INSERT INTO producto(nombre,"
+					+ "precio, stock, fk_categoria, peligroso) "
+					+ "VALUES (?,?,?,?//hay que hacer una funcion para traer el fk de categoria,?");
+			
+			stmt.setString(1,producto.getNombre());
+			stmt.setDouble(0, producto.getPrecio());
+			stmt.setInt(0, producto.getStcok());
+			stmt.setInt(0, producto.getCategoria());
+			stmt.setInt(0, producto.getPeligroso());
+			
+			stmt.executeUpdate();
+			System.out.println("Producto agregado correctamente.");
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("No se agrego.");
+		}
 	
 	
 		}
