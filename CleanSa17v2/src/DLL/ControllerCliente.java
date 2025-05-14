@@ -1,14 +1,14 @@
 package DLL;
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 import javax.swing.JOptionPane;
 import BLL.*;
-import repositorio.ClienteRepository;
-import repositorio.Validador;
+import repositorio.*;
 
-public class ControllerCliente <T extends Cliente> implements ClienteRepository, Validador{
+public class ControllerCliente <T extends Cliente> implements ClienteRepository, Validador, Encriptador{
 	
 	private static Connection con = Conexion.getInstance().getConnection();// Poner esto en todos los controladores
 	 
@@ -27,7 +27,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	            String DNI=validarCaracteres("Ingrese su DNI");
 	       	 	String contrasena=validarPassword("Ingrese contraseña");
 	            stmt.setString(1, DNI);
-	            stmt.setString(2, contrasena);
+	            stmt.setString(2, encriptar(contrasena));
 	            
 	            ResultSet rs = stmt.executeQuery();
 	            if (rs.next()) {
@@ -38,10 +38,10 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 
 	                switch (tipo) {
 	                    case 1:
-	                        cliente = (T) new Personal(nombre,contrasena, dirreccion, DNI,tipo);
+	                        cliente = (T) new Personal(nombre,desencriptar(contrasena), dirreccion, DNI,tipo);
 	                        break;
 	                    case 2:
-	                        cliente = (T) new Empresa(nombre,contrasena, dirreccion, DNI,tipo);
+	                        cliente = (T) new Empresa(nombre,desencriptar(contrasena), dirreccion, DNI,tipo);
 	                        break;
 	                    default:
 	                        System.out.println("Tipo de cliente desconocido: " + tipo);
@@ -92,7 +92,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	            statement.setString(2, apellido);
 	            statement.setString(3, direccion);
 	            statement.setString(4, dni);
-	            statement.setString(5, contrasena);
+	            statement.setString(5, encriptar(contrasena) );
 	            statement.setInt(6, tipo);
 
 	            int filas = statement.executeUpdate();
