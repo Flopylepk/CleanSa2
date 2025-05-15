@@ -11,7 +11,7 @@ import repositorio.*;
 
 public class ControllerCliente <T extends Cliente> implements ClienteRepository, Validador, Encriptador{
 	
-	private static Connection con = Conexion.getInstance().getConnection();// Poner esto en todos los controladores
+	private static Connection con = Conexion.getInstance().getConnection();
 	 
 	
 	 public ControllerCliente() {
@@ -32,17 +32,17 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	            
 	            ResultSet rs = stmt.executeQuery();
 	            if (rs.next()) {
-	                int id = rs.getInt("id");
-	                String nombre = rs.getString("email");
-	                String dirreccion = rs.getString("tipo");
+	                int id = rs.getInt("id_cliente");
+	                String nombre = rs.getString("nombre");
+	                String dirreccion = rs.getString("direccion");
 	                int tipo=rs.getInt("fk_categoria_usuarios");
 
 	                switch (tipo) {
 	                    case 1:
-	                        cliente = (T) new Personal(nombre,desencriptar(contrasena), dirreccion, DNI,tipo);
+	                        cliente = (T) new Personal(nombre,desencriptar(contrasena), dirreccion, DNI,id,tipo);
 	                        break;
 	                    case 2:
-	                        cliente = (T) new Empresa(nombre,desencriptar(contrasena), dirreccion, DNI,tipo);
+	                        cliente = (T) new Empresa(nombre,desencriptar(contrasena), dirreccion, DNI,id,tipo);
 	                        break;
 	                    default:
 	                        System.out.println("Tipo de cliente desconocido: " + tipo);
@@ -59,22 +59,20 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	    public void agregarCliente() {
 	        try {
 	            PreparedStatement statement = con.prepareStatement(
-	                "INSERT INTO cliente (nombre, apellido, direccion, dni, contrasena, fk_categoria_usuarios) VALUES (?, ?, ?, ?, ?, ?)"
+	                "INSERT INTO cliente (nombre , direccion, dni, contrasena, fk_categoria_usuarios) VALUES (?, ?, ?, ?, ?)"
 	            );
 	            Cliente prueba=null;
 	            String nombre ="";
-	            String apellido ="";
 	            String contrasena ="";
 	            String direccion ="";
 	            String dni ="";
 	            do {
 					
 	            nombre = validarCaracteres("Ingrese su nombre");
-	            apellido = validarCaracteres("Ingrese su apellido");
 	    	 	contrasena = validarPassword("Ingrese contraseña");
 	    	 	direccion = validarCaracteres("Ingrese su dirección");
 	    		dni = validarCaracteres("Ingrese DNI");
-	    		prueba=validar(dni,contrasena);
+	    		prueba=validar(dni);
 	            } while (prueba!=null);
 	    		int tipo=0;
 	    		do {
@@ -90,11 +88,10 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 				} while (tipo==0);
 	    		
 	            statement.setString(1, nombre );
-	            statement.setString(2, apellido);
-	            statement.setString(3, direccion);
-	            statement.setString(4, dni);
-	            statement.setString(5, encriptar(contrasena) );
-	            statement.setInt(6, tipo);
+	            statement.setString(2, direccion);
+	            statement.setString(3, dni);
+	            statement.setString(4, encriptar(contrasena) );
+	            statement.setInt(5, tipo);
 
 	            int filas = statement.executeUpdate();
 	            if (filas > 0) {
@@ -116,7 +113,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
             	  int id_cliente = rs.getInt("id_cliente");
 	                String nombre = rs.getString("nombre");
 	                String direccion = rs.getString("direccion");
-	                int tipo = rs.getInt("tipo");
+	                int tipo = rs.getInt("fk_categoria_usuarios");
 	                String contrasena = rs.getString("contrasena");
 	                String dni = rs.getString("dni");
 	                Cliente cliente= new Cliente(nombre, contrasena, direccion, dni,id_cliente ,tipo);
@@ -153,26 +150,25 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	        }
 	        return cliente;
 	    }
-	public List<Cliente> mostrarUsuarios() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
-	public <T> T validar(String dni, String contrasena) {
+	public <T> T validar(String dni) {
 		 T cliente = null;
 		try {
             PreparedStatement stmt = con.prepareStatement(
-                "SELECT * FROM cliente WHERE dni = ? AND contrasena = ?"
+                "SELECT * FROM cliente WHERE dni = ?"
             );//copiar consulta de insert para producto
+            
             stmt.setString(1, dni);
-            stmt.setString(2, contrasena);
             
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                int id = rs.getInt("id");
-                String nombre = rs.getString("email");
-                String dirreccion = rs.getString("tipo");
+            	JOptionPane.showMessageDialog(null, "ese cliente ya existe, ingreselo nuevamente");
+                int id = rs.getInt("id_cliente");
+                String nombre = rs.getString("nombre");
+                String contrasena = rs.getString("contrasena");
+                String dirreccion = rs.getString("direccion");
                 int tipo=rs.getInt("fk_categoria_usuarios");
 
                 switch (tipo) {

@@ -7,5 +7,5 @@ public interface ClienteRepository {
 	 	void agregarCliente();
 	    List<Cliente> mostrarClientes();
 		<T> T login();
-		<T> T validar(String nombre, String contrasena);
+		<T> T validar(String nombre);
 }
