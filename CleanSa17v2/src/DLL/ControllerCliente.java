@@ -2,6 +2,7 @@ package DLL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import BLL.*;
@@ -87,8 +88,51 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	    }
 
 	@Override
-	public List<Cliente> mostrarUsuarios() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public LinkedList<Cliente> mostrarClientes() {
+        LinkedList<Cliente> Clientes = new LinkedList<>();
+        try {
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM cliente");
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+            	  int id_cliente = rs.getInt("id_cliente");
+	                String nombre = rs.getString("nombre");
+	                String direccion = rs.getString("direccion");
+	                int tipo = rs.getInt("tipo");
+	                String contrasena = rs.getString("contrasena");
+	                String dni = rs.getString("dni");
+	                Cliente cliente= new Cliente(nombre, contrasena, direccion, dni,id_cliente ,tipo);
+	                
+	                Clientes.add(cliente);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Clientes;
+    }
+	
+	public static Cliente obtenerClientesPorID(int id) {
+		Cliente cliente =new Cliente(null, null, null, null, 0);
+	        try {
+	            PreparedStatement stmt = con.prepareStatement(
+	                "SELECT * FROM cliente WHERE id = ?"
+	            );
+	            stmt.setInt(1, id);
+	            ResultSet rs = stmt.executeQuery();
+
+	            if(rs.next()) {
+	                int id_cliente = rs.getInt("id_cliente");
+	                String nombre = rs.getString("nombre");
+	                String direccion = rs.getString("direccion");
+	                int tipo = rs.getInt("tipo");
+	                String contrasena = rs.getString("contrasena");
+	                String dni = rs.getString("dni");
+	                cliente= new Cliente(nombre, contrasena, direccion, dni,id_cliente ,tipo);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return cliente;
+	    }
 }

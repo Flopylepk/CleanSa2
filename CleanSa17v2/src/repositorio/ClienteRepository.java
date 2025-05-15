@@ -5,6 +5,6 @@ import BLL.Cliente;
 
 public interface ClienteRepository {
 	 	void agregarCliente();
-	    List<Cliente> mostrarUsuarios();
+	    List<Cliente> mostrarClientes();
 		<T> T login();
 }
