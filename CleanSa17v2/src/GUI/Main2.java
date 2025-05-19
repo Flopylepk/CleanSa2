@@ -2,6 +2,7 @@ package GUI;
 
 import java.util.LinkedList;
 
+
 import javax.swing.JOptionPane;
 
 import BLL.*;
@@ -10,8 +11,9 @@ import enums.Opcion1;
 import enums.OpcionClientes;
 import enums.OpcionGeneral;
 import enums.OpcionGeneralAD;
+import repositorio.Validador;
 
-public class Main2 {
+public class Main2 implements Validador{
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -39,7 +41,9 @@ public class Main2 {
 					break;
 
 				case 1:
-					cliente=controlercliente.login();
+					String dni=cliente.validarCaracteres("ingrese su dni");
+					String contrasena=cliente.validarPassword("ingerse su contraseña");
+					cliente=controlercliente.login(dni,contrasena);
 					if (cliente.getTipo()==1) {
 						JOptionPane.showMessageDialog(null, "Bienvenido al menu de Personal");
 						

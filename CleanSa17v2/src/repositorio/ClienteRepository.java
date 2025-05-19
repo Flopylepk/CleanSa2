@@ -6,6 +6,6 @@ import BLL.Cliente;
 public interface ClienteRepository {
 	 	void agregarCliente();
 	    List<Cliente> mostrarClientes();
-		<T> T login();
+		<T> T login(String dni, String contrasena);
 		<T> T validar(String nombre);
 }

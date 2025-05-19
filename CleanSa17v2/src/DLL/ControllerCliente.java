@@ -19,14 +19,12 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	}
 
 	@Override
-	    public T login() {
+	    public T login(String DNI, String contrasena) {
 	        T cliente = null;
 	        try {
 	            PreparedStatement stmt = con.prepareStatement(
 	                "SELECT * FROM cliente WHERE dni = ? AND contrasena = ?"
 	            );//copiar consulta de insert para producto
-	            String DNI=validarCaracteres("Ingrese su DNI");
-	       	 	String contrasena=validarPassword("Ingrese contraseña");
 	            stmt.setString(1, DNI);
 	            stmt.setString(2, encriptar(contrasena));
 	            
