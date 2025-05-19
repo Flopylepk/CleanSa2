@@ -24,8 +24,27 @@ public interface Validador {
 		return Integer.parseInt(num);
 	}
 	
-	
-	
+	default double validarPrecio(String mensaje) {
+		boolean flag;
+		String num = "";
+		do {
+			flag = true;
+			num = JOptionPane.showInputDialog(mensaje);
+			while (num.isEmpty()) {
+				num = JOptionPane.showInputDialog(mensaje);
+			}
+			for (int i = 0; i < num.length(); i++) {
+				if (!Character.isDigit(num.charAt(i))) {
+					flag = false;
+					break;
+				}
+			}
+		} while (!flag);
+		
+
+		return Double.parseDouble(num);
+	}
+
 	default String validarCaracteres(String mensaeje) {
 		String palabra = "";
 		do {
@@ -49,13 +68,9 @@ public interface Validador {
 	    int tieneNumero=0;
 	    int tieneMayuscula=0;
 	    int tieneEspecial=0;
-	    
-	   
-	    
+
 	    do {
-
 	    	palabra= JOptionPane.showInputDialog(mensaje);
-
 	    if (palabra.length() < 8) {
 	        JOptionPane.showMessageDialog(null, "Debe tener 8 o más caracteres");
 	        error=false;
@@ -67,10 +82,8 @@ public interface Validador {
 		        	tieneMayuscula++;
 		        } else if (!Character.isLetterOrDigit(c)) {
 		        	tieneEspecial++;
-		        }
-		        
+		        } 
 		    }
-
 		    if (tieneNumero==0|| tieneMayuscula==0 || tieneEspecial==0) {
 		        JOptionPane.showMessageDialog(null, "se produjo un  error");
 		        error=false;
@@ -84,20 +97,15 @@ public interface Validador {
 		        
 		    }
 		    if (tieneMayuscula==0) {
-		        JOptionPane.showMessageDialog(null, "Debe contener al menos una letra mayúscula");
-		        
-		    }
-		    
+		        JOptionPane.showMessageDialog(null, "Debe contener al menos una letra mayúscula");		        
+		    }		    
 		    if (tieneEspecial==0) {
 		        JOptionPane.showMessageDialog(null, "Debe contener al menos un carácter especial");
 		    }
 		}
-
 	    if (error==false) {
 			mensaje="se produjo un error, ingrese la contraseña nuevamente";
-		}
-	    
-
+		}	    
 		} while (error==false);
 	    JOptionPane.showMessageDialog(null, "La contraseña es válida");
 	    return palabra; 

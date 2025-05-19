@@ -13,7 +13,6 @@ public class ControllerProducto {
 	 
 
 	 public LinkedList<Producto> mostrarProductos() {
-		 
 	        LinkedList<Producto> productos = new LinkedList<>();
 	        try {
 	            PreparedStatement stmt = con.prepareStatement("SELECT * FROM producto"); //traer consulta de insert
@@ -24,22 +23,20 @@ public class ControllerProducto {
 	            	/*
 	            	 * id_producto	nombre	precio	stock	fk_peligoso	fk_categoria	
 						tiene que coincidir dentro de " " */
-	            	
-	            	
+
 	                int id = rs.getInt("id_producto");
 	                String nombre = rs.getString("nombre");
 	                int stock = rs.getInt("stock");
 	                int precio = rs.getInt("precio");
-	                int peligoso = rs.getInt("peligroso");
+	                boolean peligoso = rs.getBoolean("peligroso");
 	                int categoria = rs.getInt("fk_categoria");
-	               
-	                
+
 	                /*	this.nombre = nombre;
 						this.stcok = stcok;
 						this.precio = precio;
 						this.categoria = categoria;
 						this.peligroso = peligroso;*/
-	                productos.add(new Producto(nombre, stock, precio, peligoso, categoria));
+	                productos.add(new Producto(nombre, stock, precio, categoria, peligoso));
 	              //crea objeto con los datos de una mima fila d la base de datos
 	            }
 	        } catch (Exception e) {
@@ -47,7 +44,6 @@ public class ControllerProducto {
 	        }
 	        return productos;
 	    }
-
 	public void agregarProducto (Producto producto) {
 		try {
 			PreparedStatement stmt = con.prepareStatement("INSERT INTO producto(nombre,"
@@ -58,21 +54,16 @@ public class ControllerProducto {
 			stmt.setDouble(0, producto.getPrecio());
 			stmt.setInt(0, producto.getStcok());
 			stmt.setInt(0, producto.getCategoria());
-			stmt.setInt(0, producto.getPeligroso());
+			stmt.setBoolean(0, producto.getPeligroso());
 			
 			stmt.executeUpdate();
 			System.out.println("Producto agregado correctamente.");
-			
-			
+	
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("No se agrego.");
 		}
-	
-	
+
 		}
-
-
-
 }
 	 
