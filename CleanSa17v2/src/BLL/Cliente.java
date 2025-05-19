@@ -84,10 +84,14 @@ public class Cliente implements Validador {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public void Registro_Cliente(Cliente cliente) {
-		   
-	
+	@Override
+	public String toString() {
+		return "Cliente [nombre=" + nombre + "\n contrasena=" + contrasena + "\n direccion=" + direccion + "\n dni=" + dni
+				+ "\n tipo=" + tipo + "\n id=" + id + "]";
 	}
+	
+	
+	
 	
 	
 
