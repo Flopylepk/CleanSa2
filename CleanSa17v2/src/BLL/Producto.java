@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
+import DLL.ControllerCategoria;
 import repositorio.Validador;
 
 public class Producto implements Validador{
@@ -65,10 +66,11 @@ public class Producto implements Validador{
 				+ " Peligroso=" + peligroso;
 	}
 	
-	public static boolean AgregarProductos(Producto nuevo) {
+	public static boolean AddProductos(Producto nuevo) {
 		String nombre = nuevo.validarCaracteres("Ingrese nombre del producto: ");
+		nuevo.setNombre(nombre);
 		for (Producto p : producto) {
-			if (p.getNombre().equals(nuevo.getNombre())) {
+			if (p.getNombre().equalsIgnoreCase(nuevo.getNombre())) {
 				JOptionPane.showMessageDialog(null, "No se puede agregar. El producto ya existe.");
 				return false;	
 			}
@@ -84,10 +86,21 @@ public class Producto implements Validador{
 
 		boolean peligorso = (respuesta == JOptionPane.YES_OPTION);
 		
-		
-		nuevo.setNombre(nombre);
 		nuevo.setStcok(stock);
 		nuevo.setPrecio(precio);
+		ControllerCategoria fk = new ControllerCategoria();
+		LinkedList<Categoria> categorias = fk.mostrarCategorias();
+		Categoria [] desplegable = categorias.toArray(new Categoria[0]);
+		
+		Categoria seleccionada = (Categoria) JOptionPane.showInputDialog(null, 
+				"Seleciona categoria",
+				"Categorias",
+				JOptionPane.QUESTION_MESSAGE,
+				null,
+				desplegable,
+				desplegable[0]);
+		int fk_elegido = seleccionada.getId_categoria();
+		nuevo.setCategoria(fk_elegido);
 		nuevo.setPeligroso(peligorso);
 		JOptionPane.showMessageDialog(null, nuevo.getNombre() + " agregado con exito.");
 		producto.add(nuevo);
@@ -95,6 +108,18 @@ public class Producto implements Validador{
 		
 		
 	}
+	
+	public static boolean updateProducto() {
+		
+		return true; 
+	}
+	
+	public static boolean deleleteProducto() {
+		
+		return true; 
+	}
+	
+	
 	
 	
 

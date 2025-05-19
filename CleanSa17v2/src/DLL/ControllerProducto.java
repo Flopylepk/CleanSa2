@@ -48,13 +48,13 @@ public class ControllerProducto {
 		try {
 			PreparedStatement stmt = con.prepareStatement("INSERT INTO producto(nombre,"
 					+ "precio, stock, fk_categoria, peligroso) "
-					+ "VALUES (?,?,?,?//hay que hacer una funcion para traer el fk de categoria,?");
+					+ "VALUES (?,?,?,?,?");
 			
 			stmt.setString(1,producto.getNombre());
-			stmt.setDouble(0, producto.getPrecio());
-			stmt.setInt(0, producto.getStcok());
-			stmt.setInt(0, producto.getCategoria());
-			stmt.setBoolean(0, producto.getPeligroso());
+			stmt.setDouble(2, producto.getPrecio());
+			stmt.setInt(3, producto.getStcok());
+			stmt.setInt(4, producto.getCategoria());
+			stmt.setBoolean(5, producto.getPeligroso());
 			
 			stmt.executeUpdate();
 			System.out.println("Producto agregado correctamente.");
