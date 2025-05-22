@@ -66,8 +66,8 @@ public class login extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("DNI");
 		lblNewLabel_1.setBounds(205, 182, 56, 33);
-		lblNewLabel_1.setForeground(SystemColor.menu);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblNewLabel_1.setForeground(SystemColor.desktop);
+		lblNewLabel_1.setFont(new Font("Verdana", Font.PLAIN, 13));
 		contentPane.add(lblNewLabel_1);
 		
 		inpdni = new JTextField();
@@ -80,15 +80,16 @@ public class login extends JFrame {
 		contentPane.add(inpcontrasena);
 		
 		JLabel lblNewLabel_2 = new JLabel("Contraseña");
+		lblNewLabel_2.setBackground(SystemColor.desktop);
 		lblNewLabel_2.setBounds(205, 254, 85, 14);
-		lblNewLabel_2.setForeground(SystemColor.menu);
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblNewLabel_2.setForeground(SystemColor.desktop);
+		lblNewLabel_2.setFont(new Font("Verdana", Font.PLAIN, 13));
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Login");
 		lblNewLabel_3.setBounds(163, 145, 46, 26);
 		lblNewLabel_3.setBackground(SystemColor.menu);
-		lblNewLabel_3.setForeground(SystemColor.menu);
+		lblNewLabel_3.setForeground(SystemColor.desktop);
 		lblNewLabel_3.setFont(new Font("Verdana", Font.PLAIN, 16));
 		contentPane.add(lblNewLabel_3);
 		
