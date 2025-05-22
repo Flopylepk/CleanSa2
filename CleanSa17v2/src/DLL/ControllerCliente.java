@@ -1,13 +1,15 @@
 package DLL;
 import java.sql.Connection;
-
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import BLL.*;
 import repositorio.*;
+import DLL.*;
 
 public class ControllerCliente <T extends Cliente> implements ClienteRepository, Validador, Encriptador{
 	
@@ -188,5 +190,62 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
             cliente=null;
         }
         return cliente;
+	}
+
+	@Override
+	public void comprar(int id) {
+		try {
+			 PreparedStatement statement = con.prepareStatement(
+		                "INSERT INTO carrito (fecha , estado, total, estadoenvio, codigoenvio, fk_cliente) VALUES (?,?, ?, ?, ?, ?)"
+					 );
+			 Carrito carrito = null;
+			 Date fecha= Date.valueOf(LocalDate.now());
+			 String estado="en proceso";
+			 double total = 0;
+			 boolean estadoenvio= false;
+			 int codigoenvio= (int)Math.random()*1001+100;
+			 int fk_cliente= id;
+			 
+			 	statement.setDate(1, fecha );
+	            statement.setString(2, estado);
+	            statement.setDouble(3, total);
+	            statement.setBoolean(4, estadoenvio );
+	            statement.setInt(5, codigoenvio);
+	            statement.setInt(5, fk_cliente);
+	            
+	         
+	            PreparedStatement statement2 = con.prepareStatement(
+		                "SELECT id_carrito FROM carrito WHEN estadoenvio='en proceso' and id_cliente = ?"
+					 );
+	            
+	            statement2.setInt(1, id);
+	            ResultSet rs = statement2.executeQuery();
+	            
+	            int id_carrito=rs.getInt("id_carrito");
+	            
+	            ControllerProducto controller=new ControllerProducto();
+	            String opciones[]={"si", "no"};
+	            int opcion=0;
+	            int id_producto=0;
+	            do {
+	            	JOptionPane.showMessageDialog(null, "agreguemos productos a nuestro acrrito");
+	            	id_producto=controller.elegir();
+	            	PreparedStatement statement3 = con.prepareStatement(
+			                "SELECT * FROM producto WHEN id_producto=?"
+						 );
+	            	 statement3.setInt(1, id_producto);
+	            	 ResultSet rs2 = statement2.executeQuery();
+	            	 
+	            	 
+					opcion=JOptionPane.showOptionDialog(null, "quiere agregar más productos", null, 0, 0, null, opciones, opciones[0]);
+				} while (opcion!=1);
+	            
+	            
+	            
+		} catch (Exception e) {
+			 e.printStackTrace();
+		}
+		
+		
 	}
 }

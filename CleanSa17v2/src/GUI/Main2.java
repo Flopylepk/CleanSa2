@@ -64,6 +64,11 @@ public class Main2 {
 						break;
 					case 2:
 						JOptionPane.showMessageDialog(null, "comprar");
+
+			       
+			            
+			            
+			            
 						break;
 					case 3:
 						JOptionPane.showMessageDialog(null, "Ver_carrito");

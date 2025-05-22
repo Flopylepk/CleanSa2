@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.LinkedList;
 
+import javax.swing.JOptionPane;
+
 import BLL.Producto;
 
 
@@ -32,14 +34,13 @@ public class ControllerProducto {
 	                int precio = rs.getInt("stock");
 	                int peligoso = rs.getInt("peligroso");
 	                int categoria = rs.getInt("fk_categoria");
-	               
 	                
 	                /*	this.nombre = nombre;
 						this.stcok = stcok;
 						this.precio = precio;
 						this.categoria = categoria;
 						this.peligroso = peligroso;*/
-	                productos.add(new Producto(nombre, stock, precio, peligoso, categoria));
+	                productos.add(new Producto(nombre, stock, precio, peligoso, categoria,id));
 	               
 	            }
 	        } catch (Exception e) {
@@ -52,7 +53,19 @@ public class ControllerProducto {
 	
 	
 		}
-
+	
+	public int elegir() {
+		LinkedList<Producto> productos = mostrarProductos();
+        String []lista = new String[productos.size()];
+        for (int i = 0; i < productos.size(); i++) {
+        	lista[i] = productos.get(i).getNombre() +"/" + productos.get(i).getId();
+		}
+        String opcion = (String)JOptionPane.showInputDialog(null, "", "", 0,  null, lista, lista[0]);
+        
+        int idElegido = Integer.parseInt( opcion.split("/")[1]);
+        return idElegido;
+	}
+	
 
 
 }

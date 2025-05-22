@@ -8,6 +8,7 @@ public class Producto {
 	private double precio;
 	private int categoria;
 	private int peligroso;
+	private int id;
 	private static LinkedList<Producto> producto = new LinkedList<Producto>() ;
 	public Producto(String nombre, int stcok, double precio, int categoria, int peligroso) {
 		super();
@@ -17,6 +18,25 @@ public class Producto {
 		this.categoria = categoria;
 		this.peligroso = peligroso;
 	}
+	
+	public Producto(String nombre, int stcok, double precio, int categoria, int peligroso, int id) {
+		super();
+		this.nombre = nombre;
+		this.stcok = stcok;
+		this.precio = precio;
+		this.categoria = categoria;
+		this.peligroso = peligroso;
+		this.id = id;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}

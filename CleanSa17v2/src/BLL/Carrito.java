@@ -3,17 +3,16 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 
 public class Carrito {
-
+	
+	private int id_carrito;
 	private LocalDate fecha;
 	private Cliente cliente;
-	private  static LinkedList<Producto> productosC = new LinkedList<Producto>();
 	private double total_compra;
 	private String estado;
-	private static LinkedList<Carrito> carrito = new LinkedList<Carrito>() ;
 	private boolean estado_envio;
 	private int codigo_envio;
-	public Carrito(LocalDate fecha, Cliente cliente, double total_compra, String estado, boolean estado_envio,
-			int codigo_envio) {
+	public Carrito(int id_carrito,LocalDate fecha, String estado ,double total_compra , boolean estado_envio,
+			int codigo_envio, Cliente cliente ) {
 		super();
 		this.fecha = fecha;
 		this.cliente = cliente;
@@ -21,7 +20,18 @@ public class Carrito {
 		this.estado = estado;
 		this.estado_envio = estado_envio;
 		this.codigo_envio = codigo_envio;
+		this.id_carrito= id_carrito;
 	}
+	
+	
+	public int getId_carrito() {
+		return id_carrito;
+	}
+
+	public void setId_carrito(int id_carrito) {
+		this.id_carrito = id_carrito;
+	}
+
 	public LocalDate getFecha() {
 		return fecha;
 	}
@@ -33,12 +43,6 @@ public class Carrito {
 	}
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
-	}
-	public static LinkedList<Producto> getProducto() {
-		return productosC;
-	}
-	public static void setProducto(LinkedList<Producto> producto) {
-		Carrito.productosC = producto;
 	}
 	public double getTotal_compra() {
 		return total_compra;
@@ -52,12 +56,7 @@ public class Carrito {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public static LinkedList<Carrito> getCarrito() {
-		return carrito;
-	}
-	public static void setCarrito(LinkedList<Carrito> carrito) {
-		Carrito.carrito = carrito;
-	}
+
 	public boolean isEstado_envio() {
 		return estado_envio;
 	}

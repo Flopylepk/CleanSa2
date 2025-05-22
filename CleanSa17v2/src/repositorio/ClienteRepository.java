@@ -8,4 +8,5 @@ public interface ClienteRepository {
 	    List<Cliente> mostrarClientes();
 		<T> T login();
 		<T> T validar(String nombre);
+		void comprar(int id);
 }
