@@ -49,6 +49,11 @@ public class Administrador implements Validador {
 		this.contrasena = contrasena;
 	}
 	
+	public boolean LogIn (String usuario, String contrasena) {
+		
+		return false;
+	}
+	
 	
 	
 	

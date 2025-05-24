@@ -32,7 +32,7 @@ public class ControllerAdmin <T extends Administrador> implements AdministradorR
             if (rs.next()) {
                int id = rs.getInt("id_administrador");
                 String apellido = rs.getString("apellido");
-                int tipo=rs.getInt("fk_categoria_administrasdor");
+                int tipo=rs.getInt("fk_categoria_administrador");
 
                 switch (tipo) {
                     case 1:

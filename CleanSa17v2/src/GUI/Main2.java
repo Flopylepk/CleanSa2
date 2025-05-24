@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import BLL.*;
 import DLL.*;
 import enums.Opcion1;
+import enums.OpcionAdmin;
 import enums.OpcionClientes;
 import enums.OpcionGeneral;
 import enums.OpcionGeneralAD;
@@ -110,19 +111,39 @@ public class Main2 {
 				JOptionPane.showMessageDialog(null, "Bienvenido al Administrador");
 				do {
 
-					opciongeneral = JOptionPane.showOptionDialog(null, "Indique que quiere hacer", null, 0, 0, null,
-							OpcionGeneralAD.values(), OpcionGeneralAD.values());
-					switch (opciongeneral) {
+					opcionAdmin = JOptionPane.showOptionDialog(null, "Indique que quiere hacer", null, 0, 0, null,
+							OpcionAdmin.values(), OpcionAdmin.values());
+					switch (opcionAdmin) {
 					case 0:
 						admin = controleradmin.login();
-
-						break;
-
+						if (admin !=null) {
+							if (admin.getTipo() == 1) {
+								JOptionPane.showMessageDialog(null, "Bienvenido al Administrador de ventas");
+							}else {
+								JOptionPane.showMessageDialog(null, "No tienes permisos de Administrador de ventas");
+							}													
+						}else {
+							JOptionPane.showMessageDialog(null, "Los credenciales no coinciden");
+						}					
+						break;						
 					case 1:
+						admin = controleradmin.login();
+						if (admin !=null) {
+							if (admin.getTipo()== 2) {
+								JOptionPane.showMessageDialog(null, "Bienvenido al Administrador de Envios");
+							}else {
+								JOptionPane.showMessageDialog(null, "No tienes permisos Administrador de Envios");
+							}
+														
+						}else {
+							JOptionPane.showMessageDialog(null, "Los credenciales no coinciden");
+						}
+						break; 
+					case 2:
 						JOptionPane.showMessageDialog(null, "nos vemos la proxima");
 						break;
 					}
-				} while (opciongeneral != 0);
+				} while (opcionAdmin != 2);
 				break;
 			case 2:
 				JOptionPane.showMessageDialog(null, "Nos vemos la proxima");
