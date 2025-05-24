@@ -1,5 +1,7 @@
 package enums;
 
 public enum OpcionAdmin {
-Ventas, Envios, Salir
+    ADMINISTRADOR_VENTAS,
+    ADMINISTRADOR_ENVIOS,
+    SALIR
 }
