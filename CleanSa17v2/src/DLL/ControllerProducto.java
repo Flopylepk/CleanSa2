@@ -12,9 +12,9 @@ public class ControllerProducto {
 	 private static Connection con = Conexion.getInstance().getConnection();// Poner esto en todos los controladores
 	 
 
-	 public LinkedList<Producto> mostrarProductos() {
-	        LinkedList<Producto> productos = new LinkedList<>();
-	        try {
+public LinkedList<Producto> mostrarProductos() {
+	     LinkedList<Producto> productos = new LinkedList<>();
+	     try {
 	            PreparedStatement stmt = con.prepareStatement("SELECT * FROM producto"); //traer consulta de insert
 	            ResultSet rs = stmt.executeQuery();
 
