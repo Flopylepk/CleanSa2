@@ -196,21 +196,22 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	public void comprar(int id) {
 		try {
 			 PreparedStatement statement = con.prepareStatement(
-		                "INSERT INTO carrito (fecha , estado, total, estadoenvio, codigoenvio, fk_cliente) VALUES (?,?, ?, ?, ?, ?)"
+		                "INSERT INTO carrito (fecha , estado, total, codigoenvio, fk_cliente) VALUES (?,?, ?, ?, ?, ?)"
 					 );
 			 Carrito carrito = null;
 			 Date fecha= Date.valueOf(LocalDate.now());
 			 String estado="en proceso";
 			 double total = 0;
-			 boolean estadoenvio= false;
+			// boolean estadoenvio= false;
 			 int codigoenvio= (int)Math.random()*1001+100;
 			 int fk_cliente= id;
 			 
 			 	statement.setDate(1, fecha );
 	            statement.setString(2, estado);
 	            statement.setDouble(3, total);
-	            statement.setBoolean(4, estadoenvio );
-	            statement.setInt(5, codigoenvio);
+	            //ya no hay estado envio
+	         //   statement.setBoolean(4, estadoenvio );
+	            statement.setInt(4, codigoenvio);
 	            statement.setInt(5, fk_cliente);
 	            
 	         
@@ -219,7 +220,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 					 );
 	            
 	            statement2.setInt(1, id);
-	            ResultSet rs = statement2.executeQuery();
+	            ResultSet rs = statement2.executeQuery(); 
 	            
 	            int id_carrito=rs.getInt("id_carrito");
 	            
@@ -227,14 +228,38 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	            String opciones[]={"si", "no"};
 	            int opcion=0;
 	            int id_producto=0;
+	            
+	            ////AGREGAMOS EL PRODUCTO AL CARRITO
 	            do {
-	            	JOptionPane.showMessageDialog(null, "agreguemos productos a nuestro acrrito");
+	            	JOptionPane.showMessageDialog(null, "agreguemos productos a nuestro acarrito");
 	            	id_producto=controller.elegir();
 	            	PreparedStatement statement3 = con.prepareStatement(
 			                "SELECT * FROM producto WHEN id_producto=?"
 						 );
 	            	 statement3.setInt(1, id_producto);
 	            	 ResultSet rs2 = statement2.executeQuery();
+	            	 
+	            	 /////Validamos el perfil de cliente con el tipo de producto (PELIGROSO)
+	            	 PreparedStatement peligroso = con.prepareStatement(
+	 		                "SELECT fk_categoria_usuarios FROM cliente WHERE id_cliente=?"
+	 					 );
+	            	 
+		            	 peligroso.setInt(1, id);
+		            	 
+		            	
+	            	 
+	            	 
+	     
+	            	 
+	            	 
+	            	 
+	            
+	            
+	            	 	 
+	            	 
+	            	 
+	            	 
+	            	 
 	            	 
 	            	 //Validar si hay stock
 	            	int cantidadstock=rs2.getInt("stock");
