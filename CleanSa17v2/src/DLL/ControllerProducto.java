@@ -62,6 +62,7 @@ public class ControllerProducto {
 		}
         String opcion = (String)JOptionPane.showInputDialog(null, "", "", 0,  null, lista, lista[0]);
         
+        
         int idElegido = Integer.parseInt( opcion.split("/")[1]);
         return idElegido;
 	}
