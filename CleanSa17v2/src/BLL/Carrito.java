@@ -22,6 +22,11 @@ public class Carrito {
 		this.estado_envio = estado_envio;
 		this.codigo_envio = codigo_envio;
 	}
+	
+	public Carrito() {
+		super();
+	}
+
 	public LocalDate getFecha() {
 		return fecha;
 	}
