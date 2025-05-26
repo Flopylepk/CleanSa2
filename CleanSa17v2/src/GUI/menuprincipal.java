@@ -57,7 +57,7 @@ public class menuprincipal extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(menuprincipal.class.getResource("/img/logochico.png")));
-		lblNewLabel.setBounds(123, 205, 171, 56);
+		lblNewLabel.setBounds(117, 205, 171, 56);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Elija que quiere ser...");
@@ -70,28 +70,33 @@ public class menuprincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		
 		btnAdministrador.setFont(new Font("Verdana", Font.ITALIC, 11));
-		btnAdministrador.setBackground(SystemColor.activeCaptionText);
+		btnAdministrador.setBackground(SystemColor.menu);
 		btnAdministrador.setBounds(158, 154, 120, 23);
 		contentPane.add(btnAdministrador);
 		
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) { //Salir
 			}
 		});
+		
 		btnSalir.setFont(new Font("Verdana", Font.ITALIC, 11));
-		btnSalir.setBackground(SystemColor.activeCaptionText);
+		btnSalir.setBackground(SystemColor.menu);
 		btnSalir.setBounds(288, 154, 120, 23);
 		contentPane.add(btnSalir);
 		
 		JButton btnCliente = new JButton("Cliente");
 		btnCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				
 			}
 		});
 		btnCliente.setFont(new Font("Verdana", Font.ITALIC, 11));
-		btnCliente.setBackground(SystemColor.activeCaptionText);
+		btnCliente.setBackground(SystemColor.menu);
 		btnCliente.setBounds(28, 154, 120, 23);
 		contentPane.add(btnCliente);
 	}
