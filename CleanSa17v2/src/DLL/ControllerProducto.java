@@ -48,7 +48,7 @@ public LinkedList<Producto> mostrarProductos() {
 		try {
 			PreparedStatement stmt = con.prepareStatement("INSERT INTO producto(nombre,"
 					+ "precio, stock, fk_categoria, peligroso) "
-					+ "VALUES (?,?,?,?,?");
+					+ "VALUES (?,?,?,?,?)");
 			
 			stmt.setString(1,producto.getNombre());
 			stmt.setDouble(2, producto.getPrecio());
