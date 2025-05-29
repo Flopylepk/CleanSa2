@@ -8,4 +8,6 @@ public interface ClienteRepository {
 	    List<Cliente> mostrarClientes();
 		<T> T login(String dni, String contrasena);
 		<T> T validar(String nombre);
+		void comprar(int id);
+		void carrito(int id);
 }

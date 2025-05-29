@@ -1,50 +1,52 @@
 package BLL;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.LinkedList;
 
 public class Carrito {
-
-	private LocalDate fecha;
+	
+	private int id_carrito;
+	private Date fecha;
 	private Cliente cliente;
-	private  static LinkedList<Producto> productosC = new LinkedList<Producto>();
 	private double total_compra;
 	private String estado;
-	private static LinkedList<Carrito> carrito = new LinkedList<Carrito>() ;
-	private boolean estado_envio;
 	private int codigo_envio;
-	public Carrito(LocalDate fecha, Cliente cliente, double total_compra, String estado, boolean estado_envio,
-			int codigo_envio) {
-		super();
-		this.fecha = fecha;
-		this.cliente = cliente;
+	private int fk_cliente;
+	public Carrito(int id_carrito,Date fecha2, String estado ,double total_compra,
+			int codigo_envio,int fk_cliente) {
+		
+		this.fecha = fecha2;
 		this.total_compra = total_compra;
 		this.estado = estado;
-		this.estado_envio = estado_envio;
 		this.codigo_envio = codigo_envio;
+		this.id_carrito= id_carrito;
+		this.fk_cliente=fk_cliente;
 	}
 	
+<<<<<<< HEAD
 	public Carrito() {
 		super();
 	}
 
 	public LocalDate getFecha() {
+=======
+	
+	public int getId_carrito() {
+		return id_carrito;
+	}
+
+	public void setId_carrito(int id_carrito) {
+		this.id_carrito = id_carrito;
+	}
+
+	public Date getFecha() {
+>>>>>>> flor
 		return fecha;
 	}
-	public void setFecha(LocalDate fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	public Cliente getCliente() {
-		return cliente;
-	}
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-	public static LinkedList<Producto> getProducto() {
-		return productosC;
-	}
-	public static void setProducto(LinkedList<Producto> producto) {
-		Carrito.productosC = producto;
-	}
+	
 	public double getTotal_compra() {
 		return total_compra;
 	}
@@ -57,24 +59,25 @@ public class Carrito {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public static LinkedList<Carrito> getCarrito() {
-		return carrito;
-	}
-	public static void setCarrito(LinkedList<Carrito> carrito) {
-		Carrito.carrito = carrito;
-	}
-	public boolean isEstado_envio() {
-		return estado_envio;
-	}
-	public void setEstado_envio(boolean estado_envio) {
-		this.estado_envio = estado_envio;
-	}
+
 	public int getCodigo_envio() {
 		return codigo_envio;
 	}
 	public void setCodigo_envio(int codigo_envio) {
 		this.codigo_envio = codigo_envio;
 	}
+
+
+	public int getFk_cliente() {
+		return fk_cliente;
+	}
+
+
+	public void setFk_cliente(int fk_cliente) {
+		this.fk_cliente = fk_cliente;
+	}
+	
+	
 	
 	
 	
