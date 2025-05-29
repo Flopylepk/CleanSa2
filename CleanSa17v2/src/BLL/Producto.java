@@ -13,23 +13,22 @@ public class Producto implements Validador{
 	private int stock;
 	private double precio;
 	private int categoria;
-	private boolean peligroso;
-	private int peligroso;
+	private boolean peligroso; 
 	private int id;
 	private static LinkedList<Producto> producto = new LinkedList<Producto>() ;
-	public Producto(String nombre, int stcok, double precio, int categoria, boolean peligroso) {
+	public Producto(String nombre, int stock, double precio, int categoria, boolean peligroso) {
 		super();
 		this.nombre = nombre;
-		this.stock = stcok;
+		this.stock = stock;
 		this.precio = precio;
 		this.categoria = categoria;
 		this.peligroso = peligroso;
 	}
 	
-	public Producto(String nombre, int stcok, double precio, int categoria, int peligroso, int id) {
+	public Producto(String nombre, int stock, double precio, int categoria, boolean peligroso, int id) {
 		super();
 		this.nombre = nombre;
-		this.stcok = stcok;
+		this.stock = stock;
 		this.precio = precio;
 		this.categoria = categoria;
 		this.peligroso = peligroso;
@@ -53,8 +52,8 @@ public class Producto implements Validador{
 	public int getStcok() {
 		return stock;
 	}
-	public void setStcok(int stcok) {
-		this.stock = stcok;
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 	public double getPrecio() {
 		return precio;

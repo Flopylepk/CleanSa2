@@ -11,13 +11,12 @@ import BLL.Producto;
 
 
 public class ControllerProducto  {
-	 private static Connection con = Conexion.getInstance().getConnection();// Poner esto en todos los controladores
+	private static Connection con = Conexion.getInstance().getConnection();// Poner esto en todos los controladores
 	 
-public static LinkedList<Producto> mostrarProductos() {
-		
-	        LinkedList<Producto> productos = new LinkedList<>();
-	        try {
-	        	PreparedStatement stmt = con.prepareStatement("SELECT * FROM producto"); //traer consulta de insert
+	public LinkedList<Producto> mostrarProductos() {
+	     LinkedList<Producto> productos = new LinkedList<>();
+	     try {
+	            PreparedStatement stmt = con.prepareStatement("SELECT * FROM producto"); //traer consulta de insert
 	            ResultSet rs = stmt.executeQuery();
 
 	            while (rs.next()) {
@@ -31,16 +30,15 @@ public static LinkedList<Producto> mostrarProductos() {
 	                int stock = rs.getInt("stock");
 	                int precio = rs.getInt("precio");
 	                boolean peligoso = rs.getBoolean("peligroso");
-
-
+	                int categoria = rs.getInt("fk_categoria");
 
 	                /*	this.nombre = nombre;
 						this.stcok = stcok;
 						this.precio = precio;
 						this.categoria = categoria;
 						this.peligroso = peligroso;*/
-	                productos.add(new Producto(nombre, stock, precio,categoria, peligoso,id));
-	               
+	                productos.add(new Producto(nombre, stock, precio, categoria, peligoso));
+	              //crea objeto con los datos de una mima fila d la base de datos
 	            }
 	        } catch (Exception e) {
 	            e.printStackTrace();
