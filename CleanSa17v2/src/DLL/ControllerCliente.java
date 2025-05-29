@@ -229,86 +229,140 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	            int opcion=0;
 	            int id_producto=0;
 	            
-	            ////AGREGAMOS EL PRODUCTO AL CARRITO
-	            do {
-	            	JOptionPane.showMessageDialog(null, "agreguemos productos a nuestro acarrito");
-	            	id_producto=controller.elegir();
-	            	PreparedStatement statement3 = con.prepareStatement(
-			                "SELECT * FROM producto WHEN id_producto=?"
-						 );
-	            	 statement3.setInt(1, id_producto);
-	            	 ResultSet rs2 = statement2.executeQuery();
-	            	 
-	            	 /////Validamos el perfil de cliente con el tipo de producto (PELIGROSO)
-	            	 PreparedStatement peligroso = con.prepareStatement(
-	 		                "SELECT fk_categoria_usuarios FROM cliente WHERE id_cliente=?"
-	 					 );
-	            	 
-		            	 peligroso.setInt(1, id);
-		            	 
-		            	
-	            	 
-	            	 
-	     
-	            	 
-	            	 
-	            	 
+	            PreparedStatement carritopendiente = con.prepareStatement(
+		                "SELECT * FROM carrito WHEN fk_cliente=? and estado=?"
+					 );
+	            carritopendiente.setInt(1, id);
+	            carritopendiente.setString(2, "en proseso");
+	            
+           	 ResultSet cp2 = statement2.executeQuery();
+           	 if (cp2==null) {
+           		 do {
+ 	            	JOptionPane.showMessageDialog(null, "agreguemos productos a nuestro acarrito");
+ 	            	id_producto=controller.elegir();
+ 	            	////VAlidar si ya lo tiene en el carrito
+ 	            	PreparedStatement carritoproducto = con.prepareStatement(
+ 			                "SELECT * FROM carrito WHEN fk_cliente=? and estado=? "
+ 						 );
+ 		            carritopendiente.setInt(1, id);
+ 		            carritopendiente.setString(2, "en proseso");
+ 		            
+ 	           	 ResultSet cp3 = statement2.executeQuery();
+ 	           	 
+ 	           	 
+ 	            	PreparedStatement statement3 = con.prepareStatement(
+ 			                "SELECT * FROM producto WHEN id_producto=?"
+ 						 );
+ 	            	 statement3.setInt(1, id_producto);
+ 	            	 ResultSet rs2 = statement2.executeQuery();
+ 	            	 
+ 	                 /////Validamos el perfil de cliente con el tipo de producto (PELIGROSO)
+ 	               	 PreparedStatement cateCliente = con.prepareStatement(
+ 	    		                "SELECT fk_categoria_usuarios FROM cliente WHERE id_cliente=?"
+ 	    					 );
+ 	               	 
+ 	               	 cateCliente.setInt(1, id);
+ 	               	 ResultSet rs4 = cateCliente.executeQuery();
+ 	               	 
+ 	               	 // guardamos la categoria de usuario en un int
+ 	               	 int cliente = rs4.getInt("fk_categoria_usuario") ;
+ 	            	
+ 	            	 ////query para buscar categoria del producto
+ 	            	 PreparedStatement catProducto = con.prepareStatement(
+ 	            			 "SELECT  peligroso FROM producto WHERE id_producto=? "	            			 
+ 	            			 );
+ 	            	 
+ 	            	 catProducto.setInt(1, id_producto);
+ 	            	 ResultSet rs5 = catProducto.executeQuery();
+ 	            	 
+ 	            	 //guardamos el resultado de peligroso en un int
+ 	            	 int produc = rs5.getInt("peligroso");
+
+ 	            	 
+ 	            	 //Validar si hay stock
+ 	            	int cantidadstock=rs2.getInt("stock");
+ 	            	while (cantidadstock==0) {
+ 	            		JOptionPane.showMessageDialog(null, "este producto no tiene stock");
+ 	            		id_producto=controller.elegir();
+ 		            	 statement3.setInt(1, id_producto);
+ 		            	  rs2 = statement2.executeQuery();
+ 		            	 cantidadstock=rs2.getInt("stock");
+ 					}
+ 	            	
+ 	            	//Validar si la cantidad es 0 o si es mayor al stock
+ 	            	int cantidadcompra=validarNumeros("ponga la cantidad de stock que quiere ingresar");
+ 	            	while (cantidadcompra>0 || cantidadcompra>cantidadstock) {
+ 	            		if (cantidadcompra>0) {
+ 							JOptionPane.showMessageDialog(null, "La cantidad de producto que elija no puede ser 0");
+ 						}
+ 	            		if (cantidadcompra>cantidadstock) {
+ 							JOptionPane.showMessageDialog(null, "La cantidad que eligio es mayor a la cantidad del stock");
+ 						}
+ 	            		cantidadcompra=validarNumeros("ponga la cantidad de stock que quiere ingresar");
+ 					}
+ 	            	
+ 	            	//agregamos el producto y el carrito al pedido
+ 	            	PreparedStatement carrito_detalle = con.prepareStatement(
+ 			                "INSERT INTO carrito_detalle(fk_carrito, fk_producto, total_producto) VALUES (?,?)"
+ 						 );
+ 	            	carrito_detalle.setInt(1, id_carrito);
+ 	            	carrito_detalle.setInt(2, id_producto);
+ 	            	carrito_detalle.setInt(3, cantidadcompra*rs2.getInt("precio"));
+ 	            	
+ 	            	
+ 	           
+ 	            	//Modificar la cantidad del producto
+ 	            	PreparedStatement update = con.prepareStatement(
+ 			                "UPDATE producto SET stock=? WHEN id_producto=?"
+ 						 );
+ 	            	
+ 	            	update.setInt(1, cantidadstock-cantidadcompra);
+ 	            	update.setInt(2, id_producto);
+ 	            	 
+ 					opcion=JOptionPane.showOptionDialog(null, "quiere agregar más productos", null, 0, 0, null, opciones, opciones[0]);
+ 				} while (opcion!=1);
+			} else {
+				JOptionPane.showMessageDialog(null,"Ya tiene un carrito pendiente, no puede comprar otro" );
+			}
 	            
 	            
-	            	 	 
-	            	 
-	            	 
-	            	 
-	            	 
-	            	 
-	            	 //Validar si hay stock
-	            	int cantidadstock=rs2.getInt("stock");
-	            	while (cantidadstock==0) {
-	            		JOptionPane.showMessageDialog(null, "este producto no tiene stock");
-	            		id_producto=controller.elegir();
-		            	 statement3.setInt(1, id_producto);
-		            	  rs2 = statement2.executeQuery();
-		            	 cantidadstock=rs2.getInt("stock");
-					}
-	            	
-	            	//Validar si la cantidad es 0 o si es mayor al stock
-	            	int cantidadcompra=validarNumeros("ponga la cantidad de stock que quiere ingresar");
-	            	while (cantidadcompra>0 || cantidadcompra>cantidadstock) {
-	            		if (cantidadcompra>0) {
-							JOptionPane.showMessageDialog(null, "La cantidad de producto que elija no puede ser 0");
-						}
-	            		if (cantidadcompra>cantidadstock) {
-							JOptionPane.showMessageDialog(null, "La cantidad que eligio es mayor a la cantidad del stock");
-						}
-	            		cantidadcompra=validarNumeros("ponga la cantidad de stock que quiere ingresar");
-					}
-	            	
-	            	//agregamos el producto y el carrito al pedido
-	            	PreparedStatement carrito_detalle = con.prepareStatement(
-			                "INSERT INTO carrito_detalle(fk_carrito, fk_producto, total_producto) VALUES (?,?)"
-						 );
-	            	carrito_detalle.setInt(1, id_carrito);
-	            	carrito_detalle.setInt(2, id_producto);
-	            	carrito_detalle.setInt(3, cantidadcompra*rs2.getInt("precio"));
-	            	
-	            	
+            
 	           
-	            	//Modificar la cantidad del producto
-	            	PreparedStatement update = con.prepareStatement(
-			                "UPDATE producto SET stock=? WHEN id_producto=?"
-						 );
-	            	
-	            	update.setInt(1, cantidadstock-cantidadcompra);
-	            	update.setInt(2, id_producto);
-	            	 
-					opcion=JOptionPane.showOptionDialog(null, "quiere agregar más productos", null, 0, 0, null, opciones, opciones[0]);
-				} while (opcion!=1);
 	            
 	          
 		} catch (Exception e) {
 			 e.printStackTrace();
 		}
 		
+		
+	}
+
+	@Override
+	public void carrito(int id) {
+		try {
+			PreparedStatement statement = con.prepareStatement(
+	                "INSERT INTO carrito (fecha , estado, total, codigoenvio, fk_cliente) VALUES (?,?, ?, ?, ?, ?)"
+				 );
+		 Carrito carrito = null;
+		 Date fecha= Date.valueOf(LocalDate.now());
+		 String estado="en proceso";
+		 double total = 0;
+		// boolean estadoenvio= false;
+		 int codigoenvio= (int)Math.random()*1001+100;
+		 int fk_cliente= id;
+		 
+		 	statement.setDate(1, fecha );
+            statement.setString(2, estado);
+            statement.setDouble(3, total);
+            //ya no hay estado envio
+         //   statement.setBoolean(4, estadoenvio );
+            statement.setInt(4, codigoenvio);
+            statement.setInt(5, fk_cliente);
+            
+		} catch (Exception e) {
+			
+		}
+			 
 		
 	}
 }

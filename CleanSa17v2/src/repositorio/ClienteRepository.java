@@ -9,4 +9,5 @@ public interface ClienteRepository {
 		<T> T login();
 		<T> T validar(String nombre);
 		void comprar(int id);
+		void carrito(int id);
 }
