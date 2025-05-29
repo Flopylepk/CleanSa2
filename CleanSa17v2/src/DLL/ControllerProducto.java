@@ -55,7 +55,6 @@ public LinkedList<Producto> mostrarProductos() {
 			stmt.setInt(3, producto.getStcok());
 			stmt.setInt(4, producto.getCategoria());
 			stmt.setBoolean(5, producto.getPeligroso());
-			
 			stmt.executeUpdate();
 			System.out.println("Producto agregado correctamente.");
 	
