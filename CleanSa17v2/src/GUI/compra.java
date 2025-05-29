@@ -27,7 +27,7 @@ public class compra extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					compra frame = new compra();
+					compra frame = new compra(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
