@@ -5,11 +5,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+
+
 import java.awt.SystemColor;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 
@@ -53,6 +57,13 @@ public class menuCliente extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton btnRegistro = new JButton("Registrarse");
+		btnRegistro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Registro registro = new Registro();
+				registro.setVisible(true);;
+				dispose();
+			}
+		});
 		btnRegistro.setBackground(SystemColor.menu);
 		btnRegistro.setFont(new Font("Verdana", Font.ITALIC, 11));
 		btnRegistro.setBounds(49, 129, 149, 23);
@@ -61,6 +72,9 @@ public class menuCliente extends JFrame {
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Login login = new Login();
+				login.setVisible(true);;
+				dispose();
 			}
 		});
 		btnLogin.setFont(new Font("Verdana", Font.ITALIC, 11));
@@ -70,7 +84,7 @@ public class menuCliente extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(menuCliente.class.getResource("/img/logochico.png")));
-		lblNewLabel_1.setBounds(257, 228, 177, 33);
+		lblNewLabel_1.setBounds(273, 228, 177, 33);
 		contentPane.add(lblNewLabel_1);
 		
 		JButton btnNewButton = new JButton("salir");
