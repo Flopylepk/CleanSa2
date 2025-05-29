@@ -121,14 +121,14 @@ public class Main2 {
 						if (admin !=null) {
 							if (admin.getTipo() == 1) {
 								JOptionPane.showMessageDialog(null, "Bienvenido al Administrador de ventas");
-<<<<<<< Updated upstream
+
 								opcionAdminVentas = JOptionPane.showOptionDialog(null, "Indique que quiere hacer", null, 0, 0, null,
 										OpcionVenta.values(), OpcionVenta.values());
 								
 								do {
 									
 								} while (opcionAdminVentas !=6);
-=======
+
 								ControllerProducto producto = new ControllerProducto();
 								String AdminVentas[] = new String [] {"Add", "UpDate", "Delete", "Salir"};
 								int AdminVentasOpcion = 0;
@@ -165,7 +165,6 @@ public class Main2 {
 								            break;
 								    }
 								} while (AdminVentasOpcion !=3);
->>>>>>> Stashed changes
 								
 							}else {
 								JOptionPane.showMessageDialog(null, "No tienes permisos de Administrador de ventas");

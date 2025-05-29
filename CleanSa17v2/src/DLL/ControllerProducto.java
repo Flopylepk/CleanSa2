@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import BLL.Producto;
 
 
-public class ControllerProducto {
+public class ControllerProducto  {
 	 private static Connection con = Conexion.getInstance().getConnection();// Poner esto en todos los controladores
 	 
 
