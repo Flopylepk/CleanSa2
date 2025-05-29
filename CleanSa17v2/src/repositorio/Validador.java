@@ -102,10 +102,6 @@ public interface Validador {
 	    JOptionPane.showMessageDialog(null, "La contraseña es válida");
 	    return palabra; 
 	}
-
-
-
-	void carrito(int id);
 	
 	
 

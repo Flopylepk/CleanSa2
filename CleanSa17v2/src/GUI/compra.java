@@ -68,7 +68,10 @@ public class compra extends JFrame {
 		JButton btnNewButton = new JButton("Continuar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ControllerCliente.carrito(cliente.getId());
+				ControllerCliente.carrito2(cliente.getId());
+				Tabla tabla =new Tabla();
+				tabla.setVisible(true);
+				dispose();
 			}
 		});
 		btnNewButton.setBounds(206, 302, 92, 43);

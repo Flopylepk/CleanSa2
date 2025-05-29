@@ -336,9 +336,49 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 		
 		
 	}
-
 	@Override
-	public static void carrito(int id) {
+	public void carrito(int id) {
+		try {
+			PreparedStatement validar = con.prepareStatement(
+	                "Select * FROM carrito WHERE fk_cliente=? AND estado=?"
+					);
+			validar.setInt(1, id );
+			validar.setString(2, "en proseso");
+			ResultSet rs = validar.executeQuery();
+			if (rs==null) {
+				PreparedStatement statement = con.prepareStatement(
+		                "INSERT INTO carrito (fecha , estado, total, codigoenvio, fk_cliente) VALUES (?,?, ?, ?, ?, ?)"
+					 );
+			 Carrito carrito = null;
+			 Date fecha= Date.valueOf(LocalDate.now());
+			 String estado="en proceso";
+			 double total = 0;
+			// boolean estadoenvio= false;
+			 int codigoenvio= (int)Math.random()*1001+100;
+			 int fk_cliente= id;
+			 
+			 	statement.setDate(1, fecha );
+	            statement.setString(2, estado);
+	            statement.setDouble(3, total);
+	            //ya no hay estado envio
+	         //   statement.setBoolean(4, estadoenvio );
+	            statement.setInt(4, codigoenvio);
+	            statement.setInt(5, fk_cliente);
+			} else {
+				JOptionPane.showMessageDialog(null, "no se puede agregar otro carrito porque ya existe uno");
+			}
+			
+			
+			
+            
+		} catch (Exception e) {
+			
+		}
+			 
+		
+	}
+	
+	public static void carrito2(int id) {
 		try {
 			PreparedStatement validar = con.prepareStatement(
 	                "Select * FROM carrito WHERE fk_cliente=? AND estado=?"
