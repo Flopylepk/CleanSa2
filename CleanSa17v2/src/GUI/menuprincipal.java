@@ -95,6 +95,9 @@ public class menuprincipal extends JFrame {
 		JButton btnCliente = new JButton("Cliente");
 		btnCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				menuCliente menucliente = new menuCliente();
+				menucliente.setVisible(true);;
+				dispose();
 				
 				
 				
