@@ -20,6 +20,11 @@ import javax.swing.JList;
 import javax.swing.JTextPane;
 import javax.swing.JScrollBar;
 import javax.swing.JTree;
+import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
+import javax.swing.JToggleButton;
+import javax.swing.JSlider;
+import javax.swing.JProgressBar;
 
 public class menuprincipal extends JFrame {
 
