@@ -1,6 +1,7 @@
 package BLL;
 
 import java.util.LinkedList;
+import DLL.*;
 
 import javax.swing.JOptionPane;
 
@@ -92,7 +93,16 @@ public class Cliente implements Validador {
 	
 	
 	
-	
+	public static Cliente Login(String DNI, String contrasena) {
+		if (DNI.isEmpty()|| contrasena.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Error");
+			return null;
+		} else {
+			ControllerCliente controllercliente= new ControllerCliente();
+			 return controllercliente.login(DNI, contrasena);
+		}
+		
+	}
 	
 
 	
