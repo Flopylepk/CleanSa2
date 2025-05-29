@@ -13,12 +13,9 @@ public class Producto implements Validador{
 	private int stock;
 	private double precio;
 	private int categoria;
-<<<<<<< HEAD
 	private boolean peligroso;
-=======
 	private int peligroso;
 	private int id;
->>>>>>> flor
 	private static LinkedList<Producto> producto = new LinkedList<Producto>() ;
 	public Producto(String nombre, int stcok, double precio, int categoria, boolean peligroso) {
 		super();

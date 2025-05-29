@@ -13,16 +13,11 @@ import BLL.Producto;
 public class ControllerProducto  {
 	 private static Connection con = Conexion.getInstance().getConnection();// Poner esto en todos los controladores
 	 
-
-public LinkedList<Producto> mostrarProductos() {
-	     LinkedList<Producto> productos = new LinkedList<>();
-	     try {
-
-	 public static LinkedList<Producto> mostrarProductos() {
-		 
+public static LinkedList<Producto> mostrarProductos() {
+		
 	        LinkedList<Producto> productos = new LinkedList<>();
 	        try {
-  PreparedStatement stmt = con.prepareStatement("SELECT * FROM producto"); //traer consulta de insert
+	        	PreparedStatement stmt = con.prepareStatement("SELECT * FROM producto"); //traer consulta de insert
 	            ResultSet rs = stmt.executeQuery();
 
 	            while (rs.next()) {
@@ -44,10 +39,6 @@ public LinkedList<Producto> mostrarProductos() {
 						this.precio = precio;
 						this.categoria = categoria;
 						this.peligroso = peligroso;*/
-
-	                productos.add(new Producto(nombre, stock, precio, categoria, peligoso));
-	              //crea objeto con los datos de una mima fila d la base de datos
-
 	                productos.add(new Producto(nombre, stock, precio,categoria, peligoso,id));
 	               
 	            }
@@ -152,4 +143,4 @@ public LinkedList<Producto> mostrarProductos() {
 
 
 }
-	 
+ 
