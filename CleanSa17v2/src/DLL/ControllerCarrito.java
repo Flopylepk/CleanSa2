@@ -237,8 +237,12 @@ public class ControllerCarrito implements  CarritoRepository{
 					JOptionPane.showMessageDialog(null, "usted no tiene ninguna compra en proseso");
 				}else {
 					PreparedStatement cambio = con.prepareStatement("UPDATE carrito SET estado=? WHERE fk_cliente=?");
-					stmt.setString(1, "pagado");
-					stmt.setInt(2, id);
+					cambio.setString(1, "pagado");
+					cambio.setInt(2, id);
+					int filas = cambio.executeUpdate();
+					if (filas>1) {
+						JOptionPane.showMessageDialog(null, "pago realizado");
+					}
 				}
             }
 		} catch (Exception e) {

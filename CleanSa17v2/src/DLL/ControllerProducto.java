@@ -60,7 +60,7 @@ public class ControllerProducto {
 	        try {
 	        						////SOLO TRAE PRODUCTOS CON PELIGROSO = 0 
 	            PreparedStatement stmt = con.prepareStatement("SELECT * FROM producto WHERE peligroso = ? and stock>?"); //traer consulta de insert
-	            stmt.setInt(1, 0);
+	            stmt.setInt(1, 1);
 	            stmt.setInt(2, 0);
 	            ResultSet rs = stmt.executeQuery();
 
@@ -124,6 +124,16 @@ public class ControllerProducto {
         int idElegido = Integer.parseInt( opcion.split("/")[1]);
         return idElegido;
 	}
+	
+	public void cargarStock (int cantidad) {
+		
+		
+		
+		
+		
+	}
+	
+	
 	
 
 

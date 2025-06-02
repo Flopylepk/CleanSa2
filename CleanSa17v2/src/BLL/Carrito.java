@@ -23,7 +23,12 @@ public class Carrito {
 		this.fk_cliente=fk_cliente;
 	}
 	
+	public Carrito(int id_carrito) {
 	
+
+		this.id_carrito= id_carrito;
+	
+	}
 	public int getId_carrito() {
 		return id_carrito;
 	}
