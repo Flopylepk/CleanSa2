@@ -18,7 +18,9 @@ public class ControllerProducto {
 		 
 	        LinkedList<Producto> productos = new LinkedList<>();
 	        try {
-	            PreparedStatement stmt = con.prepareStatement("SELECT * FROM producto"); //traer consulta de insert
+	            PreparedStatement stmt = con.prepareStatement("SELECT * FROM producto where stock>?"); //traer consulta de insert
+	            stmt.setInt(1, 0);
+	            
 	            ResultSet rs = stmt.executeQuery();
 
 	            while (rs.next()) {
@@ -57,8 +59,9 @@ public class ControllerProducto {
 	        LinkedList<Producto> productos = new LinkedList<>();
 	        try {
 	        						////SOLO TRAE PRODUCTOS CON PELIGROSO = 0 
-	            PreparedStatement stmt = con.prepareStatement("SELECT * FROM producto WHERE peligroso = ?"); //traer consulta de insert
+	            PreparedStatement stmt = con.prepareStatement("SELECT * FROM producto WHERE peligroso = ? and stock>?"); //traer consulta de insert
 	            stmt.setInt(1, 0);
+	            stmt.setInt(2, 0);
 	            ResultSet rs = stmt.executeQuery();
 
 	            while (rs.next()) {
