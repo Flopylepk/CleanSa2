@@ -25,13 +25,13 @@ public class Producto implements Validador{
 		this.peligroso = peligroso;
 	}
 	
-	public Producto(String nombre, int stock, double precio, int categoria, boolean peligroso, int id) {
+	public Producto(String nombre, int stock, double precio, int categoria, int i, int id) {
 		super();
 		this.nombre = nombre;
 		this.stock = stock;
 		this.precio = precio;
 		this.categoria = categoria;
-		this.peligroso = peligroso;
+		this.peligroso = i;
 		this.id = id;
 	}
 	
@@ -106,7 +106,7 @@ public class Producto implements Validador{
 
 		boolean peligorso = (respuesta == JOptionPane.YES_OPTION);
 		
-		nuevo.setStcok(stock);
+		nuevo.setStock(stock);
 		nuevo.setPrecio(precio);
 		ControllerCategoria fk = new ControllerCategoria();
 		LinkedList<Categoria> categorias = fk.mostrarCategorias();

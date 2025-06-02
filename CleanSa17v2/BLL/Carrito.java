@@ -23,13 +23,10 @@ public class Carrito {
 		this.fk_cliente=fk_cliente;
 	}
 	
-<<<<<<< HEAD
+
 	public Carrito() {
 		super();
 	}
-
-	public LocalDate getFecha() {
-=======
 	
 	public int getId_carrito() {
 		return id_carrito;
@@ -40,7 +37,6 @@ public class Carrito {
 	}
 
 	public Date getFecha() {
->>>>>>> flor
 		return fecha;
 	}
 	public void setFecha(Date fecha) {
