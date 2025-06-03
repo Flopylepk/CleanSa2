@@ -12,12 +12,11 @@ public class Carrito {
 	private String estado;
 	private int codigo_envio;
 	private int fk_cliente;
-	public Carrito(int id_carrito,Date fecha2, String estado ,double total_compra,
+	public Carrito(int id_carrito,Date fecha2 ,double total_compra,
 			int codigo_envio,int fk_cliente) {
 		
 		this.fecha = fecha2;
 		this.total_compra = total_compra;
-		this.estado = estado;
 		this.codigo_envio = codigo_envio;
 		this.id_carrito= id_carrito;
 		this.fk_cliente=fk_cliente;

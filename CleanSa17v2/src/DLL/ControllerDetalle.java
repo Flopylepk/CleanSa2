@@ -9,6 +9,7 @@ import java.util.List;
 
 import BLL.Carrito;
 import BLL.Pedido;
+import BLL.Producto;
 import repositorio.*;
 
 public class ControllerDetalle implements  DetalleRepository{
@@ -18,9 +19,10 @@ public class ControllerDetalle implements  DetalleRepository{
 		super();
 	}
 
-	@Override
-	public List<Pedido> mostrarCarrito_detalle(int id_carrito) {
+	
+	public static LinkedList<Producto> mostrarCarrito_detalle(int id_carrito) {
 		LinkedList<Pedido> pedido = new LinkedList<>();
+		LinkedList<Producto> productos = new LinkedList<>();
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito_detalle");
             ResultSet rs = stmt.executeQuery();
@@ -32,11 +34,23 @@ public class ControllerDetalle implements  DetalleRepository{
             	Pedido pedidos=new Pedido(fk_carrito,fk_producto,cantidad,totalPrecio);
             	
             	pedido.add(pedidos);
+            	
+            	PreparedStatement stmt2 = con.prepareStatement("SELECT * FROM producto WHERE id_producto=?");
+            	stmt.setInt(1, fk_producto);
+            	rs = stmt.executeQuery();
+            	String nombre=rs.getString("nombre");
+            	double precio=rs.getDouble("precio");
+            	int stock=rs.getInt("stock");
+            	int fk_categoria=rs.getInt("fk_categoria");
+            	int peligroso=rs.getInt("peligroso");
+            	
+            	Producto productos2=new Producto(nombre,stock,precio,fk_categoria,peligroso);
+            	productos.add(productos2);
             }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return pedido;
+		return productos;
 	}
 	
 

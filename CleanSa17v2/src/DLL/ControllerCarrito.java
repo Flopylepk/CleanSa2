@@ -21,8 +21,7 @@ public class ControllerCarrito implements  CarritoRepository{
 		super();
 	}
 
-	@Override
-	public List<Carrito> mostrarCarrito() {
+	public static LinkedList<Carrito> mostrarCarrito() {
 		LinkedList<Carrito> carrito = new LinkedList<>();
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito");
@@ -34,7 +33,7 @@ public class ControllerCarrito implements  CarritoRepository{
             	double total=rs.getDouble("total");
             	int codigo_envio=rs.getInt("codigo_envio");
             	int fk_cliente=rs.getInt("fk_cliente");
-            	Carrito carritos=new Carrito(id_carrito, fecha, estado, total, codigo_envio, fk_cliente);
+            	Carrito carritos=new Carrito(id_carrito, fecha, total, codigo_envio, fk_cliente);
             	
             	carrito.add(carritos);
             }
@@ -44,8 +43,8 @@ public class ControllerCarrito implements  CarritoRepository{
 		return carrito;
 	}
 	
-	@Override
-	public List<Carrito> mostrarCarritoEnProseso() {
+	
+	public static LinkedList<Carrito> mostrarCarritoEnProseso() {
 		LinkedList<Carrito> carrito = new LinkedList<>();
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito where estado=?");
@@ -58,7 +57,7 @@ public class ControllerCarrito implements  CarritoRepository{
             	double total=rs.getDouble("total");
             	int codigo_envio=rs.getInt("codigo_envio");
             	int fk_cliente=rs.getInt("fk_cliente");
-            	Carrito carritos=new Carrito(id_carrito, fecha, estado, total, codigo_envio, fk_cliente);
+            	Carrito carritos=new Carrito(id_carrito, fecha, total, codigo_envio, fk_cliente);
             	
             	carrito.add(carritos);
             }
@@ -68,8 +67,8 @@ public class ControllerCarrito implements  CarritoRepository{
 		return carrito;
 	}
 
-	@Override
-	public List<Carrito> mostrarCarritosPagados() {
+	
+	public static LinkedList<Carrito> mostrarCarritosPagados() {
 		LinkedList<Carrito> carrito = new LinkedList<>();
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito where estado=?");
@@ -82,7 +81,7 @@ public class ControllerCarrito implements  CarritoRepository{
             	double total=rs.getDouble("total");
             	int codigo_envio=rs.getInt("codigo_envio");
             	int fk_cliente=rs.getInt("fk_cliente");
-            	Carrito carritos=new Carrito(id_carrito, fecha, estado, total, codigo_envio, fk_cliente);
+            	Carrito carritos=new Carrito(id_carrito, fecha, total, codigo_envio, fk_cliente);
             	
             	carrito.add(carritos);
             }
@@ -92,8 +91,8 @@ public class ControllerCarrito implements  CarritoRepository{
 		return carrito;
 	}
 
-	@Override
-	public List<Carrito> mostrarCarritoCancelados() {
+	
+	public static LinkedList<Carrito> mostrarCarritoCancelados() {
 		LinkedList<Carrito> carrito = new LinkedList<>();
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito where estado=?");
@@ -106,7 +105,7 @@ public class ControllerCarrito implements  CarritoRepository{
             	double total=rs.getDouble("total");
             	int codigo_envio=rs.getInt("codigo_envio");
             	int fk_cliente=rs.getInt("fk_cliente");
-            	Carrito carritos=new Carrito(id_carrito, fecha, estado, total, codigo_envio, fk_cliente);
+            	Carrito carritos=new Carrito(id_carrito, fecha, total, codigo_envio, fk_cliente);
             	
             	carrito.add(carritos);
             }
@@ -116,8 +115,8 @@ public class ControllerCarrito implements  CarritoRepository{
 		return carrito;
 	}
 
-	@Override
-	public List<Carrito> mostrarCarritoporCliente(int id) {
+	
+	public static LinkedList<Carrito> mostrarCarritoporCliente(int id) {
 		LinkedList<Carrito> carrito = new LinkedList<>();
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito where fk_cliente=?");
@@ -131,7 +130,7 @@ public class ControllerCarrito implements  CarritoRepository{
             	double total=rs.getDouble("total");
             	int codigo_envio=rs.getInt("codigo_envio");
             	int fk_cliente=rs.getInt("fk_cliente");
-            	Carrito carritos=new Carrito(id_carrito, fecha, estado, total, codigo_envio, fk_cliente);
+            	Carrito carritos=new Carrito(id_carrito, fecha, total, codigo_envio, fk_cliente);
             	
             	carrito.add(carritos);
             }
@@ -143,8 +142,8 @@ public class ControllerCarrito implements  CarritoRepository{
 
 	
 
-	@Override
-	public List<Carrito> mostrarCarritoporClienteEnProseso(int id) {
+	
+	public static LinkedList<Carrito> mostrarCarritoporClienteEnProseso(int id) {
 		LinkedList<Carrito> carrito = new LinkedList<>();
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito where fk_cliente=? and estado=?");
@@ -159,7 +158,7 @@ public class ControllerCarrito implements  CarritoRepository{
             	double total=rs.getDouble("total");
             	int codigo_envio=rs.getInt("codigo_envio");
             	int fk_cliente=rs.getInt("fk_cliente");
-            	Carrito carritos=new Carrito(id_carrito, fecha, estado, total, codigo_envio, fk_cliente);
+            	Carrito carritos=new Carrito(id_carrito, fecha, total, codigo_envio, fk_cliente);
             	
             	carrito.add(carritos);
             }
@@ -169,8 +168,8 @@ public class ControllerCarrito implements  CarritoRepository{
 		return carrito;
 	}
 
-	@Override
-	public List<Carrito> mostrarCarritoporClientePagados(int id) {
+	
+	public static LinkedList<Carrito> mostrarCarritoporClientePagados(int id) {
 		LinkedList<Carrito> carrito = new LinkedList<>();
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito where fk_cliente=? and estado=?");
@@ -185,7 +184,7 @@ public class ControllerCarrito implements  CarritoRepository{
             	double total=rs.getDouble("total");
             	int codigo_envio=rs.getInt("codigo_envio");
             	int fk_cliente=rs.getInt("fk_cliente");
-            	Carrito carritos=new Carrito(id_carrito, fecha, estado, total, codigo_envio, fk_cliente);
+            	Carrito carritos=new Carrito(id_carrito, fecha, total, codigo_envio, fk_cliente);
             	
             	carrito.add(carritos);
             }
@@ -195,8 +194,8 @@ public class ControllerCarrito implements  CarritoRepository{
 		return carrito;
 	}
 
-	@Override
-	public List<Carrito> mostrarCarritoporClienteCancelados(int id) {
+	
+	public static LinkedList<Carrito> mostrarCarritoporClienteCancelados(int id) {
 		LinkedList<Carrito> carrito = new LinkedList<>();
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito where fk_cliente=? and estado=?");
@@ -211,7 +210,7 @@ public class ControllerCarrito implements  CarritoRepository{
             	double total=rs.getDouble("total");
             	int codigo_envio=rs.getInt("codigo_envio");
             	int fk_cliente=rs.getInt("fk_cliente");
-            	Carrito carritos=new Carrito(id_carrito, fecha, estado, total, codigo_envio, fk_cliente);
+            	Carrito carritos=new Carrito(id_carrito, fecha, total, codigo_envio, fk_cliente);
             	
             	carrito.add(carritos);
             }
