@@ -104,8 +104,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	        }
 	    }
 
-	@Override
-	public LinkedList<Cliente> mostrarClientes() {
+	public static LinkedList<Cliente> mostrarClientes() {
         LinkedList<Cliente> Clientes = new LinkedList<>();
         try {
             PreparedStatement stmt = con.prepareStatement("SELECT * FROM cliente");
