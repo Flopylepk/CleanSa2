@@ -47,16 +47,17 @@ public interface Validador {
 
 	default String validarCaracteres(String mensaeje) {
 		String palabra = "";
-		do {
-			
-		try {
-			palabra = JOptionPane.showInputDialog(mensaeje);
-			} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "no completo nada");
-			}
 		
-		} while (palabra.isEmpty());
-		return palabra;
+		if (palabra.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "No completo nada");
+			return null;
+		} else {
+			return palabra;
+
+		}
+
+		
+		
 	}
 	
 	 

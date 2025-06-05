@@ -95,8 +95,18 @@ public class Login extends JFrame {
 		btnNewButton.setBounds(129, 313, 206, 26);
 		contentPane.add(btnNewButton);
 		
+		JButton salir = new JButton("salir");
+		salir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menuCliente menucliente = new menuCliente();
+				menucliente.setVisible(true);;
+				dispose();
+			}
+		});
+		salir.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		salir.setBounds(10, 347, 89, 23);
+		contentPane.add(salir);
+		
 		
 	}
-
-
 }

@@ -13,7 +13,7 @@ import BLL.Producto;
 public class ControllerProducto  {
 	private static Connection con = Conexion.getInstance().getConnection();// Poner esto en todos los controladores
 	 
-	public LinkedList<Producto> mostrarProductos() {
+	public static LinkedList<Producto> mostrarProductos() {
 	     LinkedList<Producto> productos = new LinkedList<>();
 	     try {
 	            PreparedStatement stmt = con.prepareStatement("SELECT * FROM producto"); //traer consulta de insert
@@ -29,7 +29,7 @@ public class ControllerProducto  {
 	                String nombre = rs.getString("nombre");
 	                int stock = rs.getInt("stock");
 	                int precio = rs.getInt("precio");
-	                boolean peligoso = rs.getBoolean("peligroso");
+	                int peligoso = rs.getInt("peligroso");
 	                int categoria = rs.getInt("fk_categoria");
 
 	                /*	this.nombre = nombre;
@@ -96,7 +96,7 @@ public class ControllerProducto  {
 			stmt.setDouble(2, producto.getPrecio());
 			stmt.setInt(3, producto.getStcok());
 			stmt.setInt(4, producto.getCategoria());
-			stmt.setBoolean(5, producto.getPeligroso());
+			stmt.setInt(5, producto.getPeligroso());
 			stmt.executeUpdate();
 			System.out.println("Producto agregado correctamente.");
 	

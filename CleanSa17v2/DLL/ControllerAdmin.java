@@ -52,6 +52,11 @@ public class ControllerAdmin <T extends Administrador> implements AdministradorR
         return administrador;
     }
 
+	private String encriptar(String contrasena) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	 
 	 
 	

@@ -2,7 +2,7 @@ package repositorio;
 
 public interface Encriptador {
 
-	default String encriptar(String texto) {
+	static  String encriptar(String texto) {
 		String resultado = "";
 		for (char c : texto.toCharArray()) {
 			if (Character.isLetter(c)) {

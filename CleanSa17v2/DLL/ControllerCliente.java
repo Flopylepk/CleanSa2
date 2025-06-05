@@ -55,38 +55,45 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	        return cliente;
 	    }
 	 
-	 @Override
-	    public void agregarCliente() {
+	    public static void agregarClienteProfe(
+        String nombre,
+        String contrasena,
+        String direccion,
+        String dni, int tipo) {
+	        try {
+	            PreparedStatement statement = con.prepareStatement(
+	                "INSERT INTO cliente (nombre , direccion, dni, "
+	                + "contrasena, fk_categoria_usuarios) VALUES (?, ?, ?, ?, ?)"
+	            );
+	            
+	          
+	    		
+	            statement.setString(1, nombre );
+	            statement.setString(2, direccion);
+	            statement.setString(3, dni);
+	            statement.setString(4, contrasena);
+	            statement.setInt(5, tipo);
+
+	            int filas = statement.executeUpdate();
+	            if (filas > 0) {
+	                System.out.println("Cliente agregado correctamente.");
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	   public static void agregarCliente2(String nombre,String contrasena,String direccion,String dni,int tipo) {
 	        try {
 	            PreparedStatement statement = con.prepareStatement(
 	                "INSERT INTO cliente (nombre , direccion, dni, contrasena, fk_categoria_usuarios) VALUES (?, ?, ?, ?, ?)"
 	            );
-	            Cliente prueba=null;
-	            String nombre ="";
-	            String contrasena ="";
-	            String direccion ="";
-	            String dni ="";
-	            do {
-					
-	            nombre = validarCaracteres("Ingrese su nombre");
-	    	 	contrasena = validarPassword("Ingrese contraseña");
-	    	 	direccion = validarCaracteres("Ingrese su dirección");
-	    		dni = validarCaracteres("Ingrese DNI");
-	    		prueba=validar(dni);
-	            } while (prueba!=null);
-	    		int tipo=0;
-	    		do {
-	    			String tipo1=validarCaracteres("Ingrese su tipo de ususario (Personal o empresa)");
-		    		if (tipo1.equalsIgnoreCase("personal")) {
-						tipo=1;
-					} else if(tipo1.equalsIgnoreCase("empresa")){
-						tipo=2;
-					}
-		    		if (tipo==0) {
-						JOptionPane.showMessageDialog(null, "el tipo de usuario es incorrecto, ingreselo nuevamente");
-					}
-				} while (tipo==0);
-	    		
+	            
+	            /*estos son parametros (AGREGAR)*/
+	           
+	            /*BLL pasar validaciones a bll, (como esta hecho en controllerCliente)*/
+	           
+	    		/*aca*/
 	            statement.setString(1, nombre );
 	            statement.setString(2, direccion);
 	            statement.setString(3, dni);
@@ -101,6 +108,11 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	            e.printStackTrace();
 	        }
 	    }
+
+	private static String encriptar(String contrasena) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public LinkedList<Cliente> mostrarClientes() {
@@ -152,8 +164,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	    }
 
 
-	@Override
-	public <T> T validar(String dni) {
+	public static <T> T validar2(String dni) {
 		 T cliente = null;
 		try {
             PreparedStatement stmt = con.prepareStatement(
@@ -414,6 +425,12 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 			
 		}
 			 
+		
+	}
+
+	@Override
+	public void agregarCliente() {
+		// TODO Auto-generated method stub
 		
 	}
 }
