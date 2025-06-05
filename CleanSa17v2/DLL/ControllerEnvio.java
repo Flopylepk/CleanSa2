@@ -22,10 +22,14 @@ public class ControllerEnvio {
 			stm.setDate(2, fechaEntregaBD);
 			stm.setString(3, direccion);
 			
-			
+			PreparedStatement stm2 = con.prepareStatement("UPDATE carrito SET estado=? WHERE id_carrito=?");
+			stm2.setString(1, "Enviado");
+			stm2.setInt(2, carrito.getId_carrito());
 			
 			
 			stm.executeUpdate();
+			stm2.executeUpdate();
+			
 			
 		} catch (Exception e) {
 			
