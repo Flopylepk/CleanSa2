@@ -16,6 +16,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
@@ -126,24 +127,50 @@ public class Tabla2 extends JFrame implements Validador {
 								"Tiene que ingresar una cantidad de producto, tiene que ser mayor a 0");
 					} else {
 						if (cantidad2 <= productoSeleccionado.getStcok()) {
+							////validacion para no repetir producto
+							
 							try {
-								PreparedStatement stmt = con.prepareStatement(
-										"INSERT INTO carrito_detalle(fk_carrito, fk_producto, total_producto, cantidad) VALUES (?,?,?,?)");
-								stmt.setInt(1, carrito.getId_carrito());
-								stmt.setInt(2, productoSeleccionado.getId());
-								stmt.setDouble(3, productoSeleccionado.getPrecio() * cantidad2);
-								stmt.setInt(4, cantidad2);
+							PreparedStatement repetir = con.prepareStatement(
+									"SELECT id_carrito_detalle FROM carrito_detalle WHERE fk_carrito = ? AND fk_producto = ? ");
+							
+							repetir.setInt(1, carrito.getId_carrito());
+							repetir.setInt(2, productoSeleccionado.getId());
+							
+								ResultSet cr = repetir.executeQuery();
+								
+								int opcion=cr.getInt("id_carrito_detalle");
+								
+																
+								if (opcion>=1) {
+									JOptionPane.showMessageDialog(null, "este producto ya existe en el carrito");
+								} else {
+									try {
+										PreparedStatement stmt = con.prepareStatement(
+												"INSERT INTO carrito_detalle(fk_carrito, fk_producto, total_producto, cantidad) VALUES (?,?,?,?)");
+										stmt.setInt(1, carrito.getId_carrito());
+										stmt.setInt(2, productoSeleccionado.getId());
+										stmt.setDouble(3, productoSeleccionado.getPrecio() * cantidad2);
+										stmt.setInt(4, cantidad2);
 
-								PreparedStatement stmt2 = con
-										.prepareStatement("UPDATE producto SET stock=? WHERE id_producto=?");
-								stmt2.setInt(1, productoSeleccionado.getStcok() - cantidad2);
-								stmt2.setInt(2, productoSeleccionado.getId());
+										PreparedStatement stmt2 = con
+												.prepareStatement("UPDATE producto SET stock=? WHERE id_producto=?");
+										stmt2.setInt(1, productoSeleccionado.getStcok() - cantidad2);
+										stmt2.setInt(2, productoSeleccionado.getId());
 
-								JOptionPane.showMessageDialog(null, "Producto agregado correctamernte");
-							} catch (SQLException e1) {
+										JOptionPane.showMessageDialog(null, "Producto agregado correctamernte");
+									} catch (SQLException e1) {
 
+										e1.printStackTrace();
+									}
+								}
+								
+								
+							} catch (SQLException e1) {																							
 								e1.printStackTrace();
 							}
+							
+																
+							
 						} else {
 							JOptionPane.showMessageDialog(null,
 									"Tiene que ingresar una cantidad de producto, tiene que ser menor al stock del producto");

@@ -12,20 +12,26 @@ import DLL.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 public class Tabla extends JFrame {
+	private static Connection con = Conexion.getInstance().getConnection();
 
     private JPanel contentPane;
     private JTable table;
     private DefaultTableModel model;
     private Producto productoSeleccionado;
     private JTextField inpFiltro;
+    private JTextField cantidad;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
-            	Tabla frame = new Tabla();
+            	Tabla frame = new Tabla(new Carrito(1));
                 frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -33,7 +39,7 @@ public class Tabla extends JFrame {
         });
     }
 
-    public Tabla() {
+    public Tabla(Carrito carrito) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 800, 500);
         contentPane = new JPanel();
@@ -107,15 +113,95 @@ public class Tabla extends JFrame {
                     volver.addActionListener(new ActionListener() {
                     	public void actionPerformed(ActionEvent e) {
                     		cargarTabla();
+                    		inpFiltro.setText("");
                     		
                     	}
                     });
                     volver.setBounds(310, 291, 118, 51);
                     contentPane.add(volver);
-            
-           
-      
+                    
+            		cantidad = new JTextField();
+            		cantidad.setBounds(10, 413, 182, 34);
+            		contentPane.add(cantidad);
+            		cantidad.setColumns(10);
+                    
+                    JButton agregarCarrito = new JButton("agregar al carrito");
+                    agregarCarrito.addActionListener(new ActionListener() {
+                    	public void actionPerformed(ActionEvent e) {
+                    		
+                    		
+                			if (cantidad.getText().isEmpty()) {
+            					JOptionPane.showMessageDialog(null, "Tiene que ingresar la cantidad de producto");
+            				} else {
+            					int cantidad2 = Integer.parseInt(cantidad.getText());
+            					if (cantidad2 <= 0) {
+            						JOptionPane.showMessageDialog(null,
+            								"Tiene que ingresar una cantidad de producto, tiene que ser mayor a 0");
+            					} else {
+            						if (cantidad2 <= productoSeleccionado.getStcok()) {
+            							////validacion para no repetir producto
+            							
+            							try {
+            							PreparedStatement repetir = con.prepareStatement(
+            									"SELECT id_carrito_detalle FROM carrito_detalle WHERE fk_carrito = ? AND fk_producto = ? ");
+            							
+            							repetir.setInt(1, carrito.getId_carrito());
+            							repetir.setInt(2, productoSeleccionado.getId());
+            							
+            								ResultSet cr = repetir.executeQuery();
+            								
+            								int opcion=cr.getInt("id_carrito_detalle");
+            								
+            																
+            								if (opcion>=1) {
+            									JOptionPane.showMessageDialog(null, "este producto ya existe en el carrito");
+            								} else {
+            									try {
+            										PreparedStatement stmt = con.prepareStatement(
+            												"INSERT INTO carrito_detalle(fk_carrito, fk_producto, total_producto, cantidad) VALUES (?,?,?,?)");
+            										stmt.setInt(1, carrito.getId_carrito());
+            										stmt.setInt(2, productoSeleccionado.getId());
+            										stmt.setDouble(3, productoSeleccionado.getPrecio() * cantidad2);
+            										stmt.setInt(4, cantidad2);
 
+            										PreparedStatement stmt2 = con
+            												.prepareStatement("UPDATE producto SET stock=? WHERE id_producto=?");
+            										stmt2.setInt(1, productoSeleccionado.getStcok() - cantidad2);
+            										stmt2.setInt(2, productoSeleccionado.getId());
+
+            										JOptionPane.showMessageDialog(null, "Producto agregado correctamernte");
+            									} catch (SQLException e1) {
+
+            										e1.printStackTrace();
+            									}
+            								}
+            								
+            								
+            							} catch (SQLException e1) {																							
+            								e1.printStackTrace();
+            							}
+            							
+            																
+            							
+            						} else {
+            							JOptionPane.showMessageDialog(null,
+            									"Tiene que ingresar una cantidad de producto, tiene que ser menor al stock del producto");
+            						}
+            					}
+            				}
+                    		
+                    		
+                    		
+                    		
+                    		
+                    	}
+                    });
+                    agregarCarrito.setBounds(23, 382, 118, 23);
+                    contentPane.add(agregarCarrito);
+                    
+
+   
+                    
         // Cargar datos
         cargarTabla();
 
