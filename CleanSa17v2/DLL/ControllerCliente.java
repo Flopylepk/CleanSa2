@@ -172,7 +172,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
             	JOptionPane.showMessageDialog(null, "ese cliente ya existe, ingreselo nuevamente");
-               cliente=null;
+               
             }
         } catch (Exception e) {
             e.printStackTrace();
