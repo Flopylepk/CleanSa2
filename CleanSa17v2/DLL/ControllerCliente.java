@@ -55,15 +55,10 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	        return cliente;
 	    }
 	 
-	    public static void agregarClienteProfe(
-        String nombre,
-        String contrasena,
-        String direccion,
-        String dni, int tipo) {
+	    public static void agregarClienteProfe(String nombre,String contrasena,String direccion,String dni, int tipo) {
 	        try {
 	            PreparedStatement statement = con.prepareStatement(
-	                "INSERT INTO cliente (nombre , direccion, dni, "
-	                + "contrasena, fk_categoria_usuarios) VALUES (?, ?, ?, ?, ?)"
+	                "INSERT INTO cliente (nombre , direccion, dni, contrasena, fk_categoria_usuarios) VALUES (?, ?, ?, ?, ?)"
 	            );
 	            
 	          
@@ -81,6 +76,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
+	       
 	    }
 
 	   public static void agregarCliente2(String nombre,String contrasena,String direccion,String dni,int tipo) {
@@ -176,23 +172,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
             	JOptionPane.showMessageDialog(null, "ese cliente ya existe, ingreselo nuevamente");
-                int id = rs.getInt("id_cliente");
-                String nombre = rs.getString("nombre");
-                String contrasena = rs.getString("contrasena");
-                String dirreccion = rs.getString("direccion");
-                int tipo=rs.getInt("fk_categoria_usuarios");
-
-                switch (tipo) {
-                    case 1:
-                        cliente = (T) new Personal(nombre,contrasena, dirreccion, dni,tipo);
-                        break;
-                    case 2:
-                        cliente = (T) new Empresa(nombre,contrasena, dirreccion, dni,tipo);
-                        break;
-                    default:
-                        System.out.println("Tipo de cliente desconocido: " + tipo);
-                        break;
-                }
+               cliente=null;
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -114,27 +114,43 @@ public class Cliente implements Validador {
 		Cliente prueba = null;
 		
 		
-			nombre = this.validarCaracteres(nombre);
-			if (nombre.equals(null)) {
+			
+			if (nombre.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "el nombre esta vacio");
 				return;
 			}
-			
-			contrasena = this.validarPassword(contrasena);
-			if (contrasena.equals(null)) {
-				JOptionPane.showMessageDialog(null, "la contraseña esta vacia");
+			String contrasena2=controller.validarPassword(contrasena);
+			if (contrasena2.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "se produjo un error. Ingresela nuevamente");
 				return;
 			}
-			direccion = this.validarCaracteres(direccion);
-			if (direccion.equals(null)) {
+
+			if (direccion.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "la direccion esta vacia");
 				return;
 			}
-			dni = this.validarCaracteres(dni);
-			if (dni.equals(null)) {
+
+			
+			if (dni.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "el dni esta vacio");
 				return;
+				
+			}else if (dni.length()<8) {
+				JOptionPane.showMessageDialog(null, "el dni es menor a 8 caracteres");
+				return;
 			}
+				int tamaño=dni.length();
+				for (int i = 0; i < tamaño; i++) {
+					if (!Character.isDigit(dni.charAt(i))) {
+						JOptionPane.showMessageDialog(null, "el dni tiene letras");
+						
+						return;
+					}
+					
+				}
+				
+				
+			
 			
 			prueba = (Cliente) ControllerCliente.validar2(dni);
 			if (prueba!=null) {
@@ -150,7 +166,7 @@ public class Cliente implements Validador {
 				tipo2 = 2;
 			}
 
-		ControllerCliente.agregarCliente2(nombre, contrasena, direccion, dni, tipo2);
+		ControllerCliente.agregarCliente2(nombre, contrasena2, direccion, dni, tipo2);
 	}
 
 }
