@@ -160,7 +160,7 @@ public class Cliente implements Validador {
 			
 		int tipo2 = 0;
 			String tipo1 = tipo;
-			if (tipo1.equalsIgnoreCase("personal")) {
+			if (tipo1.equalsIgnoreCase("general")) {
 				tipo2 = 1;
 			} else if (tipo1.equalsIgnoreCase("empresa")) {
 				tipo2 = 2;

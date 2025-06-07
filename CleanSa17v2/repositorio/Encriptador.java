@@ -1,5 +1,7 @@
 package repositorio;
 
+import javax.swing.JOptionPane;
+
 public interface Encriptador {
 
 	static  String encriptar(String texto) {
@@ -10,8 +12,9 @@ public interface Encriptador {
 
 				c = (char) ((c - base + 3) % 26 + base);
 			}
-			resultado += c;
+			resultado = resultado +c;
 		}
+		
 		return resultado;
 	}
 

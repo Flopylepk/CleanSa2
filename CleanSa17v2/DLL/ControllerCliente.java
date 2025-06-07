@@ -28,7 +28,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	                "SELECT * FROM cliente WHERE dni = ? AND contrasena = ?"
 	            );//copiar consulta de insert para producto
 	            stmt.setString(1, DNI);
-	            stmt.setString(2, encriptar(contrasena));
+	            stmt.setString(2,contrasena);
 	            
 	            ResultSet rs = stmt.executeQuery();
 	            if (rs.next()) {
@@ -39,10 +39,10 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 
 	                switch (tipo) {
 	                    case 1:
-	                        cliente = (T) new Personal(nombre,desencriptar(contrasena), dirreccion, DNI,id,tipo);
+	                        cliente = (T) new Personal(nombre,contrasena, dirreccion, DNI,id,tipo);
 	                        break;
 	                    case 2:
-	                        cliente = (T) new Empresa(nombre,desencriptar(contrasena), dirreccion, DNI,id,tipo);
+	                        cliente = (T) new Empresa(nombre,contrasena, dirreccion, DNI,id,tipo);
 	                        break;
 	                    default:
 	                        System.out.println("Tipo de cliente desconocido: " + tipo);
@@ -90,10 +90,11 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	            /*BLL pasar validaciones a bll, (como esta hecho en controllerCliente)*/
 	           
 	    		/*aca*/
+
 	            statement.setString(1, nombre );
 	            statement.setString(2, direccion);
 	            statement.setString(3, dni);
-	            statement.setString(4, encriptar(contrasena) );
+	            statement.setString(4, contrasena);
 	            statement.setInt(5, tipo);
 
 	            int filas = statement.executeUpdate();
@@ -172,7 +173,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
             	JOptionPane.showMessageDialog(null, "ese cliente ya existe, ingreselo nuevamente");
-               
+            	cliente=null;
             }
         } catch (Exception e) {
             e.printStackTrace();
