@@ -153,7 +153,7 @@ public class Cliente implements Validador {
 			
 			
 			prueba = (Cliente) ControllerCliente.validar2(dni);
-			if (prueba!=null) {
+			if (prueba==null) {
 				JOptionPane.showMessageDialog(null, "ese cliente ya existe");
 				return;
 			}
