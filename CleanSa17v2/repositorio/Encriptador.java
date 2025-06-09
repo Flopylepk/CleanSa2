@@ -3,8 +3,9 @@ package repositorio;
 import javax.swing.JOptionPane;
 
 public interface Encriptador {
+	
 
-	static  String encriptar(String texto) {
+	default String encriptar(String texto) {
 		String resultado = "";
 		for (char c : texto.toCharArray()) {
 			if (Character.isLetter(c)) {

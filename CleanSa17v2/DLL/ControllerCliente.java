@@ -28,7 +28,8 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	                "SELECT * FROM cliente WHERE dni = ? AND contrasena = ?"
 	            );//copiar consulta de insert para producto
 	            stmt.setString(1, DNI);
-	            stmt.setString(2,contrasena);
+	            stmt.setString(2,encriptar(contrasena));
+	            
 	            
 	            ResultSet rs = stmt.executeQuery();
 	            if (rs.next()) {
@@ -80,7 +81,8 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	    }
 
 	   public static void agregarCliente2(String nombre,String contrasena,String direccion,String dni,int tipo) {
-	        try {
+	        
+		   try {
 	            PreparedStatement statement = con.prepareStatement(
 	                "INSERT INTO cliente (nombre , direccion, dni, contrasena, fk_categoria_usuarios) VALUES (?, ?, ?, ?, ?)"
 	            );
@@ -90,7 +92,8 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	            /*BLL pasar validaciones a bll, (como esta hecho en controllerCliente)*/
 	           
 	    		/*aca*/
-
+	            
+	            
 	            statement.setString(1, nombre );
 	            statement.setString(2, direccion);
 	            statement.setString(3, dni);
@@ -106,10 +109,6 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	        }
 	    }
 
-	private static String encriptar(String contrasena) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public LinkedList<Cliente> mostrarClientes() {
@@ -173,7 +172,13 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
             	JOptionPane.showMessageDialog(null, "ese cliente ya existe, ingreselo nuevamente");
-            	cliente=null;
+            	int id_cliente = rs.getInt("id_cliente");
+                String nombre = rs.getString("nombre");
+                String direccion = rs.getString("direccion");
+                int tipo = rs.getInt("fk_categoria_usuarios");
+                String contrasena = rs.getString("contrasena");
+                 cliente= (T) new Cliente(nombre, contrasena, direccion, dni,id_cliente ,tipo);
+                
             }
         } catch (Exception e) {
             e.printStackTrace();

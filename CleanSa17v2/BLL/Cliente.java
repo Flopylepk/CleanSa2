@@ -5,9 +5,10 @@ import DLL.*;
 
 import javax.swing.JOptionPane;
 
+import repositorio.Encriptador;
 import repositorio.Validador;
 
-public class Cliente implements Validador {
+public class Cliente implements Validador, Encriptador {
 
 	private String nombre;
 	private String contrasena;
@@ -135,8 +136,8 @@ public class Cliente implements Validador {
 				JOptionPane.showMessageDialog(null, "el dni esta vacio");
 				return;
 				
-			}else if (dni.length()<8) {
-				JOptionPane.showMessageDialog(null, "el dni es menor a 8 caracteres");
+			}else if (dni.length()<8||dni.length()>=9) {
+				JOptionPane.showMessageDialog(null, "el dni debe ser igual a 8 caracteres");
 				return;
 			}
 				int tamaño=dni.length();
@@ -153,7 +154,7 @@ public class Cliente implements Validador {
 			
 			
 			prueba = (Cliente) ControllerCliente.validar2(dni);
-			if (prueba==null) {
+			if (prueba!=null) {
 				JOptionPane.showMessageDialog(null, "ese cliente ya existe");
 				return;
 			}
@@ -166,7 +167,7 @@ public class Cliente implements Validador {
 				tipo2 = 2;
 			}
 
-		ControllerCliente.agregarCliente2(nombre, contrasena2, direccion, dni, tipo2);
+		ControllerCliente.agregarCliente2(nombre, encriptar(contrasena2), direccion, dni, tipo2);
 	}
 
 }
