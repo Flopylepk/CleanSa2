@@ -403,10 +403,12 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	            int filas = statement.executeUpdate();
 	            if (filas > 0) {
 	                System.out.println("Carrito agregado correctamente.");
+	                //getgeneratekeys
+	                ResultSet rs5=statement.getGeneratedKeys();
+	                int id_carrito=rs5.getInt("id_carrito");
 	                
-	                PreparedStatement carrito3 = con.prepareStatement(
-			                
-						 );
+	                carrito=new Carrito(id_carrito,fecha, estado, total,codigoenvio,fk_cliente);
+	                return carrito;
 	            }
 			} else {
 				JOptionPane.showMessageDialog(null, "no se puede agregar otro carrito porque ya existe uno");
@@ -418,7 +420,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 		} catch (Exception e) {
 			return null;
 		}
-			 
+		return null;	 
 		
 	}
 
