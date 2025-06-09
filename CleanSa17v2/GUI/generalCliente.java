@@ -5,6 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import BLL.Cliente;
+import DLL.ControllerCliente;
+
 import java.awt.SystemColor;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -26,7 +30,7 @@ public class generalCliente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public generalCliente() {
+	public generalCliente(Cliente cliente) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 475, 328);
 		contentPane = new JPanel();
@@ -54,6 +58,14 @@ public class generalCliente extends JFrame {
 		contentPane.add(btnVerCarrito);
 		
 		JButton btnComprar = new JButton("Comprar");
+		btnComprar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerCliente.carrito2(cliente.getId());
+				Tabla tabla =new Tabla();
+				tabla.setVisible(true);
+				dispose();
+			}
+		});
 		btnComprar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnComprar.setBackground(SystemColor.menu);
 		btnComprar.setBounds(165, 117, 129, 23);

@@ -85,7 +85,7 @@ public class Login extends JFrame {
 				if (cliente==null) {
 					JOptionPane.showMessageDialog(null, "error, usuario incorrecto");
 				} else {
-					generalCliente generalcliente = new generalCliente();
+					generalCliente generalcliente = new generalCliente(cliente);
 					generalcliente.setVisible(true);;
 					dispose();
 				}

@@ -373,7 +373,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 		
 	}
 	
-	public static void carrito2(int id) {
+	public static Carrito carrito2(int id) {
 		try {
 			PreparedStatement validar = con.prepareStatement(
 	                "Select * FROM carrito WHERE fk_cliente=? AND estado=?"
@@ -400,6 +400,14 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	         //   statement.setBoolean(4, estadoenvio );
 	            statement.setInt(4, codigoenvio);
 	            statement.setInt(5, fk_cliente);
+	            int filas = statement.executeUpdate();
+	            if (filas > 0) {
+	                System.out.println("Carrito agregado correctamente.");
+	                
+	                PreparedStatement carrito3 = con.prepareStatement(
+			                
+						 );
+	            }
 			} else {
 				JOptionPane.showMessageDialog(null, "no se puede agregar otro carrito porque ya existe uno");
 			}
@@ -408,7 +416,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 			
             
 		} catch (Exception e) {
-			
+			return null;
 		}
 			 
 		
