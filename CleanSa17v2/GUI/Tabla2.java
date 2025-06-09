@@ -29,16 +29,7 @@ public class Tabla2 extends JFrame implements Validador {
 	private Producto productoSeleccionado;
 	private JTextField inpFiltro;
 	private JTextField cantidad;
-	  public static void main(String[] args) {
-	        EventQueue.invokeLater(() -> {
-	            try {
-	            	Tabla2 frame = new Tabla2(new Carrito(1));
-	                frame.setVisible(true);
-	            } catch (Exception e) {
-	                e.printStackTrace();
-	            }
-	        });
-	    }
+
 
 	public Tabla2(Carrito carrito) {
 
