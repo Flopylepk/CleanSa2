@@ -12,6 +12,8 @@ import DLL.ControllerCliente;
 
 import java.awt.SystemColor;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
@@ -61,16 +63,22 @@ public class generalCliente extends JFrame {
 		JButton btnComprar = new JButton("Comprar");
 		btnComprar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Carrito carrito=ControllerCliente.carrito2(cliente.getId());
-				if (cliente.getTipo()==1) {
-					Tabla3 tabla3 =new Tabla3(carrito,cliente);
-					tabla3.setVisible(true);
-					dispose();
-				} else if (cliente.getTipo()==2) {
-					Tabla2 tabla2 =new Tabla2(carrito,cliente);
-					tabla2.setVisible(true);
-					dispose();
+				JOptionPane.showMessageDialog(null, cliente);
+				Carrito carrito=ControllerCliente.carrito2(cliente);
+				if (carrito==null) {
+					JOptionPane.showMessageDialog(null, "ocurrio un error");
+				} else {
+					if (cliente.getTipo()==1) {
+						Tabla3 tabla3 =new Tabla3(carrito,cliente);
+						tabla3.setVisible(true);
+						dispose();
+					} else if (cliente.getTipo()==2) {
+						Tabla2 tabla2 =new Tabla2(carrito,cliente);
+						tabla2.setVisible(true);
+						dispose();
+					}
 				}
+				
 					
 				
 				

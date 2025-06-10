@@ -373,20 +373,20 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 		
 	}
 	
-	public static Carrito carrito2(int id) {
+	public static Carrito carrito2(Cliente cliente) {
 		try {
 			PreparedStatement validar = con.prepareStatement(
 	                "Select * FROM carrito WHERE fk_cliente=? AND estado=?"
 					);
-			validar.setInt(1, id);
+			validar.setInt(1, cliente.getId());
 			validar.setString(2, "en proseso");
 			ResultSet rs = validar.executeQuery();
 			
-			if (rs.next()) {
+			if (!rs.next()) {
 				System.out.println("Carrito nuevo");
 				JOptionPane.showMessageDialog(null, "creemos un carrito para usted");
 				PreparedStatement statement = con.prepareStatement(
-		                "INSERT INTO carrito (fecha , estado, total, codigoenvio, fk_cliente) VALUES (?,?, ?, ?, ?, ?)"
+		                "INSERT INTO carrito (fecha , estado, total, codigoenvio, fk_cliente) VALUES (?, ?, ?, ?, ?)"
 					 );
 			 Carrito carrito = null;
 			 Date fecha= Date.valueOf(LocalDate.now());
@@ -394,7 +394,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 			 double total = 0;
 			// boolean estadoenvio= false;
 			 int codigoenvio= (int)Math.random()*1001+100;
-			 int fk_cliente= id;
+			 int fk_cliente= cliente.getId();
 			 
 			 	statement.setDate(1, fecha );
 	            statement.setString(2, estado);
@@ -407,8 +407,20 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	            if (filas > 0) {
 	                System.out.println("Carrito agregado correctamente.");
 	                //getgeneratekeys
-	                ResultSet rs5=statement.getGeneratedKeys();
-	                int id_carrito=rs5.getInt("id_carrito");
+	                PreparedStatement validar2 = con.prepareStatement(
+	    	                "Select * FROM carrito WHERE fk_cliente=? AND estado=?"
+	    					);
+	                
+	                validar2.setInt(1, cliente.getId());
+	    			validar2.setString(2, "en proseso");
+	    			ResultSet rs2 = validar.executeQuery();
+	    			
+	    			int id_carrito=rs2.getInt("id_carrito");
+	    			fecha=rs2.getDate("fecha");
+	    			estado=rs2.getString("estado");
+	                total=rs2.getDouble("total");
+	                codigoenvio=rs2.getInt("estado_envio");
+	                fk_cliente=rs2.getInt("fk_cliente");
 	                
 	                carrito=new Carrito(id_carrito,fecha, estado, total,codigoenvio,fk_cliente);
 	                return carrito;
@@ -432,7 +444,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 			
             
 		} catch (Exception e) {
-			System.out.println("Error");
+			System.out.println(e);
 			return null;
 		}
 		 
