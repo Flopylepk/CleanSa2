@@ -171,7 +171,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
             
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-            	JOptionPane.showMessageDialog(null, "ese cliente ya existe, ingreselo nuevamente");
+            	
             	int id_cliente = rs.getInt("id_cliente");
                 String nombre = rs.getString("nombre");
                 String direccion = rs.getString("direccion");
@@ -378,10 +378,13 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 			PreparedStatement validar = con.prepareStatement(
 	                "Select * FROM carrito WHERE fk_cliente=? AND estado=?"
 					);
-			validar.setInt(1, id );
+			validar.setInt(1, id);
 			validar.setString(2, "en proseso");
 			ResultSet rs = validar.executeQuery();
-			if (rs==null) {
+			
+			if (rs.next()) {
+				System.out.println("Carrito nuevo");
+				JOptionPane.showMessageDialog(null, "creemos un carrito para usted");
 				PreparedStatement statement = con.prepareStatement(
 		                "INSERT INTO carrito (fecha , estado, total, codigoenvio, fk_cliente) VALUES (?,?, ?, ?, ?, ?)"
 					 );
@@ -410,8 +413,8 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	                carrito=new Carrito(id_carrito,fecha, estado, total,codigoenvio,fk_cliente);
 	                return carrito;
 	            }
-			} else {
-				JOptionPane.showMessageDialog(null, "continuemos con su compra");
+			}
+				System.out.println("Carrito existente");
 				int id_carrito=rs.getInt("id_carrito");
 				Date fecha=rs.getDate("fecha");
 				String estado=rs.getString("estado");
@@ -420,15 +423,19 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 				int fk_cliente=rs.getInt("fk_cliente");
 				Carrito carrito = new Carrito(id_carrito,fecha, estado, total,codigo_envio,fk_cliente);
 				return carrito;
-			}
+			
+				
+			
+			
 			
 			
 			
             
 		} catch (Exception e) {
+			System.out.println("Error");
 			return null;
 		}
-		return null;	 
+		 
 		
 	}
 

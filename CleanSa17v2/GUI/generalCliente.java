@@ -63,8 +63,8 @@ public class generalCliente extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Carrito carrito=ControllerCliente.carrito2(cliente.getId());
 				if (cliente.getTipo()==1) {
-					Tabla tabla =new Tabla(carrito);
-					tabla.setVisible(true);
+					Tabla3 tabla3 =new Tabla3(carrito,cliente);
+					tabla3.setVisible(true);
 					dispose();
 				} else if (cliente.getTipo()==2) {
 					Tabla2 tabla2 =new Tabla2(carrito,cliente);

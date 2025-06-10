@@ -20,7 +20,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
-public class Tabla2 extends JFrame implements Validador {
+public class Tabla3 extends JFrame implements Validador {
 	private static Connection con = Conexion.getInstance().getConnection();
 
 	private JPanel contentPane;
@@ -31,7 +31,7 @@ public class Tabla2 extends JFrame implements Validador {
 	private JTextField cantidad;
 
 
-	public Tabla2(Carrito carrito, Cliente cliente) {
+	public Tabla3(Carrito carrito, Cliente cliente) {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
@@ -231,7 +231,7 @@ public class Tabla2 extends JFrame implements Validador {
 
 	private void cargarTabla() {
 		model.setRowCount(0);
-		LinkedList<Producto> productos = ControllerProducto.mostrarProductosNoPeligrosos();
+		LinkedList<Producto> productos = ControllerProducto.mostrarProductos();
 		for (Producto u : productos) {
 			model.addRow(
 
@@ -244,7 +244,7 @@ public class Tabla2 extends JFrame implements Validador {
 
 	private void cargarTablaFiltro(String filtro) {
 		model.setRowCount(0);
-		LinkedList<Producto> productos = ControllerProducto.mostrarProductosNoPeligrosos();
+		LinkedList<Producto> productos = ControllerProducto.mostrarProductos();
 		for (Producto u : productos) {
 			if (u.getNombre().startsWith(filtro)) {
 
