@@ -379,7 +379,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	                "Select * FROM carrito WHERE fk_cliente=? AND estado=?"
 					);
 			validar.setInt(1, cliente.getId());
-			validar.setString(2, "en proseso");
+			validar.setString(2, "en proceso");
 			ResultSet rs = validar.executeQuery();
 			
 			if (!rs.next()) {
@@ -412,14 +412,14 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	    					);
 	                
 	                validar2.setInt(1, cliente.getId());
-	    			validar2.setString(2, "en proseso");
+	    			validar2.setString(2, "en proceso");
 	    			ResultSet rs2 = validar.executeQuery();
 	    			
 	    			int id_carrito=rs2.getInt("id_carrito");
 	    			fecha=rs2.getDate("fecha");
 	    			estado=rs2.getString("estado");
 	                total=rs2.getDouble("total");
-	                codigoenvio=rs2.getInt("estado_envio");
+	                codigoenvio=rs2.getInt("codigoenvio");
 	                fk_cliente=rs2.getInt("fk_cliente");
 	                
 	                carrito=new Carrito(id_carrito,fecha, estado, total,codigoenvio,fk_cliente);
@@ -431,7 +431,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 				Date fecha=rs.getDate("fecha");
 				String estado=rs.getString("estado");
 				double total=rs.getDouble("total");
-				int codigo_envio=rs.getInt("codigo_envio");
+				int codigo_envio=rs.getInt("codigoenvio");
 				int fk_cliente=rs.getInt("fk_cliente");
 				Carrito carrito = new Carrito(id_carrito,fecha, estado, total,codigo_envio,fk_cliente);
 				return carrito;
