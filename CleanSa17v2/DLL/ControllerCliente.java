@@ -411,7 +411,15 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	                return carrito;
 	            }
 			} else {
-				JOptionPane.showMessageDialog(null, "no se puede agregar otro carrito porque ya existe uno");
+				JOptionPane.showMessageDialog(null, "continuemos con su compra");
+				int id_carrito=rs.getInt("id_carrito");
+				Date fecha=rs.getDate("fecha");
+				String estado=rs.getString("estado");
+				double total=rs.getDouble("total");
+				int codigo_envio=rs.getInt("codigo_envio");
+				int fk_cliente=rs.getInt("fk_cliente");
+				Carrito carrito = new Carrito(id_carrito,fecha, estado, total,codigo_envio,fk_cliente);
+				return carrito;
 			}
 			
 			

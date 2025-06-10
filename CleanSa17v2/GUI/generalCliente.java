@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import BLL.Carrito;
 import BLL.Cliente;
 import DLL.ControllerCliente;
 
@@ -60,10 +61,19 @@ public class generalCliente extends JFrame {
 		JButton btnComprar = new JButton("Comprar");
 		btnComprar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ControllerCliente.carrito2(cliente.getId());
-				Tabla tabla =new Tabla();
-				tabla.setVisible(true);
-				dispose();
+				Carrito carrito=ControllerCliente.carrito2(cliente.getId());
+				if (cliente.getTipo()==1) {
+					Tabla tabla =new Tabla(carrito);
+					tabla.setVisible(true);
+					dispose();
+				} else if (cliente.getTipo()==2) {
+					Tabla2 tabla2 =new Tabla2(carrito);
+					tabla2.setVisible(true);
+					dispose();
+				}
+					
+				
+				
 			}
 		});
 		btnComprar.setFont(new Font("Tahoma", Font.PLAIN, 12));
