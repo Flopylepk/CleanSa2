@@ -67,7 +67,7 @@ public class generalCliente extends JFrame {
 					tabla.setVisible(true);
 					dispose();
 				} else if (cliente.getTipo()==2) {
-					Tabla2 tabla2 =new Tabla2(carrito);
+					Tabla2 tabla2 =new Tabla2(carrito,cliente);
 					tabla2.setVisible(true);
 					dispose();
 				}

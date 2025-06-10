@@ -31,7 +31,7 @@ public class Tabla2 extends JFrame implements Validador {
 	private JTextField cantidad;
 
 
-	public Tabla2(Carrito carrito) {
+	public Tabla2(Carrito carrito, Cliente cliente) {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
@@ -109,13 +109,26 @@ public class Tabla2 extends JFrame implements Validador {
 		JButton compra = new JButton("Agregar al carrito");
 		compra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (productoSeleccionado==null) {
+					JOptionPane.showInternalMessageDialog(null, "no eligio ningun producto");
+					return;
+				}
 				if (cantidad.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Tiene que ingresar la cantidad de producto");
 				} else {
-					int cantidad2 = Integer.parseInt(cantidad.getText());
+					String cantidad3=cantidad.getText();
+					int espacio=cantidad3.length();
+					for (int i = 0; i < espacio; i++) {
+						if (!Character.isDigit(cantidad3.charAt(i))) {
+							JOptionPane.showMessageDialog(null, "solo se pueden ingresar numeros en la cantidad");
+							return;
+						}
+					}
+					int cantidad2 = Integer.parseInt(cantidad3);
 					if (cantidad2 <= 0) {
 						JOptionPane.showMessageDialog(null,
 								"Tiene que ingresar una cantidad de producto, tiene que ser mayor a 0");
+						return;
 					} else {
 						if (cantidad2 <= productoSeleccionado.getStcok()) {
 							////validacion para no repetir producto
@@ -134,6 +147,7 @@ public class Tabla2 extends JFrame implements Validador {
 																
 								if (opcion>=1) {
 									JOptionPane.showMessageDialog(null, "este producto ya existe en el carrito");
+									return;
 								} else {
 									try {
 										PreparedStatement stmt = con.prepareStatement(
@@ -142,13 +156,21 @@ public class Tabla2 extends JFrame implements Validador {
 										stmt.setInt(2, productoSeleccionado.getId());
 										stmt.setDouble(3, productoSeleccionado.getPrecio() * cantidad2);
 										stmt.setInt(4, cantidad2);
+										int filas = stmt.executeUpdate();
+							            if (filas > 0) {
+							                System.out.println("Producto agregado correctamente.");
+							                
+							            }
 
 										PreparedStatement stmt2 = con
 												.prepareStatement("UPDATE producto SET stock=? WHERE id_producto=?");
 										stmt2.setInt(1, productoSeleccionado.getStcok() - cantidad2);
 										stmt2.setInt(2, productoSeleccionado.getId());
-
-										JOptionPane.showMessageDialog(null, "Producto agregado correctamernte");
+										int filas2 = stmt2.executeUpdate();
+							            if (filas > 0) {
+							                System.out.println("Producto modificado correctamente.");  
+							            }
+										
 									} catch (SQLException e1) {
 
 										e1.printStackTrace();
@@ -179,6 +201,13 @@ public class Tabla2 extends JFrame implements Validador {
 		contentPane.add(lblNewLabel_1);
 
 		JButton Salir = new JButton("Salir");
+		Salir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				generalCliente generalcliente = new generalCliente(cliente);
+				generalcliente.setVisible(true);;
+				dispose();
+			}
+		});
 		Salir.setBounds(670, 419, 104, 31);
 		contentPane.add(Salir);
 
