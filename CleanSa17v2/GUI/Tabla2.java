@@ -109,6 +109,8 @@ public class Tabla2 extends JFrame implements Validador {
 		JButton compra = new JButton("Agregar al carrito");
 		compra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "cliente: "+cliente+"\n Carrito: "+carrito+"\n producto: "
+			+productoSeleccionado+"\n cantidad: "+cantidad);
 				if (productoSeleccionado==null) {
 					JOptionPane.showInternalMessageDialog(null, "no eligio ningun producto");
 					return;
