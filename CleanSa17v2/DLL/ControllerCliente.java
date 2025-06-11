@@ -407,6 +407,9 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	            if (filas > 0) {
 	                System.out.println("Carrito agregado correctamente.");
 	                //getgeneratekeys
+	                
+	                
+	                //preguntar a gama. Da error
 	                PreparedStatement validar2 = con.prepareStatement(
 	    	                "Select * FROM carrito WHERE fk_cliente=? AND estado=?"
 	    					);
@@ -427,6 +430,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	            }
 			}
 				System.out.println("Carrito existente");
+				JOptionPane.showMessageDialog(null, "cotinuemos con su compra");
 				int id_carrito=rs.getInt("id_carrito");
 				Date fecha=rs.getDate("fecha");
 				String estado=rs.getString("estado");
