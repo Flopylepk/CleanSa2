@@ -67,12 +67,12 @@ public class generalCliente extends JFrame {
 				if (carrito==null) {
 					JOptionPane.showMessageDialog(null, "ocurrio un error");
 				} else {
-					if (cliente.getTipo()==1) {
+					if (cliente.getTipo()==2) {
 						Tabla2 tabla2 =new Tabla2(carrito,cliente);
 						tabla2.setVisible(true);
 						dispose();
 						
-					} else if (cliente.getTipo()==2) {
+					} else if (cliente.getTipo()==1) {
 						Tabla3 tabla3 =new Tabla3(carrito,cliente);
 						tabla3.setVisible(true);
 						dispose();
