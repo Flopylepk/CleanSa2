@@ -188,6 +188,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	}
 
 	@Override
+	//Este no se usa
 	public void comprar(int id) {
 		try {
 			 PreparedStatement statement = con.prepareStatement(
