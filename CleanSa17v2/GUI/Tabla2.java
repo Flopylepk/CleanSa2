@@ -173,13 +173,51 @@ public class Tabla2 extends JFrame implements Validador {
 				                rs2 = validar.executeQuery();
 								
 				                int opcion=0;
+				                int cambio1=0;
+				                double total_producto=0;
 				                if (rs2.next()) {
 				                	opcion=rs2.getInt("id_carrito_detalle");
+				                	cambio1=rs2.getInt("cantidad");
+				                	total_producto=rs2.getDouble("total_producto");
 								}
 								
 																
 								if (opcion>=1) {
-									JOptionPane.showMessageDialog(null, "este producto ya existe en el carrito");
+									if (rs2.next()) {
+										int cantidad_antigua=rs2.getInt("cantidad");
+										int total_antiguo=rs2.getInt("total_producto");
+										double total_carrito=productoSeleccionado.getPrecio()*cantidad2;
+										
+										PreparedStatement stmt = con
+												.prepareStatement("UPDATE carrito_detalle SET total_producto=?,cantidad=?  WHERE fk_carrito=?");
+										total_producto=total_producto+total_carrito;
+										stmt.setDouble(1, total_producto);
+										stmt.setInt(2, cambio1);
+										stmt.setInt(3, carrito.getId_carrito());
+										
+										
+										PreparedStatement stmt2 = con
+												.prepareStatement("UPDATE producto SET stock=? WHERE id_producto=?");
+										stmt2.setInt(1, productoSeleccionado.getStcok() - cantidad2);
+										stmt2.setInt(2, productoSeleccionado.getId());
+										int filas2 = stmt2.executeUpdate();
+							            if (filas2 > 0) {
+							                System.out.println("Producto modificado correctamente cuando ya existe");  
+							            }
+							            
+							            PreparedStatement stmt3 = con
+												.prepareStatement("UPDATE carrito SET total=? WHERE id_carrito=? and estado=?");
+							            
+							            total_carrito=carrito.getTotal_compra()+total_carrito;
+							            stmt3.setDouble(1, total_carrito);
+							            stmt3.setInt(2, carrito.getId_carrito());
+							            stmt3.setString(2, carrito.getEstado());
+							            int filas3 = stmt3.executeUpdate();
+							            if (filas3 > 0) {
+							                System.out.println("Carrito total modificado correctamente.");  
+							            }
+										
+									}
 									return;
 								} else {
 									try {
