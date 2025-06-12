@@ -374,7 +374,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 		
 	}
 	
-	public static Carrito carrito2(Cliente cliente) {
+	public static void carrito2(Cliente cliente) {
 		try {
 			PreparedStatement validar = con.prepareStatement(
 	                "Select * FROM carrito WHERE fk_cliente=? AND estado=?"
@@ -394,7 +394,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 			 String estado="en proceso";
 			 double total = 0;
 			// boolean estadoenvio= false;
-			 int codigoenvio= (int)Math.random()*1001+100;
+			 int codigoenvio= (int)(Math.random()*1001+100);
 			 int fk_cliente= cliente.getId();
 			 
 			 	statement.setDate(1, fecha );
@@ -407,50 +407,21 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	            int filas = statement.executeUpdate();
 	            if (filas > 0) {
 	                System.out.println("Carrito agregado correctamente.");
+	                JOptionPane.showMessageDialog(null, "carrito agregado correctamene");
 	                //getgeneratekeys
 	                
 	                
-	                //preguntar a gama. Da error
-	                PreparedStatement validar2 = con.prepareStatement(
-	    	                "Select * FROM carrito WHERE fk_cliente=? AND estado=?"
-	    					);
 	                
-	                validar2.setInt(1, cliente.getId());
-	    			validar2.setString(2, "en proceso");
-	    			ResultSet rs2 = validar.executeQuery();
-	    			
-	    			int id_carrito=rs2.getInt("id_carrito");
-	    			fecha=rs2.getDate("fecha");
-	    			estado=rs2.getString("estado");
-	                total=rs2.getDouble("total");
-	                codigoenvio=rs2.getInt("codigoenvio");
-	                fk_cliente=rs2.getInt("fk_cliente");
-	                
-	                carrito=new Carrito(id_carrito,fecha, estado, total,codigoenvio,fk_cliente);
-	                return carrito;
 	            }
+			}else {
+				System.out.println("Carrito ya eistente");
+                JOptionPane.showMessageDialog(null, "continuemos con la compra");
 			}
-				System.out.println("Carrito existente");
-				JOptionPane.showMessageDialog(null, "cotinuemos con su compra");
-				int id_carrito=rs.getInt("id_carrito");
-				Date fecha=rs.getDate("fecha");
-				String estado=rs.getString("estado");
-				double total=rs.getDouble("total");
-				int codigo_envio=rs.getInt("codigoenvio");
-				int fk_cliente=rs.getInt("fk_cliente");
-				Carrito carrito = new Carrito(id_carrito,fecha, estado, total,codigo_envio,fk_cliente);
-				return carrito;
-			
 				
-			
-			
-			
-			
-			
             
 		} catch (Exception e) {
 			System.out.println(e);
-			return null;
+			
 		}
 		 
 		

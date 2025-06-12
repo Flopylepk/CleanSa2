@@ -63,26 +63,25 @@ public class generalCliente extends JFrame {
 		JButton btnComprar = new JButton("Comprar");
 		btnComprar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Carrito carrito=ControllerCliente.carrito2(cliente);
-				if (carrito==null) {
-					JOptionPane.showMessageDialog(null, "ocurrio un error");
-				} else {
+				ControllerCliente.carrito2(cliente);
+				
 					if (cliente.getTipo()==2) {
-						Tabla2 tabla2 =new Tabla2(carrito,cliente);
+						Tabla2 tabla2 =new Tabla2(cliente);
 						tabla2.setVisible(true);
 						dispose();
 						
 					} else if (cliente.getTipo()==1) {
-						Tabla3 tabla3 =new Tabla3(carrito,cliente);
+						Tabla3 tabla3 =new Tabla3(cliente);
 						tabla3.setVisible(true);
 						dispose();
 					}
+			
 				}
 				
 					
 				
 				
-			}
+			
 		});
 		btnComprar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnComprar.setBackground(SystemColor.menu);

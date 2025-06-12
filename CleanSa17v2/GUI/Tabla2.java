@@ -15,6 +15,7 @@ import repositorio.Validador;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,7 +32,7 @@ public class Tabla2 extends JFrame implements Validador {
 	private JTextField cantidad;
 
 
-	public Tabla2(Carrito carrito, Cliente cliente) {
+	public Tabla2(Cliente cliente) {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
@@ -109,15 +110,16 @@ public class Tabla2 extends JFrame implements Validador {
 		JButton compra = new JButton("Agregar al carrito");
 		compra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "cliente: "+cliente+"\n Carrito: "+carrito+"\n producto: "
-			+productoSeleccionado+"\n cantidad: "+cantidad);
+				
 				if (productoSeleccionado==null) {
 					JOptionPane.showInternalMessageDialog(null, "no eligio ningun producto");
 					return;
 				}
 				if (cantidad.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Tiene que ingresar la cantidad de producto");
-				} else {
+					return;
+				} 
+				
 					String cantidad3=cantidad.getText();
 					int espacio=cantidad3.length();
 					for (int i = 0; i < espacio; i++) {
@@ -136,15 +138,44 @@ public class Tabla2 extends JFrame implements Validador {
 							////validacion para no repetir producto
 							
 							try {
-							PreparedStatement repetir = con.prepareStatement(
+								PreparedStatement validar = con.prepareStatement(
+				    	                "Select * FROM carrito WHERE fk_cliente=? AND estado=?"
+				    					);
+				                
+				                validar.setInt(1, cliente.getId());
+				                validar.setString(2, "en proceso");
+				    			ResultSet rs2 = validar.executeQuery();
+				    			int id_carrito=0;
+				    			Date fecha=null;
+				    			String estado="";
+				    			double total=0;
+				    			int codigoenvio=0;
+				    			int fk_cliente=0;
+				    			
+				    			if (rs2.next()) {
+				    				id_carrito=rs2.getInt("id_carrito");
+				    				fecha=rs2.getDate("fecha");
+				    				estado=rs2.getString("estado");
+				    				total=rs2.getDouble("total");
+				    				codigoenvio=rs2.getInt("codigoenvio");
+				    				fk_cliente=rs2.getInt("fk_cliente");
+								}
+				    			
+				                Carrito carrito=new Carrito(id_carrito,fecha, estado, total,codigoenvio,fk_cliente);
+				                
+				                
+				                validar= con.prepareStatement(
 									"SELECT id_carrito_detalle FROM carrito_detalle WHERE fk_carrito = ? AND fk_producto = ? ");
 							
-							repetir.setInt(1, carrito.getId_carrito());
-							repetir.setInt(2, productoSeleccionado.getId());
+				                validar.setInt(1, carrito.getId_carrito());
+				                validar.setInt(2, productoSeleccionado.getId());
 							
-								ResultSet cr = repetir.executeQuery();
+				                rs2 = validar.executeQuery();
 								
-								int opcion=cr.getInt("id_carrito_detalle");
+				                int opcion=0;
+				                if (rs2.next()) {
+				                	opcion=rs2.getInt("id_carrito_detalle");
+								}
 								
 																
 								if (opcion>=1) {
@@ -154,10 +185,10 @@ public class Tabla2 extends JFrame implements Validador {
 									try {
 										PreparedStatement stmt = con.prepareStatement(
 												"INSERT INTO carrito_detalle(fk_carrito, fk_producto, total_producto, cantidad) VALUES (?,?,?,?)");
-										double total=productoSeleccionado.getPrecio() * cantidad2;
+										double total2=productoSeleccionado.getPrecio() * cantidad2;
 										stmt.setInt(1, carrito.getId_carrito());
 										stmt.setInt(2, productoSeleccionado.getId());
-										stmt.setDouble(3,total);
+										stmt.setDouble(3,total2);
 										stmt.setInt(4, cantidad2);
 										int filas = stmt.executeUpdate();
 							            if (filas > 0) {
@@ -170,18 +201,19 @@ public class Tabla2 extends JFrame implements Validador {
 										stmt2.setInt(1, productoSeleccionado.getStcok() - cantidad2);
 										stmt2.setInt(2, productoSeleccionado.getId());
 										int filas2 = stmt2.executeUpdate();
-							            if (filas > 0) {
+							            if (filas2 > 0) {
 							                System.out.println("Producto modificado correctamente.");  
 							            }
 							            
 							            PreparedStatement stmt3 = con
 												.prepareStatement("UPDATE carrito SET total=? WHERE id_carrito=? and estado=?");
+							            
 							            double total_carrito=carrito.getTotal_compra()+total;
 							            stmt3.setDouble(1, total_carrito);
 							            stmt3.setInt(2, carrito.getId_carrito());
 							            stmt3.setString(2, carrito.getEstado());
-							            int filas3 = stmt2.executeUpdate();
-							            if (filas > 0) {
+							            int filas3 = stmt3.executeUpdate();
+							            if (filas3 > 0) {
 							                System.out.println("Carrito total modificado correctamente.");  
 							            }
 										
@@ -203,7 +235,7 @@ public class Tabla2 extends JFrame implements Validador {
 									"Tiene que ingresar una cantidad de producto, tiene que ser menor al stock del producto");
 						}
 					}
-				}
+				
 
 			}
 		});

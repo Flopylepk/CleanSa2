@@ -31,7 +31,7 @@ public class Tabla3 extends JFrame implements Validador {
 	private JTextField cantidad;
 
 
-	public Tabla3(Carrito carrito, Cliente cliente) {
+	public Tabla3(Cliente cliente) {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
@@ -109,6 +109,7 @@ public class Tabla3 extends JFrame implements Validador {
 		JButton compra = new JButton("Agregar al carrito");
 		compra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Carrito carrito=null;
 				if (productoSeleccionado==null) {
 					JOptionPane.showInternalMessageDialog(null, "no eligio ningun producto");
 					return;
