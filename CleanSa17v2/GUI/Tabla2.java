@@ -135,7 +135,8 @@ public class Tabla2 extends JFrame implements Validador {
 						return;
 					} else {
 						if (cantidad2 <= productoSeleccionado.getStcok()) {
-							////validacion para no repetir producto
+							
+							
 							
 							try {
 								PreparedStatement validar = con.prepareStatement(
@@ -173,25 +174,28 @@ public class Tabla2 extends JFrame implements Validador {
 				                rs2 = validar.executeQuery();
 								
 				                int opcion=0;
-				                int cambio1=0;
-				                double total_producto=0;
+				            
 				                if (rs2.next()) {
 				                	opcion=rs2.getInt("id_carrito_detalle");
-				                	cambio1=rs2.getInt("cantidad");
-				                	total_producto=rs2.getDouble("total_producto");
+				                	
 								}
 								
 																
 								if (opcion>=1) {
+					                
+								////validacion para sumar al producto que ya esta en ese carrito
 									if (rs2.next()) {
+										
+					                	
 										int cantidad_antigua=rs2.getInt("cantidad");
-										int total_antiguo=rs2.getInt("total_producto");
+										double total_antiguo=rs2.getInt("total_producto");
 										double total_carrito=productoSeleccionado.getPrecio()*cantidad2;
 										
 										PreparedStatement stmt = con
 												.prepareStatement("UPDATE carrito_detalle SET total_producto=?,cantidad=?  WHERE fk_carrito=?");
-										total_producto=total_producto+total_carrito;
-										stmt.setDouble(1, total_producto);
+										double total_producto_nuevo=total_antiguo+total_carrito;
+										int cambio1=cantidad_antigua+cantidad2;
+										stmt.setDouble(1, total_producto_nuevo);
 										stmt.setInt(2, cambio1);
 										stmt.setInt(3, carrito.getId_carrito());
 										
