@@ -186,18 +186,21 @@ public class Tabla2 extends JFrame implements Validador {
 								////validacion para sumar al producto que ya esta en ese carrito
 									if (rs2.next()) {
 										
-					                	
 										int cantidad_antigua=rs2.getInt("cantidad");
-										double total_antiguo=rs2.getInt("total_producto");
+										double total_antigua=rs2.getInt("total_producto");
 										double total_carrito=productoSeleccionado.getPrecio()*cantidad2;
 										
 										PreparedStatement stmt = con
 												.prepareStatement("UPDATE carrito_detalle SET total_producto=?,cantidad=?  WHERE fk_carrito=?");
-										double total_producto_nuevo=total_antiguo+total_carrito;
+										double total_producto_nuevo=total_antigua+total_carrito;
 										int cambio1=cantidad_antigua+cantidad2;
 										stmt.setDouble(1, total_producto_nuevo);
 										stmt.setInt(2, cambio1);
 										stmt.setInt(3, carrito.getId_carrito());
+										int filas = stmt.executeUpdate();
+							            if (filas > 0) {
+							                System.out.println("carrito_detalle modificado correctamente cuando ya existe");  
+							            }
 										
 										
 										PreparedStatement stmt2 = con
@@ -218,7 +221,7 @@ public class Tabla2 extends JFrame implements Validador {
 							            stmt3.setString(2, carrito.getEstado());
 							            int filas3 = stmt3.executeUpdate();
 							            if (filas3 > 0) {
-							                System.out.println("Carrito total modificado correctamente.");  
+							                System.out.println("Carrito total modificado correctamente cuando ya existe el producto");  
 							            }
 										
 									}
