@@ -47,7 +47,7 @@ public class Tabla3 extends JFrame implements Validador {
 		contentPane.add(lblSeleccionado);
 
 		model = new DefaultTableModel(
-				new String[] { "nombre", "stock", "precio", "fk_categoria", "peligroso", "id_producto" }, 0);
+				new String[] { "nombre", "precio", "stock", "fk_categoria", "peligroso", "id_producto" }, 0);
 		table = new JTable(model);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(10, 40, 760, 128);
@@ -60,7 +60,7 @@ public class Tabla3 extends JFrame implements Validador {
 				if (row != -1) {
 
 					productoSeleccionado = new Producto((String) model.getValueAt(row, 0),
-							(int) model.getValueAt(row, 1), (double) model.getValueAt(row, 2),
+							(double) model.getValueAt(row, 1), (int) model.getValueAt(row, 2),
 							(int) model.getValueAt(row, 3), (int) model.getValueAt(row, 4),
 							(int) model.getValueAt(row, 5)
 

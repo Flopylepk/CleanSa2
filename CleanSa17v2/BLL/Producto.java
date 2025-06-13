@@ -25,7 +25,7 @@ public class Producto implements Validador{
 		this.peligroso = peligroso;
 	}
 	
-	public Producto(String nombre, int stock, double precio, int categoria, int peligroso, int id) {
+	public Producto(String nombre, double precio, int stock, int categoria, int peligroso, int id) {
 		super();
 		this.nombre = nombre;
 		this.stock = stock;

@@ -47,7 +47,7 @@ public class Tabla2 extends JFrame implements Validador {
 		contentPane.add(lblSeleccionado);
 
 		model = new DefaultTableModel(
-				new String[] { "nombre", "stock", "precio", "fk_categoria", "peligroso", "id_producto" }, 0);
+				new String[] { "nombre", "precio", "stock", "fk_categoria", "peligroso", "id_producto" }, 0);
 		table = new JTable(model);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(10, 40, 760, 128);
@@ -60,7 +60,7 @@ public class Tabla2 extends JFrame implements Validador {
 				if (row != -1) {
 
 					productoSeleccionado = new Producto((String) model.getValueAt(row, 0),
-							(int) model.getValueAt(row, 1), (double) model.getValueAt(row, 2),
+							(double) model.getValueAt(row, 1), (int) model.getValueAt(row, 2),
 							(int) model.getValueAt(row, 3), (int) model.getValueAt(row, 4),
 							(int) model.getValueAt(row, 5)
 
@@ -218,7 +218,7 @@ public class Tabla2 extends JFrame implements Validador {
 							            total_carrito=carrito.getTotal_compra()+total_carrito;
 							            stmt3.setDouble(1, total_carrito);
 							            stmt3.setInt(2, carrito.getId_carrito());
-							            stmt3.setString(2, carrito.getEstado());
+							            stmt3.setString(3, carrito.getEstado());
 							            int filas3 = stmt3.executeUpdate();
 							            if (filas3 > 0) {
 							                System.out.println("Carrito total modificado correctamente cuando ya existe el producto");  
@@ -256,7 +256,7 @@ public class Tabla2 extends JFrame implements Validador {
 							            double total_carrito=carrito.getTotal_compra()+total;
 							            stmt3.setDouble(1, total_carrito);
 							            stmt3.setInt(2, carrito.getId_carrito());
-							            stmt3.setString(2, carrito.getEstado());
+							            stmt3.setString(3, carrito.getEstado());
 							            int filas3 = stmt3.executeUpdate();
 							            if (filas3 > 0) {
 							                System.out.println("Carrito total modificado correctamente.");  
@@ -314,9 +314,8 @@ public class Tabla2 extends JFrame implements Validador {
 		for (Producto u : productos) {
 			model.addRow(
 
-					new Object[] { u.getNombre(), u.getStcok(), u.getPrecio(), u.getCategoria(), u.getPeligroso(),
+					new Object[] { u.getNombre(), u.getPrecio(),u.getStcok() ,u.getCategoria(), u.getPeligroso(),
 							u.getId()
-
 					});
 		}
 	}
@@ -329,7 +328,7 @@ public class Tabla2 extends JFrame implements Validador {
 
 				model.addRow(
 
-						new Object[] { u.getNombre(), u.getStcok(), u.getPrecio(), u.getCategoria(), u.getPeligroso(),
+						new Object[] { u.getNombre(), u.getPrecio(),u.getStcok() ,u.getCategoria(), u.getPeligroso(),
 								u.getId()
 
 						});

@@ -25,10 +25,10 @@ public class ControllerProducto  {
 	            	 * id_producto	nombre	precio	stock	fk_peligoso	fk_categoria	
 						tiene que coincidir dentro de " " */
 
-	                int id = rs.getInt("id_producto");
+	            	int id = rs.getInt("id_producto");
 	                String nombre = rs.getString("nombre");
 	                int stock = rs.getInt("stock");
-	                int precio = rs.getInt("precio");
+	                double precio = rs.getDouble("precio");
 	                int peligoso = rs.getInt("peligroso");
 	                int categoria = rs.getInt("fk_categoria");
 
@@ -37,7 +37,7 @@ public class ControllerProducto  {
 						this.precio = precio;
 						this.categoria = categoria;
 						this.peligroso = peligroso;*/
-	                productos.add(new Producto(nombre, stock, precio, categoria, peligoso));
+	                productos.add(new Producto(nombre, precio, stock,categoria, peligoso,id));
 	              //crea objeto con los datos de una mima fila d la base de datos
 	            }
 	        } catch (Exception e) {
@@ -67,8 +67,8 @@ public class ControllerProducto  {
 	            	
 	                int id = rs.getInt("id_producto");
 	                String nombre = rs.getString("nombre");
-	                int stock = rs.getInt("precio");
-	                int precio = rs.getInt("stock");
+	                int stock = rs.getInt("stock");
+	                double precio = rs.getDouble("precio");
 	                int peligoso = rs.getInt("peligroso");
 	                int categoria = rs.getInt("fk_categoria");
 	                
@@ -77,7 +77,7 @@ public class ControllerProducto  {
 						this.precio = precio;
 						this.categoria = categoria;
 						this.peligroso = peligroso;*/
-	                productos.add(new Producto(nombre, stock, precio,categoria, peligoso,id));
+	                productos.add(new Producto(nombre, precio, stock,categoria, peligoso,id));
 	               
 
 	            }
