@@ -249,24 +249,24 @@ public class ControllerCarrito implements  CarritoRepository{
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito where fk_cliente=? and estado=?");
 			stmt.setInt(1, id);
-			stmt.setString(2, "en proseso");
+			stmt.setString(2, "en proceso");
 			
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
-				String estado=rs.getString("estado");
-            	
-            	if (estado.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "usted no tiene ninguna compra en proseso");
-				}else {
-					PreparedStatement cambio = con.prepareStatement("UPDATE carrito SET estado=? WHERE fk_cliente=?");
+				
+					PreparedStatement cambio = con.prepareStatement("UPDATE carrito SET estado=? WHERE fk_cliente=? and estado=?");
 					cambio.setString(1, "pagado");
 					cambio.setInt(2, id);
+					cambio.setString(3, "en proceso");
 					int filas = cambio.executeUpdate();
 					if (filas>1) {
 						JOptionPane.showMessageDialog(null, "pago realizado");
+						System.out.println("modifico carrito");
 					}
-				}
-            }
+				
+            }else {
+				JOptionPane.showMessageDialog(null, "no se encontro ningun carrito en proceso. Antes de pagar debe realizar una compra");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -278,15 +278,11 @@ public class ControllerCarrito implements  CarritoRepository{
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito where fk_cliente=? and estado=?");
 			stmt.setInt(1, id);
-			stmt.setString(2, "en proseso");
+			stmt.setString(2, "en proceso");
 			
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
-				String estado=rs.getString("estado");
-            	
-            	if (estado.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "usted no tiene ninguna compra en proseso");
-				}else {
+				
 					PreparedStatement detalle = con.prepareStatement("SELECT * FROM carrito_detalle where fk_cliente=? and fk_carrito=?");
 					detalle.setInt(1, id);
 					detalle.setInt(2, rs.getInt(id));
@@ -302,20 +298,36 @@ public class ControllerCarrito implements  CarritoRepository{
 		            	producto.setInt(1, fk_producto);
 		            	ResultSet rs3 = producto.executeQuery();
 		            	
-		            	int cantidad_producto=rs3.getInt("stock");
+		            	int cantidad_producto=0;
+		            	if (rs3.next()) {
+		            		cantidad_producto=rs3.getInt("stock");
+						}
+		            
 		            	int total_cambio=cantidad+cantidad_producto;
 		            	
 		            	PreparedStatement producto_cambio = con.prepareStatement("UPDATE producto SET stock`=? WHERE id_producto=?");
 		            	producto_cambio.setInt(1, total_cambio);
 		            	producto_cambio.setInt(2, fk_producto);
+		            	int filas = producto_cambio.executeUpdate();
+						if (filas>1) {
+							System.out.println("modifico producto");  
+						}
 		            	
 		            }
 					
-					PreparedStatement cambio = con.prepareStatement("UPDATE carrito SET estado=? WHERE fk_cliente=?");
+					PreparedStatement cambio = con.prepareStatement("UPDATE carrito SET estado=? WHERE fk_cliente=? and estado=?");
 					stmt.setString(1, "cancelado");
 					stmt.setInt(2, id);
+					cambio.setString(3, "en proceso");
+					int filas2 = cambio.executeUpdate();
+					if (filas2>1) {
+						System.out.println("modifico carrito");
+						JOptionPane.showMessageDialog(null, "cancelacion realizada correctamente");
+					}
+				}else {
+					JOptionPane.showMessageDialog(null, "no se encontro ningun carrito en proceso. Antes de cancelar debe realizar una compra");
 				}
-            }
+            
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
