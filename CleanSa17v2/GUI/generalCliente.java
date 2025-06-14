@@ -110,13 +110,7 @@ public class generalCliente extends JFrame {
 				String validar=controllercarrito.pagar(cliente.getId());
 				if (validar.equals("si")) {
 					//	MODIFICAR PARA QUE VALLA A UNA PANTALLA DE AGRADECIMIENTO
-					menuprincipal Menupricipal = new menuprincipal();
-					Menupricipal.setVisible(true);;
-					dispose();
-				} else {
-					menuprincipal Menupricipal = new menuprincipal();
-					Menupricipal.setVisible(true);;
-					dispose();
+					
 				}
 			}
 		});
@@ -133,13 +127,7 @@ public class generalCliente extends JFrame {
 				String validar=controllercarrito.cancelar(cliente.getId());
 				if (validar.equals("si")) {
 					//	MODIFICAR PARA QUE VALLA A UNA PANTALLA DE AGRADECIMIENTO
-					menuprincipal Menupricipal = new menuprincipal();
-					Menupricipal.setVisible(true);;
-					dispose();
-				} else {
-					menuprincipal Menupricipal = new menuprincipal();
-					Menupricipal.setVisible(true);;
-					dispose();
+					
 				}
 			}
 		});

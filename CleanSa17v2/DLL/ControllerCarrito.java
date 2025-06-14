@@ -245,7 +245,7 @@ public class ControllerCarrito implements  CarritoRepository{
 	}
 	
 	public String pagar(int id) {
-		
+		String validar="";
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito where fk_cliente=? and estado=?");
 			stmt.setInt(1, id);
@@ -253,6 +253,15 @@ public class ControllerCarrito implements  CarritoRepository{
 			
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
+				PreparedStatement productos = con.prepareStatement("SELECT * FROM carrito_detalle where fk_carrito=?");
+				productos.setInt(1, rs.getInt("id_carrito"));
+				ResultSet rs2 = stmt.executeQuery();
+				if (!rs2.next()) {
+					JOptionPane.showMessageDialog(null, "no se encontraron productos en el carrito. Antes d epagar debe tener productos");
+					validar="no";
+					return validar;
+				}
+				
 				
 					PreparedStatement cambio = con.prepareStatement("UPDATE carrito SET estado=? WHERE fk_cliente=? and estado=?");
 					cambio.setString(1, "pagado");
@@ -262,23 +271,25 @@ public class ControllerCarrito implements  CarritoRepository{
 					if (filas>1) {
 						JOptionPane.showMessageDialog(null, "pago realizado");
 						System.out.println("modifico carrito");
-						return "si";
+						validar="si";
+						
 					}
 				
             }else {
 				JOptionPane.showMessageDialog(null, "no se encontro ningun carrito en proceso. Antes de pagar debe realizar una compra");
-				return "no";
+				validar="no";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "no";
+			validar="no";
 		}
-		return null;
+		return validar;
 		
 	}
 
 	
 	public String cancelar(int id) {
+		String validar="";
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito where fk_cliente=? and estado=?");
 			stmt.setInt(1, id);
@@ -287,15 +298,13 @@ public class ControllerCarrito implements  CarritoRepository{
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
 				
-					PreparedStatement detalle = con.prepareStatement("SELECT * FROM carrito_detalle where fk_cliente=? and fk_carrito=?");
-					detalle.setInt(1, id);
-					detalle.setInt(2, rs.getInt(id));
+					PreparedStatement detalle = con.prepareStatement("SELECT * FROM carrito_detalle where fk_carrito=?");
+					detalle.setInt(1, rs.getInt(id));
 					ResultSet rs2 = detalle.executeQuery();
+					int vueltas=0;
 					while(rs.next()) {
-		            	int id_carrito_detalle=rs2.getInt("id_carrito_detalle");
-		            	int fk_carrito=rs2.getInt("fk_carrito");
+		            	vueltas=vueltas+1;
 		            	int fk_producto=rs2.getInt("fk_producto");
-		            	double total_producto=rs2.getDouble("total_producto");
 		            	int cantidad=rs2.getInt("cantidad");
 		            	
 		            	PreparedStatement producto = con.prepareStatement("SELECT * FROM producto where id_producto=?");
@@ -309,7 +318,7 @@ public class ControllerCarrito implements  CarritoRepository{
 		            
 		            	int total_cambio=cantidad+cantidad_producto;
 		            	
-		            	PreparedStatement producto_cambio = con.prepareStatement("UPDATE producto SET stock`=? WHERE id_producto=?");
+		            	PreparedStatement producto_cambio = con.prepareStatement("UPDATE producto SET stock=? WHERE id_producto=?");
 		            	producto_cambio.setInt(1, total_cambio);
 		            	producto_cambio.setInt(2, fk_producto);
 		            	int filas = producto_cambio.executeUpdate();
@@ -318,27 +327,28 @@ public class ControllerCarrito implements  CarritoRepository{
 						}
 		            	
 		            }
-					
+					if (vueltas==0) {
+						JOptionPane.showMessageDialog(null, "el carrito que esta modificando no tiene productos");
+					}
 					PreparedStatement cambio = con.prepareStatement("UPDATE carrito SET estado=? WHERE fk_cliente=? and estado=?");
-					stmt.setString(1, "cancelado");
-					stmt.setInt(2, id);
+					cambio.setString(1, "cancelado");
+					cambio.setInt(2, id);
 					cambio.setString(3, "en proceso");
 					int filas2 = cambio.executeUpdate();
 					if (filas2>1) {
 						System.out.println("modifico carrito");
 						JOptionPane.showMessageDialog(null, "cancelacion realizada correctamente");
-						return "si";
+						validar="si";
 					}
 				}else {
 					JOptionPane.showMessageDialog(null, "no se encontro ningun carrito en proceso. Antes de cancelar debe realizar una compra");
-					return "no";
+					validar="no";
 				}
             
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "no";
+			validar="no";
 		}
-		return null;
-				
+		return validar;
 	}
 }
