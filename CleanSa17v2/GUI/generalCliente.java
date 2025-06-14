@@ -2,13 +2,15 @@ package GUI;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import BLL.Carrito;
-import BLL.Cliente;
-import DLL.ControllerCliente;
+import BLL.*;
+
+import DLL.*;
+
 
 import java.awt.SystemColor;
 import javax.swing.JLabel;
@@ -102,12 +104,45 @@ public class generalCliente extends JFrame {
 		contentPane.add(btnNewButton_1_1);
 		
 		JButton btnNewButton_2_1_1 = new JButton("Pagar");
+		btnNewButton_2_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerCarrito controllercarrito=new ControllerCarrito();
+				String validar=controllercarrito.pagar(cliente.getId());
+				if (validar.equals("si")) {
+					//	MODIFICAR PARA QUE VALLA A UNA PANTALLA DE AGRADECIMIENTO
+					menuprincipal Menupricipal = new menuprincipal();
+					Menupricipal.setVisible(true);;
+					dispose();
+				} else {
+					menuprincipal Menupricipal = new menuprincipal();
+					Menupricipal.setVisible(true);;
+					dispose();
+				}
+			}
+		});
+		
 		btnNewButton_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnNewButton_2_1_1.setBackground(SystemColor.menu);
 		btnNewButton_2_1_1.setBounds(29, 167, 176, 23);
 		contentPane.add(btnNewButton_2_1_1);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerCarrito controllercarrito=new ControllerCarrito();
+				String validar=controllercarrito.cancelar(cliente.getId());
+				if (validar.equals("si")) {
+					//	MODIFICAR PARA QUE VALLA A UNA PANTALLA DE AGRADECIMIENTO
+					menuprincipal Menupricipal = new menuprincipal();
+					Menupricipal.setVisible(true);;
+					dispose();
+				} else {
+					menuprincipal Menupricipal = new menuprincipal();
+					Menupricipal.setVisible(true);;
+					dispose();
+				}
+			}
+		});
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnCancelar.setBackground(SystemColor.menu);
 		btnCancelar.setBounds(241, 167, 176, 23);

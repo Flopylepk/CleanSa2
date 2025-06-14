@@ -244,7 +244,7 @@ public class ControllerCarrito implements  CarritoRepository{
 		return carrito;
 	}
 	
-	public void pagar(int id) {
+	public String pagar(int id) {
 		
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito where fk_cliente=? and estado=?");
@@ -262,19 +262,23 @@ public class ControllerCarrito implements  CarritoRepository{
 					if (filas>1) {
 						JOptionPane.showMessageDialog(null, "pago realizado");
 						System.out.println("modifico carrito");
+						return "si";
 					}
 				
             }else {
 				JOptionPane.showMessageDialog(null, "no se encontro ningun carrito en proceso. Antes de pagar debe realizar una compra");
+				return "no";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "no";
 		}
+		return null;
 		
 	}
 
 	
-	public void cancelar(int id) {
+	public String cancelar(int id) {
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito where fk_cliente=? and estado=?");
 			stmt.setInt(1, id);
@@ -323,14 +327,18 @@ public class ControllerCarrito implements  CarritoRepository{
 					if (filas2>1) {
 						System.out.println("modifico carrito");
 						JOptionPane.showMessageDialog(null, "cancelacion realizada correctamente");
+						return "si";
 					}
 				}else {
 					JOptionPane.showMessageDialog(null, "no se encontro ningun carrito en proceso. Antes de cancelar debe realizar una compra");
+					return "no";
 				}
             
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "no";
 		}
-		
+		return null;
+				
 	}
 }
