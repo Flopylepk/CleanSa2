@@ -205,13 +205,14 @@ public class Tabla2 extends JFrame implements Validador {
 										
 										
 										PreparedStatement updateCarrito = con
-												.prepareStatement("UPDATE carrito_detalle SET total_producto=?, cantidad=?  WHERE fk_carrito=? and fk_producto=?");
+												.prepareStatement("UPDATE carrito_detalle SET total_producto=?, cantidad=?  WHERE fk_carrito=? and fk_producto=? and id_carrito_detalle=?");
 										
 										
 										updateCarrito.setDouble(1, total_nuevo);
 										updateCarrito.setInt(2, cantidad_nueva);
 										updateCarrito.setInt(3, carrito.getId_carrito());
-										updateCarrito.setInt(4,productoSeleccionado.getId() );
+										updateCarrito.setInt(4,productoSeleccionado.getId());
+										updateCarrito.setInt(5,opcion);
 										int filas = updateCarrito.executeUpdate();
 							            if (filas > 0) {
 							                System.out.println("carrito_detalle modificado correctamente cuando ya existe");  
