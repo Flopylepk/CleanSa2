@@ -143,7 +143,9 @@ public class Registro extends JFrame {
 						,inpcontrasena.getText(),inpdireccion.getText()
 						,inpDNI.getText(),(String) tipoUsuario.getSelectedItem() );
 				if (validar.equals("si")) {
-					
+					RegistroCorrecto registrocorrecto = new RegistroCorrecto();
+					registrocorrecto.setVisible(true);;
+					dispose();
 				}else {
 					LblError.setText(validar);
 				}
