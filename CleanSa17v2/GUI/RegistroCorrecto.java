@@ -28,7 +28,7 @@ public class RegistroCorrecto extends JFrame {
 	 */
 	public RegistroCorrecto() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 556, 419);
+		setBounds(100, 100, 526, 393);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.controlShadow);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -38,17 +38,17 @@ public class RegistroCorrecto extends JFrame {
 		
 		JLabel icono = new JLabel("");
 		icono.setIcon(new ImageIcon(RegistroCorrecto.class.getResource("/img/logo.png")));
-		icono.setBounds(115, 11, 341, 111);
+		icono.setBounds(86, 11, 341, 111);
 		contentPane.add(icono);
 		
 		JLabel SI = new JLabel("Gracias por registrarse");
 		SI.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		SI.setBounds(173, 161, 210, 26);
+		SI.setBounds(150, 147, 210, 26);
 		contentPane.add(SI);
 		
 		JLabel SI2 = new JLabel("Para volver a la pantalla de cliente haga click en el botón \"Volver\"");
 		SI2.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		SI2.setBounds(86, 217, 401, 26);
+		SI2.setBounds(56, 204, 401, 26);
 		contentPane.add(SI2);
 		
 		JButton Volver = new JButton("Volver");
@@ -61,7 +61,7 @@ public class RegistroCorrecto extends JFrame {
 		});
 		Volver.setBackground(SystemColor.menu);
 		Volver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		Volver.setBounds(210, 275, 124, 59);
+		Volver.setBounds(187, 262, 124, 59);
 		contentPane.add(Volver);
 	}
 }
