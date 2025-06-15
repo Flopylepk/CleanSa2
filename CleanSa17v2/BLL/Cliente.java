@@ -100,7 +100,6 @@ public class Cliente implements Validador, Encriptador {
 
 	public static Cliente Login(String DNI, String contrasena) {
 		if (DNI.isEmpty() || contrasena.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Error");
 			return null;
 		} else {
 			ControllerCliente controllercliente = new ControllerCliente();
@@ -123,8 +122,7 @@ public class Cliente implements Validador, Encriptador {
 			}
 			String contrasena2=controller.validarPassword(contrasena);
 			if (contrasena2.isEmpty()) {
-				
-				return "Se produjo un error con ta contraseña. Ingresela nuevamente";
+				return "Se produjo un error con la contraseña. Ingresela nuevamente";
 			}
 
 			if (direccion.isEmpty()) {

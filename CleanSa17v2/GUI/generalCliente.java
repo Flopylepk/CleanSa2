@@ -67,15 +67,15 @@ public class generalCliente extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ControllerCliente.carrito2(cliente);
 				
-					if (cliente.getTipo()==2) {
-						Tabla3 tabla3 =new Tabla3(cliente);
-						tabla3.setVisible(true);
-						dispose();
-						
-					} else if (cliente.getTipo()==1) {
-						
+					if (cliente.getTipo()==1) {
 						Tabla2 tabla2 =new Tabla2(cliente);
 						tabla2.setVisible(true);
+						dispose();
+						
+					} else if (cliente.getTipo()==2) {
+						
+						Tabla3 tabla3 =new Tabla3(cliente);
+						tabla3.setVisible(true);
 						dispose();
 					}
 			
@@ -111,7 +111,22 @@ public class generalCliente extends JFrame {
 				String validar=controllercarrito.pagar(cliente.getId());
 				if (validar.equals("si")) {
 					//	MODIFICAR PARA QUE VALLA A UNA PANTALLA DE AGRADECIMIENTO
+					String primero="Gracias por elegirnos";
+					String segundo="Para regresar al menu de cliente haga click en el botón Volver";
+					String tercero="Pago realizado con exito";
 					
+					Pagar pagar = new Pagar(primero, segundo, tercero, cliente);
+					pagar.setVisible(true);;
+					dispose();
+					
+				}else {
+					String primero="Se produjo un error en el pago";
+					String segundo="Para intentarlo nuevamente haga click en el botón Volver y regresara al menu de cliente";
+					String tercero=validar;
+					
+					Pagar pagar = new Pagar(primero, segundo, tercero, cliente);
+					pagar.setVisible(true);;
+					dispose();
 				}
 			}
 		});
@@ -127,7 +142,23 @@ public class generalCliente extends JFrame {
 				ControllerCarrito controllercarrito=new ControllerCarrito();
 				String validar=controllercarrito.cancelar(cliente.getId());
 				if (validar.equals("si")) {
-					//	MODIFICAR PARA QUE VALLA A UNA PANTALLA DE AGRADECIMIENTO
+					//	MODIFICAR PARA QUE VALLA A UNA PANTALLA DE CANCELAMIENTO
+					String primero="Lamentamos que cancele su pedido";
+					String segundo="Para regresar al menu de cliente haga click en el botón Volver";
+					String tercero="Cancelación realizada con exito";
+					
+					Pagar pagar = new Pagar(primero, segundo, tercero, cliente);
+					pagar.setVisible(true);;
+					dispose();
+					
+				}else {
+					String primero="Se produjo un error en la cancelación";
+					String segundo="Para intentarlo nuevamente haga click en el botón Volver y regresara al menu de cliente";
+					String tercero=validar;
+					
+					Cancelar cancelar = new Cancelar(primero, segundo, tercero, cliente);
+					cancelar.setVisible(true);;
+					dispose();
 					
 				}
 			}

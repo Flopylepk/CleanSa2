@@ -107,9 +107,6 @@ public interface Validador {
 		        return "";
 		    }
 		}
-	        
-
-	    JOptionPane.showMessageDialog(null, "La contraseña es válida");
 	    return mensaje; 
 	}
 	

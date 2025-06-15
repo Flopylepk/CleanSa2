@@ -107,17 +107,23 @@ public class Tabla2 extends JFrame implements Validador {
 		cantidad.setBounds(10, 413, 182, 34);
 		contentPane.add(cantidad);
 		cantidad.setColumns(10);
+		
+		JLabel LblError = new JLabel("");
+		LblError.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		LblError.setForeground(new Color(255, 0, 0));
+		LblError.setBounds(54, 330, 372, 33);
+		contentPane.add(LblError);
 
 		JButton compra = new JButton("Agregar al carrito");
 		compra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				if (productoSeleccionado==null) {
-					JOptionPane.showInternalMessageDialog(null, "no eligio ningun producto");
+					LblError.setText("no eligio ningun producto");
 					return;
 				}
 				if (cantidad.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Tiene que ingresar la cantidad de producto");
+					LblError.setText("Tiene que ingresar la cantidad de producto");
 					return;
 				} 
 				
@@ -125,14 +131,13 @@ public class Tabla2 extends JFrame implements Validador {
 					int espacio=cantidad3.length();
 					for (int i = 0; i < espacio; i++) {
 						if (!Character.isDigit(cantidad3.charAt(i))) {
-							JOptionPane.showMessageDialog(null, "solo se pueden ingresar numeros en la cantidad");
+							LblError.setText("Solo se pueden ingresar numeros en la cantidad");
 							return;
 						}
 					}
 					int cantidad2 = Integer.parseInt(cantidad3);
 					if (cantidad2 <= 0) {
-						JOptionPane.showMessageDialog(null,
-								"Tiene que ingresar una cantidad de producto, tiene que ser mayor a 0");
+						LblError.setText("Tiene que ingresar una cantidad de producto, tiene que ser mayor a 0");
 						return;
 					} else {
 						if (cantidad2 <= productoSeleccionado.getStcok()) {
@@ -234,7 +239,9 @@ public class Tabla2 extends JFrame implements Validador {
 							                System.out.println("Carrito total modificado correctamente cuando ya existe el producto");  
 							            }
 										
-									
+							            CompraExitosa compraexitosa =new CompraExitosa(cliente);
+										compraexitosa.setVisible(true);
+										dispose();
 									return;
 								} else {
 									try {
@@ -272,29 +279,38 @@ public class Tabla2 extends JFrame implements Validador {
 							            if (filas3 > 0) {
 							                System.out.println("Carrito total modificado correctamente.");  
 							            }
+							            CompraExitosa compraexitosa =new CompraExitosa(cliente);
+										compraexitosa.setVisible(true);
+										dispose();
+							            return;
 										
 									} catch (SQLException e1) {
 
 										e1.printStackTrace();
+										LblError.setText("error");
+										return;
 									}
 								}
 								
 								
 							} catch (SQLException e1) {																							
 								e1.printStackTrace();
+								LblError.setText("error");
+								return;
 							}
 							
 																
 							
 						} else {
-							JOptionPane.showMessageDialog(null,
-									"Tiene que ingresar una cantidad de producto, tiene que ser menor al stock del producto");
+							LblError.setText( "Tiene que ingresar una cantidad de producto, tiene que ser menor al stock del producto");
+							return;
 						}
 					}
 				
-
+					
 			}
 		});
+	
 		compra.setBounds(202, 408, 152, 45);
 		contentPane.add(compra);
 
