@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 
@@ -40,6 +41,7 @@ public class Registro extends JFrame {
 	 * Create the frame.
 	 */
 	public Registro() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 499, 457);
 		contentPane = new JPanel();
@@ -126,20 +128,32 @@ public class Registro extends JFrame {
 		lblNewLabel_2_1_1.setBounds(241, 227, 171, 14);
 		contentPane.add(lblNewLabel_2_1_1);
 		
+		JLabel LblError = new JLabel("");
+		LblError.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		LblError.setForeground(new Color(255, 0, 0));
+		LblError.setBounds(54, 330, 372, 33);
+		contentPane.add(LblError);
 		JButton registrar = new JButton("Regitrar");
 		registrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Cliente cliente =new Cliente();
 				
 
-				cliente.agregarClienteProfe(Inpnombre.getText()
+				String validar=cliente.agregarClienteProfe(Inpnombre.getText()
 						,inpcontrasena.getText(),inpdireccion.getText()
 						,inpDNI.getText(),(String) tipoUsuario.getSelectedItem() );
+				if (validar.equals("si")) {
+					
+				}else {
+					LblError.setText(validar);
+				}
+				
 			}
+			
 		});
 		registrar.setBackground(SystemColor.menu);
 		registrar.setFont(new Font("Verdana", Font.ITALIC, 12));
-		registrar.setBounds(83, 314, 291, 23);
+		registrar.setBounds(83, 296, 291, 23);
 		contentPane.add(registrar);
 		
 		
@@ -157,5 +171,8 @@ public class Registro extends JFrame {
 		salir.setBackground(SystemColor.menu);
 		salir.setBounds(10, 384, 89, 23);
 		contentPane.add(salir);
+		
+		
+		
 	}
 }

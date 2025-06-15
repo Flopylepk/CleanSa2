@@ -109,43 +109,42 @@ public class Cliente implements Validador, Encriptador {
 
 	}
 
-	public void agregarClienteProfe(String nombre, String contrasena, String direccion, String dni, String tipo) {
+	public String agregarClienteProfe(String nombre, String contrasena, String direccion, String dni, String tipo) {
 	
+		String validar="";
 		ControllerCliente controller=new ControllerCliente();
 		Cliente prueba = null;
 		
 		
 			
 			if (nombre.isEmpty()) {
-				JOptionPane.showMessageDialog(null, "el nombre esta vacio");
-				return;
+				
+				return "El nombre esta vacio";
 			}
 			String contrasena2=controller.validarPassword(contrasena);
 			if (contrasena2.isEmpty()) {
-				JOptionPane.showMessageDialog(null, "se produjo un error. Ingresela nuevamente");
-				return;
+				
+				return "Se produjo un error con ta contraseña. Ingresela nuevamente";
 			}
 
 			if (direccion.isEmpty()) {
-				JOptionPane.showMessageDialog(null, "la direccion esta vacia");
-				return;
+				
+				return "La direccion esta vacia";
 			}
 
 			
 			if (dni.isEmpty()) {
-				JOptionPane.showMessageDialog(null, "el dni esta vacio");
-				return;
+				
+				return "El dni esta vacio";
 				
 			}else if (dni.length()<8||dni.length()>=9) {
-				JOptionPane.showMessageDialog(null, "el dni debe ser igual a 8 caracteres");
-				return;
+				
+				return "El dni debe ser igual a 8 caracteres";
 			}
 				int tamaño=dni.length();
 				for (int i = 0; i < tamaño; i++) {
 					if (!Character.isDigit(dni.charAt(i))) {
-						JOptionPane.showMessageDialog(null, "el dni tiene letras");
-						
-						return;
+						return "El dni tiene letras";
 					}
 					
 				}
@@ -155,8 +154,8 @@ public class Cliente implements Validador, Encriptador {
 			
 			prueba = (Cliente) ControllerCliente.validar2(dni);
 			if (prueba!=null) {
-				JOptionPane.showMessageDialog(null, "ese cliente ya existe");
-				return;
+				
+				return "Ese cliente ya existe";
 			}
 			
 		int tipo2 = 0;
@@ -168,6 +167,7 @@ public class Cliente implements Validador, Encriptador {
 			}
 
 		ControllerCliente.agregarCliente2(nombre, encriptar(contrasena2), direccion, dni, tipo2);
+		return "si";
 	}
 
 }

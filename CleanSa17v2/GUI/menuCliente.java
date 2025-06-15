@@ -59,6 +59,7 @@ public class menuCliente extends JFrame {
 		JButton btnRegistro = new JButton("Registrarse");
 		btnRegistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				Registro registro = new Registro();
 				registro.setVisible(true);;
 				dispose();
