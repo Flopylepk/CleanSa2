@@ -186,27 +186,27 @@ public class Tabla2 extends JFrame implements Validador {
 									int cantidad_antigua=rs3.getInt("cantidad");
 									double total_antigua=rs3.getDouble("total_producto");
 									
-									JOptionPane.showMessageDialog(null, "total antiguo "+total_antigua);
-									JOptionPane.showMessageDialog(null, "cantidad antigua "+cantidad_antigua);
+									
 									
 										int cantidad_nueva=cantidad_antigua+cantidad2;
-										JOptionPane.showMessageDialog(null,"cantidad nueva "+cantidad_nueva);
+										
 									
 									
 										double total_carrito=productoSeleccionado.getPrecio()*cantidad2;
-										JOptionPane.showMessageDialog(null,"total carrito "+ total_carrito);
+										
 										
 										double total_nuevo=total_antigua+total_carrito;
-										JOptionPane.showMessageDialog(null,"total nuevo "+ total_nuevo);
+										
 										
 										
 										PreparedStatement updateCarrito = con
-												.prepareStatement("UPDATE carrito_detalle SET total_producto=?, cantidad=?  WHERE fk_carrito=?");
+												.prepareStatement("UPDATE carrito_detalle SET total_producto=?, cantidad=?  WHERE fk_carrito=? and fk_producto=?");
 										
 										
 										updateCarrito.setDouble(1, total_nuevo);
 										updateCarrito.setInt(2, cantidad_nueva);
 										updateCarrito.setInt(3, carrito.getId_carrito());
+										updateCarrito.setInt(4,productoSeleccionado.getId() );
 										int filas = updateCarrito.executeUpdate();
 							            if (filas > 0) {
 							                System.out.println("carrito_detalle modificado correctamente cuando ya existe");  

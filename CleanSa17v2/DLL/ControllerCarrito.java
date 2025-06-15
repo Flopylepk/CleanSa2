@@ -268,7 +268,7 @@ public class ControllerCarrito implements  CarritoRepository{
 					cambio.setInt(2, id);
 					cambio.setString(3, "en proceso");
 					int filas = cambio.executeUpdate();
-					if (filas>1) {
+					if (filas>0) {
 						JOptionPane.showMessageDialog(null, "pago realizado");
 						System.out.println("modifico carrito");
 						validar="si";
@@ -335,7 +335,7 @@ public class ControllerCarrito implements  CarritoRepository{
 					cambio.setInt(2, id);
 					cambio.setString(3, "en proceso");
 					int filas2 = cambio.executeUpdate();
-					if (filas2>1) {
+					if (filas2>0) {
 						System.out.println("modifico carrito");
 						JOptionPane.showMessageDialog(null, "cancelacion realizada correctamente");
 						validar="si";

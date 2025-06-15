@@ -322,7 +322,7 @@ public class Tabla3 extends JFrame implements Validador {
 		for (Producto u : productos) {
 			model.addRow(
 
-					new Object[] { u.getNombre(), u.getStcok(), u.getPrecio(), u.getCategoria(), u.getPeligroso(),
+					new Object[] { u.getNombre(), u.getPrecio(),u.getStcok(), u.getCategoria(), u.getPeligroso(),
 							u.getId()
 
 					});
@@ -337,7 +337,7 @@ public class Tabla3 extends JFrame implements Validador {
 
 				model.addRow(
 
-						new Object[] { u.getNombre(), u.getStcok(), u.getPrecio(), u.getCategoria(), u.getPeligroso(),
+						new Object[] { u.getNombre(),u.getPrecio(),u.getStcok() ,u.getCategoria(), u.getPeligroso(),
 								u.getId()
 
 						});
