@@ -255,7 +255,7 @@ public class ControllerCarrito implements  CarritoRepository{
 			if(rs.next()) {
 				PreparedStatement productos = con.prepareStatement("SELECT * FROM carrito_detalle where fk_carrito=?");
 				productos.setInt(1, rs.getInt("id_carrito"));
-				ResultSet rs2 = stmt.executeQuery();
+				ResultSet rs2 = productos.executeQuery();
 				if (!rs2.next()) {
 					JOptionPane.showMessageDialog(null, "no se encontraron productos en el carrito. Antes d epagar debe tener productos");
 					validar="no";
