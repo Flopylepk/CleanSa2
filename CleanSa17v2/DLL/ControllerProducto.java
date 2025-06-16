@@ -12,37 +12,27 @@ import BLL.Producto;
 
 public class ControllerProducto  {
 	private static Connection con = Conexion.getInstance().getConnection();// Poner esto en todos los controladores
-	 
-<<<<<<< HEAD:CleanSa17v2/src/DLL/ControllerProducto.java
-
 	 public static LinkedList<Producto> mostrarProductos() {
 		 
 	        LinkedList<Producto> productos = new LinkedList<>();
 	        try {
 	            PreparedStatement stmt = con.prepareStatement("SELECT * FROM producto where stock>?"); //traer consulta de insert
 	            stmt.setInt(1, 0);
-	            
-=======
 	public LinkedList<Producto> mostrarProductos() {
 	     LinkedList<Producto> productos = new LinkedList<>();
 	     try {
 	            PreparedStatement stmt = con.prepareStatement("SELECT * FROM producto"); //traer consulta de insert
->>>>>>> origin/Gero:CleanSa17v2/DLL/ControllerProducto.java
 	            ResultSet rs = stmt.executeQuery();
-
-	            while (rs.next()) {
-	            	
+	            while (rs.next()) {	            	
 	            	/*
 	            	 * id_producto	nombre	precio	stock	fk_peligoso	fk_categoria	
 						tiene que coincidir dentro de " " */
-
 	                int id = rs.getInt("id_producto");
 	                String nombre = rs.getString("nombre");
 	                int stock = rs.getInt("stock");
 	                int precio = rs.getInt("precio");
 	                boolean peligoso = rs.getBoolean("peligroso");
 	                int categoria = rs.getInt("fk_categoria");
-
 	                /*	this.nombre = nombre;
 						this.stcok = stcok;
 						this.precio = precio;
@@ -55,13 +45,9 @@ public class ControllerProducto  {
 	            e.printStackTrace();
 	        }
 	        return productos;
-	    }
-	 
-	 
-	 ////MOSTRAR PRODUCTOS PELIGROSOS
-	 
-	 public static LinkedList<Producto> mostrarProductosNoPeligrosos() {
-		 
+	    }	 
+	 ////MOSTRAR PRODUCTOS PELIGROSOS	 
+	 public static LinkedList<Producto> mostrarProductosNoPeligrosos() {		 
 	        LinkedList<Producto> productos = new LinkedList<>();
 	        try {
 	        						////SOLO TRAE PRODUCTOS CON PELIGROSO = 0 
@@ -69,29 +55,23 @@ public class ControllerProducto  {
 	            stmt.setInt(1, 1);
 	            stmt.setInt(2, 0);
 	            ResultSet rs = stmt.executeQuery();
-
-	            while (rs.next()) {
-	            	
+	            while (rs.next()) {	            	
 	            	/*
 	            	 * id_producto	nombre	precio	stock	fk_peligoso	fk_categoria	
 						tiene que coincidir dentro de " " */
-	            	
-	            	
+
 	                int id = rs.getInt("id_producto");
 	                String nombre = rs.getString("nombre");
 	                int stock = rs.getInt("precio");
 	                int precio = rs.getInt("stock");
 	                int peligoso = rs.getInt("peligroso");
-	                int categoria = rs.getInt("fk_categoria");
-	                
+	                int categoria = rs.getInt("fk_categoria");                
 	                /*	this.nombre = nombre;
 						this.stcok = stcok;
 						this.precio = precio;
 						this.categoria = categoria;
 						this.peligroso = peligroso;*/
 	                productos.add(new Producto(nombre, stock, precio,categoria, peligoso,id));
-	               
-
 	            }
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -116,10 +96,7 @@ public class ControllerProducto  {
 			e.printStackTrace();
 			System.out.println("No se agrego.");
 		}
-
-
 		}
-
 	
 	////FUNCION DE ELEGIR PARA USUARIOS TIPO PERSONAL 
 	public int elegirNoPeligroso() {
@@ -128,13 +105,10 @@ public class ControllerProducto  {
         for (int i = 0; i < productos.size(); i++) {
         	lista[i] = productos.get(i).getNombre() +"/" + productos.get(i).getId();
 		}
-        String opcion = (String)JOptionPane.showInputDialog(null, "", "", 0,  null, lista, lista[0]);
-        
-        
+        String opcion = (String)JOptionPane.showInputDialog(null, "", "", 0,  null, lista, lista[0]);       
         int idElegido = Integer.parseInt( opcion.split("/")[1]);
         return idElegido;
-	}
-	
+	}	
 ////FUNCION DE ELEGIR PARA USUARIOS TIPO EMPRESA
 	public int elegir() {
 		LinkedList<Producto> productos = mostrarProductos();
@@ -150,17 +124,30 @@ public class ControllerProducto  {
 	}
 	
 	public void cargarStock (int cantidad) {
-		
-		
-		
-		
-		
+			
 	}
 	
+	//Validacion para la base de datoos para saber si el productor que el Administrador quiere añadir ya esta en el sistema o no.
+	public boolean encontrarProductos (String nombre) {
+		try {
+			PreparedStatement stmt = con.prepareStatement("SELECT COUNT(*) FROM producto WHERE LOWER(nombre) = LOWER(?)");
+			stmt.setString(1, nombre);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1) > 0;
+			}		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 	
-	
-
-
-
+	        
+	        
+	        
+	        
+	        
+	        
+	}
 }
  
