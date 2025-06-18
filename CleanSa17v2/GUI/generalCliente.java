@@ -57,6 +57,13 @@ public class generalCliente extends JFrame {
 		contentPane.add(btnverinfo);
 		
 		JButton btnVerCarrito = new JButton("Ver carrito");
+		btnVerCarrito.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				OpcionesCarritosCliente opcionescarritocliente =new OpcionesCarritosCliente(cliente);
+				opcionescarritocliente.setVisible(true);
+				dispose();
+			}
+		});
 		btnVerCarrito.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnVerCarrito.setBackground(SystemColor.menu);
 		btnVerCarrito.setBounds(304, 117, 129, 23);

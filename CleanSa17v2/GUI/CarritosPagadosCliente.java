@@ -43,11 +43,11 @@ public class CarritosPagadosCliente extends JFrame implements Validador {
 		contentPane.setLayout(null);
 
 		JLabel lblSeleccionado = new JLabel("Seleccionado:");
-		lblSeleccionado.setBounds(10, 10, 760, 20);
+		lblSeleccionado.setBounds(10, 10, 760, 24);
 		contentPane.add(lblSeleccionado);
 
 		model = new DefaultTableModel(
-				new String[] { "Id_carrito", "Fecha", "Estado", "Total", "Codigo_envio", "fk_cliente" }, 0);
+				new String[] { "Id_carrito", "Fecha", "Estado", "Total", "Codigo_envio", "fk_cliente"}, 0);
 		table = new JTable(model);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(10, 40, 760, 233);
@@ -85,7 +85,7 @@ public class CarritosPagadosCliente extends JFrame implements Validador {
 		JLabel LblError = new JLabel("");
 		LblError.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		LblError.setForeground(new Color(255, 0, 0));
-		LblError.setBounds(54, 330, 372, 33);
+		LblError.setBounds(10, 312, 372, 33);
 		contentPane.add(LblError);
 		
 		JButton Detalle = new JButton("Ver Detalle");
@@ -94,7 +94,9 @@ public class CarritosPagadosCliente extends JFrame implements Validador {
 				if (carritoSeleccionado==null) {
 					LblError.setText("Error. No se eligió ningun producto");
 				} else {
-				
+					CarritosDetalle carritosdetalle = new CarritosDetalle(cliente,carritoSeleccionado.getId_carrito());
+					carritosdetalle.setVisible(true);;
+					dispose();
 				}
 			}
 		});

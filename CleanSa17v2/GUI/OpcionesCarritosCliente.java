@@ -1,12 +1,15 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import BLL.Carrito;
 import BLL.Cliente;
+import DLL.ControllerCarrito;
 
 import java.awt.SystemColor;
 import javax.swing.JLabel;
@@ -49,7 +52,26 @@ public class OpcionesCarritosCliente extends JFrame {
 		lblNewLabel.setBounds(125, 11, 318, 117);
 		contentPane.add(lblNewLabel);
 		
+		JLabel LblError = new JLabel("");
+		LblError.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		LblError.setForeground(new Color(255, 0, 0));
+		LblError.setBounds(10, 322, 372, 33);
+		contentPane.add(LblError);
+		
 		JButton En_Proceso = new JButton("En Proceso");
+		En_Proceso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerCarrito controller=new ControllerCarrito();
+				Carrito carrito= controller.mostrarCarritoporClienteEnProceso(cliente.getId());
+				if (carrito==null) {
+					LblError.setText("Error. No se encontraron carritos en proceso");
+				} else {
+					CarritosEnProcesoCliente carritosenprosesocliente =new CarritosEnProcesoCliente(cliente, carrito);
+					carritosenprosesocliente.setVisible(true);
+					dispose();
+				}
+			}
+		});
 		En_Proceso.setBackground(SystemColor.menu);
 		En_Proceso.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		En_Proceso.setBounds(31, 244, 126, 71);
@@ -80,5 +102,16 @@ public class OpcionesCarritosCliente extends JFrame {
 		Cancelado.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		Cancelado.setBounds(424, 244, 126, 71);
 		contentPane.add(Cancelado);
+		
+		JButton Salir = new JButton("Salir");
+		Salir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				generalCliente generalcliente = new generalCliente(cliente);
+				generalcliente.setVisible(true);;
+				dispose();
+			}
+		});
+		Salir.setBounds(444, 352, 89, 23);
+		contentPane.add(Salir);
 	}
 }

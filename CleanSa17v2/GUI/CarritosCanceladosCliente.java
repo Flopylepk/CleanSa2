@@ -83,7 +83,25 @@ public class CarritosCanceladosCliente extends JFrame implements Validador {
 		});
 		contentPane.add(Salir);
 		
+		JLabel LblError = new JLabel("");
+		LblError.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		LblError.setForeground(new Color(255, 0, 0));
+		LblError.setBounds(54, 330, 372, 33);
+		contentPane.add(LblError);
+		
 		JButton Detalle = new JButton("Ver Detalle");
+		Detalle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if (carritoSeleccionado==null) {
+					LblError.setText("Error. No se eligió ningun producto");
+				} else {
+					CarritosDetalle carritosdetalle = new CarritosDetalle(cliente,carritoSeleccionado.getId_carrito());
+					carritosdetalle.setVisible(true);;
+					dispose();
+				}
+			}
+		});
 		Detalle.setBackground(SystemColor.menu);
 		Detalle.setBounds(25, 386, 136, 64);
 		contentPane.add(Detalle);

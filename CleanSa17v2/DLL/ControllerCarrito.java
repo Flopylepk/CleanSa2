@@ -32,7 +32,7 @@ public class ControllerCarrito implements  CarritoRepository{
             	Date fecha= rs.getDate("fecha");
             	String estado=rs.getString("estado");
             	double total=rs.getDouble("total");
-            	int codigo_envio=rs.getInt("codigo_envio");
+            	int codigo_envio=rs.getInt("codigoenvio");
             	int fk_cliente=rs.getInt("fk_cliente");
             	Carrito carritos=new Carrito(id_carrito, fecha, estado, total, codigo_envio, fk_cliente);
             	
@@ -56,7 +56,7 @@ public class ControllerCarrito implements  CarritoRepository{
             	Date fecha= rs.getDate("fecha");
             	String estado=rs.getString("estado");
             	double total=rs.getDouble("total");
-            	int codigo_envio=rs.getInt("codigo_envio");
+            	int codigo_envio=rs.getInt("codigoenvio");
             	int fk_cliente=rs.getInt("fk_cliente");
             	Carrito carritos=new Carrito(id_carrito, fecha, estado, total, codigo_envio, fk_cliente);
             	
@@ -80,7 +80,7 @@ public class ControllerCarrito implements  CarritoRepository{
             	Date fecha= rs.getDate("fecha");
             	String estado=rs.getString("estado");
             	double total=rs.getDouble("total");
-            	int codigo_envio=rs.getInt("codigo_envio");
+            	int codigo_envio=rs.getInt("codigoenvio");
             	int fk_cliente=rs.getInt("fk_cliente");
             	Carrito carritos=new Carrito(id_carrito, fecha, estado, total, codigo_envio, fk_cliente);
             	
@@ -104,7 +104,7 @@ public class ControllerCarrito implements  CarritoRepository{
 	            Date fecha = rs.getDate("fecha");
 	            String estado = rs.getString("estado");
 	            double total = rs.getDouble("total");
-	            int codigo_envio = rs.getInt("codigo_envio");
+	            int codigo_envio = rs.getInt("codigoenvio");
 	            int fk_cliente = rs.getInt("fk_cliente");
 	            Carrito carritos = new Carrito(id_carrito, fecha, estado, total, codigo_envio, fk_cliente);
 	            carrito.add(carritos);
@@ -127,7 +127,7 @@ public class ControllerCarrito implements  CarritoRepository{
             	Date fecha= rs.getDate("fecha");
             	String estado=rs.getString("estado");
             	double total=rs.getDouble("total");
-            	int codigo_envio=rs.getInt("codigo_envio");
+            	int codigo_envio=rs.getInt("codigoenvio");
             	int fk_cliente=rs.getInt("fk_cliente");
             	Carrito carritos=new Carrito(id_carrito, fecha, estado, total, codigo_envio, fk_cliente);
             	
@@ -152,7 +152,7 @@ public class ControllerCarrito implements  CarritoRepository{
             	Date fecha= rs.getDate("fecha");
             	String estado=rs.getString("estado");
             	double total=rs.getDouble("total");
-            	int codigo_envio=rs.getInt("codigo_envio");
+            	int codigo_envio=rs.getInt("codigoenvio");
             	int fk_cliente=rs.getInt("fk_cliente");
             	Carrito carritos=new Carrito(id_carrito, fecha, estado, total, codigo_envio, fk_cliente);
             	
@@ -180,7 +180,7 @@ public class ControllerCarrito implements  CarritoRepository{
             	Date fecha= rs.getDate("fecha");
             	String estado=rs.getString("estado");
             	double total=rs.getDouble("total");
-            	int codigo_envio=rs.getInt("codigo_envio");
+            	int codigo_envio=rs.getInt("codigoenvio");
             	int fk_cliente=rs.getInt("fk_cliente");
             	Carrito carritos=new Carrito(id_carrito, fecha, estado, total, codigo_envio, fk_cliente);
             	
@@ -206,11 +206,35 @@ public class ControllerCarrito implements  CarritoRepository{
             	Date fecha= rs.getDate("fecha");
             	String estado=rs.getString("estado");
             	double total=rs.getDouble("total");
-            	int codigo_envio=rs.getInt("codigo_envio");
+            	int codigo_envio=rs.getInt("codigoenvio");
             	int fk_cliente=rs.getInt("fk_cliente");
             	Carrito carritos=new Carrito(id_carrito, fecha, estado, total, codigo_envio, fk_cliente);
             	
             	carrito.add(carritos);
+            }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return carrito;
+	}
+	
+	public Carrito mostrarCarritoporClienteEnProceso(int id) {
+		Carrito carrito = null;
+		try {
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito where fk_cliente=? and estado=?");
+			stmt.setInt(1, id);
+			stmt.setString(2, "en proceso");
+			
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()) {
+            	int id_carrito=rs.getInt("id_carrito");
+            	Date fecha= rs.getDate("fecha");
+            	String estado=rs.getString("estado");
+            	double total=rs.getDouble("total");
+            	int codigo_envio=rs.getInt("codigoenvio");
+            	int fk_cliente=rs.getInt("fk_cliente");
+            	carrito=new Carrito(id_carrito, fecha, estado, total, codigo_envio, fk_cliente);
+
             }
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -232,7 +256,7 @@ public class ControllerCarrito implements  CarritoRepository{
             	Date fecha= rs.getDate("fecha");
             	String estado=rs.getString("estado");
             	double total=rs.getDouble("total");
-            	int codigo_envio=rs.getInt("codigo_envio");
+            	int codigo_envio=rs.getInt("codigoenvio");
             	int fk_cliente=rs.getInt("fk_cliente");
             	Carrito carritos=new Carrito(id_carrito, fecha, estado, total, codigo_envio, fk_cliente);
             	
@@ -356,7 +380,7 @@ public class ControllerCarrito implements  CarritoRepository{
 	public List<Carrito_detalle> mostrarDetalleCarrito(int id) {
 		LinkedList<Carrito_detalle> carrito_detalle = new LinkedList<>();
 		try {
-			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito_detalle WERE fk_carrito=?");
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito_detalle WHERE fk_carrito=?");
 			stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
