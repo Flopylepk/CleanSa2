@@ -116,7 +116,7 @@ public class ControllerCarrito implements  CarritoRepository{
 	}
 
 	@Override
-	public List<Carrito> mostrarCarritoCancelados() {
+	public LinkedList<Carrito> mostrarCarritoCancelados() {
 		LinkedList<Carrito> carrito = new LinkedList<>();
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito where estado=?");
