@@ -96,7 +96,7 @@ public class CarritosCanceladosCliente extends JFrame implements Validador {
 	private void cargarTabla(Cliente cliente) {
 		model.setRowCount(0);
 		ControllerCarrito controller=new ControllerCarrito();
-		List<Carrito> carritos = controller.mostrarCarritoporClientePagados(cliente.getId());
+		List<Carrito> carritos = controller.mostrarCarritoporClienteCancelados(cliente.getId());
 		for (Carrito u : carritos) {
 			model.addRow(
 
