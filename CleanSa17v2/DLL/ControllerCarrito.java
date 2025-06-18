@@ -353,4 +353,25 @@ public class ControllerCarrito implements  CarritoRepository{
 		}
 		return validar;
 	}
+	public List<Carrito_detalle> mostrarDetalleCarrito(int id) {
+		LinkedList<Carrito_detalle> carrito_detalle = new LinkedList<>();
+		try {
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito_detalle WERE fk_carrito=?");
+			stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+            	int id_carrito_detalle=rs.getInt("id_carrito_detalle");
+            	int fk_carrito=rs.getInt("fk_carrito");
+            	int fk_producto=rs.getInt("fk_producto");
+            	double total_producto=rs.getDouble("total_producto");
+            	int cantidad=rs.getInt("cantidad");
+            	
+            	Carrito_detalle darritodetalle=new Carrito_detalle(id_carrito_detalle,fk_carrito,fk_producto,total_producto,cantidad);
+            	carrito_detalle.add(darritodetalle);
+            }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return carrito_detalle;
+	}
 }
