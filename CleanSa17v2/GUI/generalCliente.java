@@ -51,6 +51,13 @@ public class generalCliente extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton btnverinfo = new JButton("Ver mi info");
+		btnverinfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VerCliente vercliente =new VerCliente(cliente);
+				vercliente.setVisible(true);
+				dispose();
+			}
+		});
 		btnverinfo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnverinfo.setBackground(SystemColor.menu);
 		btnverinfo.setBounds(26, 117, 129, 23);

@@ -73,7 +73,7 @@ public class VerCliente extends JFrame {
 			}
 		});
 		Salir.setBackground(SystemColor.menu);
-		Salir.setBounds(467, 349, 121, 42);
+		Salir.setBounds(477, 368, 111, 23);
 		contentPane.add(Salir);
 	}
 
