@@ -76,8 +76,8 @@ public class CarritosCanceladosCliente extends JFrame implements Validador {
 		Salir.setBounds(670, 419, 104, 31);
 		Salir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				generalCliente generalcliente = new generalCliente(cliente);
-				generalcliente.setVisible(true);;
+				OpcionesCarritosCliente opcionescarritoscliente = new OpcionesCarritosCliente(cliente);
+				opcionescarritoscliente.setVisible(true);
 				dispose();
 			}
 		});
