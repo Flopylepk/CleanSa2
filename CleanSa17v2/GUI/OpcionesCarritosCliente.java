@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class OpcionesCarritosCliente extends JFrame {
@@ -44,7 +45,7 @@ public class OpcionesCarritosCliente extends JFrame {
 		
 		JLabel Texto = new JLabel("Elija que tipo de carrito quiere ver");
 		Texto.setFont(new Font("Times New Roman", Font.PLAIN, 21));
-		Texto.setBounds(124, 138, 342, 60);
+		Texto.setBounds(125, 139, 342, 60);
 		contentPane.add(Texto);
 		
 		JLabel lblNewLabel = new JLabel("New label");
@@ -74,33 +75,45 @@ public class OpcionesCarritosCliente extends JFrame {
 		});
 		En_Proceso.setBackground(SystemColor.menu);
 		En_Proceso.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		En_Proceso.setBounds(31, 244, 126, 71);
+		En_Proceso.setBounds(89, 220, 171, 23);
 		contentPane.add(En_Proceso);
 		
 		JButton Pagado = new JButton("Pagado");
 		Pagado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CarritosPagadosCliente carritospagadoscliente =new CarritosPagadosCliente(cliente);
-				carritospagadoscliente.setVisible(true);
-				dispose();
+				ControllerCarrito controller=new ControllerCarrito();
+				List<Carrito> carrito=controller.mostrarCarritoporClientePagados(cliente.getId());
+				if (carrito.isEmpty()) {
+					LblError.setText("Error. No se encontraron carritos pagados");
+				} else {
+					CarritosEnviadosCliente carritosenviadoscliente =new CarritosEnviadosCliente(cliente);
+					carritosenviadoscliente.setVisible(true);
+					dispose();
+				}
 			}
 		});
 		Pagado.setBackground(SystemColor.menu);
 		Pagado.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		Pagado.setBounds(228, 244, 126, 71);
+		Pagado.setBounds(89, 267, 171, 23);
 		contentPane.add(Pagado);
 		
 		JButton Cancelado = new JButton("Cancelado");
 		Cancelado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CarritosCanceladosCliente carritoscanceladoscliente =new CarritosCanceladosCliente(cliente);
-				carritoscanceladoscliente.setVisible(true);
-				dispose();
+				ControllerCarrito controller=new ControllerCarrito();
+				List<Carrito> carrito=controller.mostrarCarritoporClienteCancelados(cliente.getId());
+				if (carrito.isEmpty()) {
+					LblError.setText("Error. No se encontraron carritos cancelados");
+				} else {
+					CarritosEnviadosCliente carritosenviadoscliente =new CarritosEnviadosCliente(cliente);
+					carritosenviadoscliente.setVisible(true);
+					dispose();
+				}
 			}
 		});
 		Cancelado.setBackground(SystemColor.menu);
 		Cancelado.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		Cancelado.setBounds(424, 244, 126, 71);
+		Cancelado.setBounds(320, 220, 171, 23);
 		contentPane.add(Cancelado);
 		
 		JButton Salir = new JButton("Salir");
@@ -111,7 +124,27 @@ public class OpcionesCarritosCliente extends JFrame {
 				dispose();
 			}
 		});
-		Salir.setBounds(444, 352, 89, 23);
+		Salir.setBounds(20, 352, 108, 23);
 		contentPane.add(Salir);
+		
+		JButton btnEnviados = new JButton("Enviados");
+		btnEnviados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerCarrito controller=new ControllerCarrito();
+				List<Carrito> carrito=controller.mostrarCarritoporClienteEnviados(cliente.getId());
+				if (carrito.isEmpty()) {
+					LblError.setText("Error. No se encontraron carritos enviados");
+				} else {
+					CarritosEnviadosCliente carritosenviadoscliente =new CarritosEnviadosCliente(cliente);
+					carritosenviadoscliente.setVisible(true);
+					dispose();
+				}
+				
+			}
+		});
+		btnEnviados.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		btnEnviados.setBackground(SystemColor.menu);
+		btnEnviados.setBounds(320, 268, 171, 23);
+		contentPane.add(btnEnviados);
 	}
 }
