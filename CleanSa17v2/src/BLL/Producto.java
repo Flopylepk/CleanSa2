@@ -16,7 +16,11 @@ public class Producto implements Validador{
 	private int peligroso; 
 	private int id;
 	private static LinkedList<Producto> producto = new LinkedList<Producto>() ;
+<<<<<<< HEAD:CleanSa17v2/src/BLL/Producto.java
 	public Producto(String nombre, int stock, double precio, int categoria, int peligroso2) {
+=======
+	public Producto(String nombre, int stock, double precio, int categoria, int peligroso) {
+>>>>>>> main:CleanSa17v2/BLL/Producto.java
 		super();
 		this.nombre = nombre;
 		this.stock = stock;
@@ -25,13 +29,13 @@ public class Producto implements Validador{
 		this.peligroso = peligroso2;
 	}
 	
-	public Producto(String nombre, int stock, double precio, int categoria, int i, int id) {
+	public Producto(String nombre, double precio, int stock, int categoria, int peligroso, int id) {
 		super();
 		this.nombre = nombre;
 		this.stock = stock;
 		this.precio = precio;
 		this.categoria = categoria;
-		this.peligroso = i;
+		this.peligroso = peligroso;
 		this.id = id;
 	}
 	
@@ -68,10 +72,10 @@ public class Producto implements Validador{
 	public void setCategoria(int categoria) {
 		this.categoria = categoria;
 	}
-	public boolean getPeligroso() {
+	public int getPeligroso() {
 		return peligroso;
 	}
-	public void setPeligroso(boolean peligroso) {
+	public void setPeligroso(int peligroso) {
 		this.peligroso = peligroso;
 	}
 	public static LinkedList<Producto> getProducto() {
@@ -104,7 +108,8 @@ public class Producto implements Validador{
 			    JOptionPane.YES_NO_OPTION
 			);
 
-		boolean peligorso = (respuesta == JOptionPane.YES_OPTION);
+		
+		int peligroso =respuesta;
 		
 		nuevo.setStock(stock);
 		nuevo.setPrecio(precio);
@@ -121,7 +126,7 @@ public class Producto implements Validador{
 				desplegable[0]);
 		int fk_elegido = seleccionada.getId_categoria();
 		nuevo.setCategoria(fk_elegido);
-		nuevo.setPeligroso(peligorso);
+		nuevo.setPeligroso(peligroso);
 		JOptionPane.showMessageDialog(null, nuevo.getNombre() + " agregado con exito.");
 		producto.add(nuevo);
 		return true;	
