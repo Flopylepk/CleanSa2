@@ -108,15 +108,9 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	            e.printStackTrace();
 	        }
 	    }
-<<<<<<< HEAD:CleanSa17v2/src/DLL/ControllerCliente.java
 	
 	public static LinkedList<Cliente> mostrarClientes1() {
-=======
 
-
-	@Override
-	public LinkedList<Cliente> mostrarClientes() {
->>>>>>> main:CleanSa17v2/DLL/ControllerCliente.java
         LinkedList<Cliente> Clientes = new LinkedList<>();
         try {
             PreparedStatement stmt = con.prepareStatement("SELECT * FROM cliente");
@@ -165,12 +159,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	    }
 
 
-<<<<<<< HEAD:CleanSa17v2/src/DLL/ControllerCliente.java
-
 public <T> T validar(String dni) {
-=======
-	public static <T> T validar2(String dni) {
->>>>>>> main:CleanSa17v2/DLL/ControllerCliente.java
 		 T cliente = null;
 		try {
             PreparedStatement stmt = con.prepareStatement(
