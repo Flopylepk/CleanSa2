@@ -29,7 +29,7 @@ public class LoginAdmin extends JFrame {
 	private JPasswordField inpcontrasena;
 	
 
-public Login() {
+public LoginAdmin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 481, 420);
 		contentPane = new JPanel();
@@ -41,7 +41,7 @@ public Login() {
 		
 		JLabel imagen = new JLabel("");
 		imagen.setBounds(52, 11, 352, 97);
-		imagen.setIcon(new ImageIcon(Login.class.getResource("/img/logo.png")));
+		imagen.setIcon(new ImageIcon(LoginAdmin.class.getResource("/img/logo.png")));
 		imagen.setHorizontalAlignment(SwingConstants.CENTER);
 		imagen.setFont(new Font("Segoe Script", Font.PLAIN, 11));
 		contentPane.add(imagen);
@@ -76,19 +76,18 @@ public Login() {
 		contentPane.add(lblNewLabel_3);
 		
 		JButton btnNewButton = new JButton("Iniciar sesión");
+
 		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				ControllerAdmin<Administrador> controlador = new ControllerAdmin<>();
-				Administrador admin = controlador.logIn();
-				
-				if (admin==null) {
-					JOptionPane.showMessageDialog(null, "error, usuario incorrecto");
-				} else {
-					JOptionPane.showMessageDialog(null, "Bienvenido" + admin.getNombre);
-				}
-				
-			}
+		    public void actionPerformed(ActionEvent e) {
+		        ControllerAdmin<Administrador> controlador = new ControllerAdmin<>();
+		        Administrador admin = controlador.logIn(); // Asegúrate de que logIn esté correctamente implementado
+		
+		        if (admin == null) {
+		            JOptionPane.showMessageDialog(null, "Error, usuario incorrecto");
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Bienvenido " + admin.getNombre()); // Asegúrate de que getNombre exista
+		        }
+		    }
 		});
 		btnNewButton.setBackground(SystemColor.control);
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
