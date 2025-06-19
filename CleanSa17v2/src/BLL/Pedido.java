@@ -5,6 +5,7 @@ public class Pedido {
 	private int fk_producto;
 	private int cantidad;
 	private double totalPrecio;
+	private int id_pedido;
 	
 	
 	
@@ -15,6 +16,14 @@ public class Pedido {
 		this.fk_producto = fk_producto;
 		this.cantidad = cantidad;
 		this.totalPrecio = totalPrecio;
+	}
+	public Pedido(int fk_carrito, int fk_producto, int cantidad, double totalPrecio, int id_pedido) {
+		super();
+		this.fk_carrito = fk_carrito;
+		this.fk_producto = fk_producto;
+		this.cantidad = cantidad;
+		this.totalPrecio = totalPrecio;
+		this.id_pedido = id_pedido;
 	}
 
 	public int getFk_carrito() {
@@ -34,6 +43,12 @@ public class Pedido {
 
 
 	
+	public int getId_pedido() {
+		return id_pedido;
+	}
+	public void setId_pedido(int id_pedido) {
+		this.id_pedido = id_pedido;
+	}
 	public double getTotalPrecio() {
 		return totalPrecio;
 	}
