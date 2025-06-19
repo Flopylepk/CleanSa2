@@ -89,11 +89,14 @@ public LoginAdmin() {
 		            dispose(); //Cierra la ventana por que se abria la vista del administrador correspondiente
 		            switch (admin.getTipo()) {
 					case 1:
-						new AdminVentas().setVisible();
+						new vistaAdminVentas().setVisible(true);
 						break;
 					case 2:
-						
+						new vistaAdminEnvios().setVisible(true);
 						break;
+					default:
+	                    JOptionPane.showMessageDialog(null, "Tipo de administrador desconocido.");
+	                    break;
 
 					}
 		        }
