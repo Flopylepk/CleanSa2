@@ -86,8 +86,8 @@ public class OpcionesCarritosCliente extends JFrame {
 				if (carrito.isEmpty()) {
 					LblError.setText("Error. No se encontraron carritos pagados");
 				} else {
-					CarritosEnviadosCliente carritosenviadoscliente =new CarritosEnviadosCliente(cliente);
-					carritosenviadoscliente.setVisible(true);
+					CarritosPagadosCliente carritospagadoscliente =new CarritosPagadosCliente(cliente);
+					carritospagadoscliente.setVisible(true);
 					dispose();
 				}
 			}
@@ -105,8 +105,8 @@ public class OpcionesCarritosCliente extends JFrame {
 				if (carrito.isEmpty()) {
 					LblError.setText("Error. No se encontraron carritos cancelados");
 				} else {
-					CarritosEnviadosCliente carritosenviadoscliente =new CarritosEnviadosCliente(cliente);
-					carritosenviadoscliente.setVisible(true);
+					CarritosCanceladosCliente carritoscanceladoscliente =new CarritosCanceladosCliente(cliente);
+					carritoscanceladoscliente.setVisible(true);
 					dispose();
 				}
 			}

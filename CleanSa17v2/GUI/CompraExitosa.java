@@ -46,16 +46,16 @@ public class CompraExitosa extends JFrame {
 		
 		JLabel SI = new JLabel("Producto agregado con exito");
 		SI.setBounds(122, 147, 274, 26);
-		SI.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		SI.setFont(new Font("Verdana", Font.BOLD, 16));
 		contentPane.add(SI);
 		
 		JLabel SI2 = new JLabel("Para volver a la pantalla de cliente haga click en el botón \"Salir\"");
-		SI2.setBounds(55, 184, 401, 26);
-		SI2.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		SI2.setBounds(25, 184, 475, 26);
+		SI2.setFont(new Font("Verdana", Font.ITALIC, 14));
 		contentPane.add(SI2);
 		
 		JButton Volver = new JButton("Volver");
-		Volver.setBounds(307, 263, 124, 59);
+		Volver.setBounds(273, 282, 137, 20);
 		Volver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (cliente.getTipo()==1) {
@@ -70,12 +70,12 @@ public class CompraExitosa extends JFrame {
 			}
 		});
 		Volver.setBackground(SystemColor.menu);
-		Volver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		Volver.setFont(new Font("Verdana", Font.PLAIN, 12));
 		contentPane.add(Volver);
 		
 		JLabel lblParaVolverA = new JLabel("Para volver a la pantalla de compra haga click en el botón \"Volver\"");
-		lblParaVolverA.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		lblParaVolverA.setBounds(44, 214, 412, 26);
+		lblParaVolverA.setFont(new Font("Verdana", Font.ITALIC, 14));
+		lblParaVolverA.setBounds(25, 221, 475, 26);
 		contentPane.add(lblParaVolverA);
 		
 		JButton Salir = new JButton("Salir");
@@ -86,9 +86,9 @@ public class CompraExitosa extends JFrame {
 				dispose();
 			}
 		});
-		Salir.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		Salir.setFont(new Font("Verdana", Font.PLAIN, 12));
 		Salir.setBackground(SystemColor.menu);
-		Salir.setBounds(86, 263, 124, 59);
+		Salir.setBounds(82, 282, 137, 20);
 		contentPane.add(Salir);
 	}
 }

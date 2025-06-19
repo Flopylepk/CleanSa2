@@ -154,8 +154,8 @@ public class generalCliente extends JFrame {
 					String segundo="Para regresar al menu de cliente haga click en el botón Volver";
 					String tercero="Cancelación realizada con exito";
 					
-					Pagar pagar = new Pagar(primero, segundo, tercero, cliente);
-					pagar.setVisible(true);;
+					Cancelar cancelar = new Cancelar(primero, segundo, tercero, cliente);
+					cancelar.setVisible(true);
 					dispose();
 					
 				}else {
@@ -164,7 +164,7 @@ public class generalCliente extends JFrame {
 					String tercero=validar;
 					
 					Cancelar cancelar = new Cancelar(primero, segundo, tercero, cliente);
-					cancelar.setVisible(true);;
+					cancelar.setVisible(true);
 					dispose();
 					
 				}

@@ -42,13 +42,13 @@ public class RegistroCorrecto extends JFrame {
 		contentPane.add(icono);
 		
 		JLabel SI = new JLabel("Gracias por registrarse");
-		SI.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		SI.setFont(new Font("Verdana", Font.BOLD | Font.ITALIC, 16));
 		SI.setBounds(150, 147, 210, 26);
 		contentPane.add(SI);
 		
 		JLabel SI2 = new JLabel("Para volver a la pantalla de cliente haga click en el botón \"Volver\"");
-		SI2.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		SI2.setBounds(56, 204, 401, 26);
+		SI2.setFont(new Font("Verdana", Font.PLAIN, 14));
+		SI2.setBounds(24, 204, 476, 26);
 		contentPane.add(SI2);
 		
 		JButton Volver = new JButton("Volver");
@@ -60,8 +60,8 @@ public class RegistroCorrecto extends JFrame {
 			}
 		});
 		Volver.setBackground(SystemColor.menu);
-		Volver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		Volver.setBounds(187, 262, 124, 59);
+		Volver.setFont(new Font("Verdana", Font.PLAIN, 12));
+		Volver.setBounds(150, 273, 210, 26);
 		contentPane.add(Volver);
 	}
 }

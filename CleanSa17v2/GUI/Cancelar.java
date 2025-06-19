@@ -68,8 +68,8 @@ public class Cancelar extends JFrame {
 			}
 		});
 		Volver.setBackground(SystemColor.menu);
-		Volver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		Volver.setBounds(191, 270, 124, 59);
+		Volver.setFont(new Font("Verdana", Font.PLAIN, 12));
+		Volver.setBounds(147, 288, 220, 26);
 		contentPane.add(Volver);
 	}
 }

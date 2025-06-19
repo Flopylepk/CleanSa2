@@ -33,7 +33,8 @@ public class CarritosPagadosCliente extends JFrame implements Validador {
 
 
 	public CarritosPagadosCliente(Cliente cliente) {
-
+		setTitle("carritopagados");
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
 		contentPane = new JPanel();
@@ -110,10 +111,14 @@ public class CarritosPagadosCliente extends JFrame implements Validador {
 	}
 
 	private void cargarTabla(Cliente cliente) {
+		System.out.println(cliente);
 		model.setRowCount(0);
 		ControllerCarrito controller=new ControllerCarrito();
 		List<Carrito> carritos = controller.mostrarCarritoporClientePagados(cliente.getId());
+			
+		
 		for (Carrito u : carritos) {
+			System.out.println(u);
 			model.addRow(
 
 					new Object[] { u.getId_carrito(), u.getFecha(),u.getEstado() ,u.getTotal_compra(), u.getCodigo_envio(),

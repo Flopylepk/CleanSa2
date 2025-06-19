@@ -197,8 +197,9 @@ public class ControllerCarrito implements  CarritoRepository{
 		LinkedList<Carrito> carrito = new LinkedList<>();
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito where fk_cliente=? and estado=?");
-			stmt.setInt(1, id);
+			stmt.setLong(1, id);
 			stmt.setString(2, "pagado");
+			
 			
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
@@ -209,6 +210,7 @@ public class ControllerCarrito implements  CarritoRepository{
             	int codigo_envio=rs.getInt("codigoenvio");
             	int fk_cliente=rs.getInt("fk_cliente");
             	Carrito carritos=new Carrito(id_carrito, fecha, estado, total, codigo_envio, fk_cliente);
+            	
             	
             	carrito.add(carritos);
             }
@@ -341,7 +343,7 @@ public class ControllerCarrito implements  CarritoRepository{
 		String validar2="";
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito where fk_cliente=? and estado=?");
-			stmt.setInt(1, id);
+			stmt.setLong(1, id);
 			stmt.setString(2, "en proceso");
 			
 			ResultSet rs = stmt.executeQuery();
@@ -351,7 +353,7 @@ public class ControllerCarrito implements  CarritoRepository{
 					detalle.setInt(1, rs.getInt(id));
 					ResultSet rs2 = detalle.executeQuery();
 					int vueltas=0;
-					while(rs.next()) {
+					while(rs2.next()) {
 		            	vueltas=vueltas+1;
 		            	int fk_producto=rs2.getInt("fk_producto");
 		            	int cantidad=rs2.getInt("cantidad");
@@ -388,7 +390,6 @@ public class ControllerCarrito implements  CarritoRepository{
 					int filas2 = cambio.executeUpdate();
 					if (filas2>0) {
 						System.out.println("modifico carrito");
-						JOptionPane.showMessageDialog(null, "cancelacion realizada correctamente");
 						validar="si";
 					}
 				}else {

@@ -22,6 +22,7 @@ import enums.OpcionCliente;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JList;
 
 public class Registro extends JFrame {
 
