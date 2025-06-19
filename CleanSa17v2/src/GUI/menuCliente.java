@@ -59,6 +59,7 @@ public class menuCliente extends JFrame {
 		JButton btnRegistro = new JButton("Registrarse");
 		btnRegistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				Registro registro = new Registro();
 				registro.setVisible(true);;
 				dispose();
@@ -88,6 +89,15 @@ public class menuCliente extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		JButton btnNewButton = new JButton("salir");
+		btnNewButton.setBackground(SystemColor.menu);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menuprincipal Menupricipal = new menuprincipal();
+				Menupricipal.setVisible(true);;
+				dispose();
+				
+			}
+		});
 		btnNewButton.setBounds(20, 228, 69, 23);
 		contentPane.add(btnNewButton);
 	}

@@ -12,13 +12,10 @@ import BLL.Producto;
 
 public class ControllerProducto  {
 	private static Connection con = Conexion.getInstance().getConnection();// Poner esto en todos los controladores
-	 public static LinkedList<Producto> mostrarProductos() {
-		 
-	        LinkedList<Producto> productos = new LinkedList<>();
-	        try {
-	            PreparedStatement stmt = con.prepareStatement("SELECT * FROM producto where stock>?"); //traer consulta de insert
-	            stmt.setInt(1, 0);
-	public LinkedList<Producto> mostrarProductos() {
+
+	 
+	public static LinkedList<Producto> mostrarProductos() {
+
 	     LinkedList<Producto> productos = new LinkedList<>();
 	     try {
 	            PreparedStatement stmt = con.prepareStatement("SELECT * FROM producto"); //traer consulta de insert
@@ -27,18 +24,21 @@ public class ControllerProducto  {
 	            	/*
 	            	 * id_producto	nombre	precio	stock	fk_peligoso	fk_categoria	
 						tiene que coincidir dentro de " " */
-	                int id = rs.getInt("id_producto");
+
+
+	            	int id = rs.getInt("id_producto");
+
 	                String nombre = rs.getString("nombre");
 	                int stock = rs.getInt("stock");
-	                int precio = rs.getInt("precio");
-	                boolean peligoso = rs.getBoolean("peligroso");
+	                double precio = rs.getDouble("precio");
+	                int peligoso = rs.getInt("peligroso");
 	                int categoria = rs.getInt("fk_categoria");
 	                /*	this.nombre = nombre;
 						this.stcok = stcok;
 						this.precio = precio;
 						this.categoria = categoria;
 						this.peligroso = peligroso;*/
-	                productos.add(new Producto(nombre, stock, precio, categoria, peligoso));
+	                productos.add(new Producto(nombre, precio, stock,categoria, peligoso,id));
 	              //crea objeto con los datos de una mima fila d la base de datos
 	            }
 	        } catch (Exception e) {
@@ -62,8 +62,8 @@ public class ControllerProducto  {
 
 	                int id = rs.getInt("id_producto");
 	                String nombre = rs.getString("nombre");
-	                int stock = rs.getInt("precio");
-	                int precio = rs.getInt("stock");
+	                int stock = rs.getInt("stock");
+	                double precio = rs.getDouble("precio");
 	                int peligoso = rs.getInt("peligroso");
 	                int categoria = rs.getInt("fk_categoria");                
 	                /*	this.nombre = nombre;
@@ -71,7 +71,11 @@ public class ControllerProducto  {
 						this.precio = precio;
 						this.categoria = categoria;
 						this.peligroso = peligroso;*/
-	                productos.add(new Producto(nombre, stock, precio,categoria, peligoso,id));
+
+	                productos.add(new Producto(nombre, precio, stock,categoria, peligoso,id));
+	               
+
+
 	            }
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -88,7 +92,7 @@ public class ControllerProducto  {
 			stmt.setDouble(2, producto.getPrecio());
 			stmt.setInt(3, producto.getStcok());
 			stmt.setInt(4, producto.getCategoria());
-			stmt.setBoolean(5, producto.getPeligroso());
+			stmt.setInt(5, producto.getPeligroso());
 			stmt.executeUpdate();
 			System.out.println("Producto agregado correctamente.");
 	
