@@ -21,19 +21,6 @@ public class Carrito {
 		this.id_carrito= id_carrito;
 		this.fk_cliente=fk_cliente;
 	}
-	
-
-	public Carrito() {
-		super();
-	}
-	
-
-		this.id_carrito= id_carrito;
-	
-	}
-	public int getId_carrito() {
-		return id_carrito;
-	}
 
 	public void setId_carrito(int id_carrito) {
 		this.id_carrito = id_carrito;

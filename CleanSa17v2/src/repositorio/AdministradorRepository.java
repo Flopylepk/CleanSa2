@@ -1,9 +1,12 @@
 package repositorio;
 
-public interface AdministradorRepository {
-	Administrador logIn();
-	
-	
+import BLL.Administrador;
+
+public interface AdministradorRepository<T extends Administrador> {
+
+	T login();
+    
+
 }
 
 

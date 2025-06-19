@@ -105,7 +105,7 @@ public class ControllerCarrito implements  CarritoRepository{
 	            double total = rs.getDouble("total");
 	            int codigo_envio = rs.getInt("codigo_envio");
 	            int fk_cliente = rs.getInt("fk_cliente");
-	            Carrito carritos = new Carrito(id_carrito, fecha, estado, total, codigo_envio, fk_cliente);
+	            Carrito carritos = new Carrito(id_carrito, fecha, total, codigo_envio, fk_cliente);
 	            carrito.add(carritos);
 	        }
 	    } catch (Exception e) {

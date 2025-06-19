@@ -12,10 +12,10 @@ public class ControllerAdmin <T extends Administrador> implements AdministradorR
 		super();
 	}
 
-	private static Connection con = Conexion.getInstance().getConnection();// Poner esto en todos los controladores
+private static Connection con = Conexion.getInstance().getConnection();// Poner esto en todos los controladores
 
-	@Override
-    public T login() {
+@Override
+public T login() {
         T administrador = null;
         try {
             PreparedStatement stmt = con.prepareStatement(
@@ -51,6 +51,8 @@ public class ControllerAdmin <T extends Administrador> implements AdministradorR
         }
         return administrador;
     }
+
+
 
 	 
 	 

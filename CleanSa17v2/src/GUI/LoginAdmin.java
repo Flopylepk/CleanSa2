@@ -77,18 +77,18 @@ public LoginAdmin() {
 		
 		JButton btnNewButton = new JButton("Iniciar sesión");
 
-		btnNewButton.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        ControllerAdmin<Administrador> controlador = new ControllerAdmin<>();
-		        Administrador admin = controlador.logIn(); // Asegúrate de que logIn esté correctamente implementado
+	btnNewButton.addActionListener(new ActionListener() {
+	public void actionPerformed(ActionEvent e) {
+		ControllerAdmin<Administrador> controlador = new ControllerAdmin<>();
+		Administrador admin = controlador.login(); // Asegúrate de que logIn esté correctamente implementado
 		
-		        if (admin == null) {
-		            JOptionPane.showMessageDialog(null, "Error, usuario incorrecto");
-		        } else {
-		            JOptionPane.showMessageDialog(null, "Bienvenido " + admin.getNombre()); // Asegúrate de que getNombre exista
-		        }
-		    }
-		});
+		if (admin == null) {
+			JOptionPane.showMessageDialog(null, "Error, usuario incorrecto");
+		} else {
+		    JOptionPane.showMessageDialog(null, "Bienvenido " + admin.getNombre()); // Asegúrate de que getNombre exista
+			}
+		}
+	});
 		btnNewButton.setBackground(SystemColor.control);
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnNewButton.setBounds(129, 313, 206, 26);

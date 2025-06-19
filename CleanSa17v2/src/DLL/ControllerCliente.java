@@ -101,8 +101,8 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	            e.printStackTrace();
 	        }
 	    }
-
-	public static LinkedList<Cliente> mostrarClientes() {
+	
+	public static LinkedList<Cliente> mostrarClientes1() {
         LinkedList<Cliente> Clientes = new LinkedList<>();
         try {
             PreparedStatement stmt = con.prepareStatement("SELECT * FROM cliente");
@@ -151,8 +151,8 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	    }
 
 
-	@Override
-	public <T> T validar(String dni) {
+
+public <T> T validar(String dni) {
 		 T cliente = null;
 		try {
             PreparedStatement stmt = con.prepareStatement(
@@ -415,4 +415,6 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 			 
 		
 	}
+
+
 }
