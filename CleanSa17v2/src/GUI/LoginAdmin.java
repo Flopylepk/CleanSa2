@@ -3,13 +3,11 @@ package GUI;
 import java.awt.EventQueue;
 import DLL.*;
 import BLL.*;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
@@ -20,6 +18,7 @@ import java.awt.SystemColor;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 
 public class LoginAdmin extends JFrame {
 
@@ -80,12 +79,26 @@ public LoginAdmin() {
 		btnNewButton.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        ControllerAdmin<Administrador> controlador = new ControllerAdmin<>();
-		        Administrador admin = controlador.logIn(); // Asegúrate de que logIn esté correctamente implementado
+		        Administrador admin = controlador.login(); // Asegúrate de que logIn esté correctamente implementado
 		
 		        if (admin == null) {
 		            JOptionPane.showMessageDialog(null, "Error, usuario incorrecto");
 		        } else {
-		            JOptionPane.showMessageDialog(null, "Bienvenido " + admin.getNombre()); // Asegúrate de que getNombre exista
+		            JOptionPane.showMessageDialog(null, "Bienvenido " + admin.getNombre());
+		            
+		            dispose(); //Cierra la ventana por que se abria la vista del administrador correspondiente
+		            switch (admin.getTipo()) {
+					case 1:
+						new vistaAdminVentas().setVisible(true);
+						break;
+					case 2:
+						new vistaAdminEnvios().setVisible(true);
+						break;
+					default:
+	                    JOptionPane.showMessageDialog(null, "Tipo de administrador desconocido.");
+	                    break;
+
+					}
 		        }
 		    }
 		});

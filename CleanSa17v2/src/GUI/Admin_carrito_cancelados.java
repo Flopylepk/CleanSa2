@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.util.LinkedList;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,7 +15,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
 import BLL.*;
 import DLL.*;
 
@@ -28,10 +26,6 @@ public class Admin_carrito_cancelados extends JFrame {
     private DefaultTableModel model;
     private Carrito carritoSeleccionado;
     private JTextField inpFiltro;
-
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -45,9 +39,6 @@ public class Admin_carrito_cancelados extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Admin_carrito_cancelados() {
 		 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        setBounds(100, 100, 800, 500);

@@ -52,6 +52,8 @@ public class ControllerAdmin <T extends Administrador> implements AdministradorR
         return administrador;
     }
 
+
+
 	 
 	 
 	

@@ -75,6 +75,14 @@ public class Carrito {
 	public void setFk_cliente(int fk_cliente) {
 		this.fk_cliente = fk_cliente;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Carrito [id_carrito=" + id_carrito + ", fecha=" + fecha + ", cliente=" + cliente + ", total_compra="
+				+ total_compra + ", estado=" + estado + ", codigo_envio=" + codigo_envio + ", fk_cliente=" + fk_cliente
+				+ "]";
+	}
 	
 	
 	

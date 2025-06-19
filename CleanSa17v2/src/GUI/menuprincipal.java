@@ -83,7 +83,8 @@ public class menuprincipal extends JFrame {
 		
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) { //Salir
+			public void actionPerformed(ActionEvent e) { 
+				System.exit(0);
 			}
 		});
 		
