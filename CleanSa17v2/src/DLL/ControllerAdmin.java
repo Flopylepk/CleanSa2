@@ -19,13 +19,16 @@ public class ControllerAdmin <T extends Administrador> implements AdministradorR
 		System.out.println("Iniciando sesión para el administrador: " );
         T administrador = null;
         try {
+        	 System.out.println("Nombre recibido: [" + nombre + "]");
+             System.out.println("Contraseña recibida: [" + contrasena + "]");
+
             PreparedStatement stmt = con.prepareStatement(
                 "SELECT * FROM administrador WHERE nombre = ? AND contrasena = ?"
             );
 
             // Configurar los parámetros de la consulta
-            stmt.setString(1, nombre);
-            stmt.setString(2, contrasena);
+            stmt.setString(1, nombre.trim());
+            stmt.setString(2, contrasena.trim());
 
             ResultSet rs = stmt.executeQuery();
 
