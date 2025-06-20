@@ -93,7 +93,7 @@ public LoginAdmin() {
 					return;
 				}
 		    	ControllerAdmin<Administrador> controlador = new ControllerAdmin<>();
-		        Administrador admin = controlador.logIn(inpNombre.getText(),inpcontrasena.getText() ); // Asegúrate de que logIn esté correctamente implementado
+		        Administrador admin = controlador.logIn(inpNombre.getText(), inpcontrasena.getText() ); // Asegúrate de que logIn esté correctamente implementado
 		
 		        if (admin == null) {
 		        	LblError.setText("Error, usuario incorrecto");

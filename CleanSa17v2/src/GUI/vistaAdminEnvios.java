@@ -1,6 +1,8 @@
 package GUI;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -51,6 +53,13 @@ public class vistaAdminEnvios extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Salir");
+		btnNewButton_2.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        LoginAdmin ventana = new LoginAdmin();
+		        ventana.setVisible(true);
+		        
+		    }
+		});
 		btnNewButton_2.setBounds(292, 190, 125, 23);
 		contentPane.add(btnNewButton_2);
 		
