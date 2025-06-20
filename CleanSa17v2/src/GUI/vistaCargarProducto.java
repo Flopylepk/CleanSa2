@@ -1,6 +1,9 @@
 package GUI;
 
 import java.awt.EventQueue;
+import java.awt.TextField;
+
+import DLL.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,6 +15,11 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 
 public class vistaCargarProducto extends JFrame {
 	private ControllerProducto controller;
@@ -90,6 +98,29 @@ public class vistaCargarProducto extends JFrame {
 		JCheckBox chckbxNewCheckBox = new JCheckBox("Producto Peligroso");
 		chckbxNewCheckBox.setBounds(6, 195, 129, 23);
 		contentPane.add(chckbxNewCheckBox);
+		
+		JButton cargarProducto = new JButton("Agregar Producto");
+		cargarProducto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String nombre = textField.getSelectedText();
+					double precio = Double.parseDouble(textField_1.getText());
+					int stock = Integer.parseInt(textField_2.getText());
+				 
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+				
+			}
+		});
+		cargarProducto.setBounds(169, 229, 129, 23);
+		contentPane.add(cargarProducto);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(vistaCargarProducto.class.getResource("/img/logo.png")));
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblNewLabel_1.setBounds(117, 0, 309, 137);
+		contentPane.add(lblNewLabel_1);
 	}
 	
 	private void cargarProductos() {
