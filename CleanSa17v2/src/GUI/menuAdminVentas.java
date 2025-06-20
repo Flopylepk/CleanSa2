@@ -19,7 +19,7 @@ public class MenuAdminVentas extends JFrame {
 		JButton btnAgregarProducto = new JButton("Registrar nuevo producto");
 		btnAgregarProducto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				admin.agregarProducto(null); 
+		
 			}
 		});
 		add(btnAgregarProducto);

@@ -9,7 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import BLL.Categoria;
 import DLL.ControllerProducto;
+import DLL.ControllerCategoria;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -17,6 +19,7 @@ import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
@@ -29,6 +32,7 @@ public class vistaCargarProducto extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JComboBox<Categoria> comboBox;
 
 	/**
 	 * Launch the application.
@@ -106,6 +110,9 @@ public class vistaCargarProducto extends JFrame {
 					String nombre = textField.getSelectedText();
 					double precio = Double.parseDouble(textField_1.getText());
 					int stock = Integer.parseInt(textField_2.getText());
+					Categoria categoriaSeleccionada = (Categoria) comboBox.getSelectedItem();
+					int idCategoria = categoriaSeleccionada.getId_categoria();
+					
 				 
 				} catch (Exception e2) {
 					// TODO: handle exception
@@ -129,5 +136,15 @@ public class vistaCargarProducto extends JFrame {
 	
 	private void limpiarFormulario() {
 		
+	}
+	
+	private void traerCategoria() {
+		ControllerCategoria controllercategoria = new ControllerCategoria();
+		LinkedList<Categoria> categorias = new LinkedList();
+		
+		controllercategoria.mostrarCategorias();
+		for (Categoria c : categorias) {
+			comboBox.addItem(c);
+		}
 	}
 }

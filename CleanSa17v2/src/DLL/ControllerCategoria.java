@@ -11,7 +11,7 @@ import DLL.Conexion;
 public class ControllerCategoria {
 	private static Connection con = Conexion.getInstance().getConnection();
 	
-	public LinkedList<Categoria> mostrarCategorias(){
+	public  LinkedList<Categoria> mostrarCategorias(){
 		LinkedList<Categoria> categoria = new LinkedList<>();
 		
 		try {

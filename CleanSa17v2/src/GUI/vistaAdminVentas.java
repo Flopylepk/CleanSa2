@@ -48,6 +48,8 @@ public class vistaAdminVentas extends JFrame {
 		JButton btnNewButton = new JButton("Cargar Productos");
 		btnNewButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+			vistaCargarProducto ventana = new vistaCargarProducto();
+			ventana.setVisible(true);
 			
 			
 			}
