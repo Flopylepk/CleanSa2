@@ -75,7 +75,6 @@ public LoginAdmin() {
 		contentPane.add(lblNewLabel_3);
 		
 		JButton btnNewButton = new JButton("Iniciar sesión");
-
 		btnNewButton.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        ControllerAdmin<Administrador> controlador = new ControllerAdmin<>();
