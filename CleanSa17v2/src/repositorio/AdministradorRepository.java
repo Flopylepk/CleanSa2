@@ -1,7 +1,9 @@
 package repositorio;
 
 public interface AdministradorRepository {
-	Administrador logIn();
+	<T> T logIn();
+
+	<T> T logIn(String nombre, String contrasena);
 	
 	
 }
