@@ -73,6 +73,13 @@ public class menuprincipal extends JFrame {
 		JButton btnAdministrador = new JButton("Administrador");
 		btnAdministrador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				LoginAdmin loginadmin = new LoginAdmin();
+				loginadmin.setVisible(true);
+				dispose();
+
+				// Aquí puedes agregar la lógica para el administrador si es necesario
+				// Por ejemplo, podrías abrir un menú específico para administradores
+				// o realizar alguna acción relacionada con la administración.
 			}
 		});
 		

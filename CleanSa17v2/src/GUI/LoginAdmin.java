@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import DLL.*;
 import BLL.*;
@@ -24,7 +25,7 @@ public class LoginAdmin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField inpdni;
+	private JTextField inpNombre;
 	private JPasswordField inpcontrasena;
 	
 
@@ -45,16 +46,16 @@ public LoginAdmin() {
 		imagen.setFont(new Font("Segoe Script", Font.PLAIN, 11));
 		contentPane.add(imagen);
 		
-		JLabel lblNewLabel_1 = new JLabel("DNI");
-		lblNewLabel_1.setBounds(129, 180, 56, 33);
+		JLabel lblNewLabel_1 = new JLabel("NOMBRE");
+		lblNewLabel_1.setBounds(129, 180, 85, 33);
 		lblNewLabel_1.setForeground(SystemColor.desktop);
 		lblNewLabel_1.setFont(new Font("Verdana", Font.PLAIN, 13));
 		contentPane.add(lblNewLabel_1);
 		
-		inpdni = new JTextField();
-		inpdni.setBounds(129, 209, 206, 20);
-		contentPane.add(inpdni);
-		inpdni.setColumns(10);
+		inpNombre = new JTextField();
+		inpNombre.setBounds(129, 209, 206, 20);
+		contentPane.add(inpNombre);
+		inpNombre.setColumns(10);
 		
 		inpcontrasena = new JPasswordField();
 		inpcontrasena.setBounds(129, 265, 206, 20);
@@ -74,15 +75,28 @@ public LoginAdmin() {
 		lblNewLabel_3.setFont(new Font("Verdana", Font.PLAIN, 16));
 		contentPane.add(lblNewLabel_3);
 		
+		JLabel LblError = new JLabel("");
+		LblError.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		LblError.setForeground(new Color(255, 0, 0));
+		LblError.setBounds(52, 307, 372, 33);
+		contentPane.add(LblError);
+		
 		JButton btnNewButton = new JButton("Iniciar sesión");
 
 		btnNewButton.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
-		        ControllerAdmin<Administrador> controlador = new ControllerAdmin<>();
-		        Administrador admin = controlador.login(); // Asegúrate de que logIn esté correctamente implementado
+				String nombre = inpNombre.getText();
+				String contrasena = new String(inpcontrasena.getPassword());
+
+				if (nombre.isEmpty() || contrasena.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
+					return;
+				}
+		    	ControllerAdmin<Administrador> controlador = new ControllerAdmin<>();
+		        Administrador admin = controlador.logIn(inpNombre.getText(),inpcontrasena.getText() ); // Asegúrate de que logIn esté correctamente implementado
 		
 		        if (admin == null) {
-		            JOptionPane.showMessageDialog(null, "Error, usuario incorrecto");
+		        	LblError.setText("Error, usuario incorrecto");
 		        } else {
 		            JOptionPane.showMessageDialog(null, "Bienvenido " + admin.getNombre());
 		            

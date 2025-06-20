@@ -15,42 +15,51 @@ public class ControllerAdmin <T extends Administrador> implements AdministradorR
 	private static Connection con = Conexion.getInstance().getConnection();// Poner esto en todos los controladores
 
 	@Override
-    public T login() {
+	public T logIn(String nombre, String contrasena) {
+		System.out.println("Iniciando sesión para el administrador: " );
         T administrador = null;
         try {
             PreparedStatement stmt = con.prepareStatement(
-                "SELECT * FROM administrador WHERE  nombre = ? AND contrasena=?"
+                "SELECT * FROM administrador WHERE nombre = ? AND contrasena = ?"
             );
-            String nombre=validarCaracteres("Ingrese su nombre");
-            String contrasena=validarPassword("ingrese su contraseña");
-            
-            
-            stmt.setString(1, nombre);
-            stmt.setString(2, encriptar(contrasena));
-            
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-               int id = rs.getInt("id_administrador");
-                String apellido = rs.getString("apellido");
-                int tipo=rs.getInt("fk_categoria_administrador");
 
-                switch (tipo) {
-                    case 1:
-                    	administrador = (T) new AdminEnvios (nombre,apellido, id, tipo, desencriptar(contrasena) );
-                        break;
-                    case 2:
-                    	administrador = (T) new AdminVentas(nombre,apellido, id, tipo, desencriptar(contrasena));
-                        break;
-                    default:
-                        System.out.println("Tipo de administrador desconocido: " + tipo);
-                        break;
-                }
+            // Configurar los parámetros de la consulta
+            stmt.setString(1, nombre);
+            stmt.setString(2, contrasena);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (!rs.next()) {
+                System.out.println("No se encontró el administrador con el nombre: " + nombre);
+                return null;
+            }
+
+            int id = rs.getInt("id_administrador");
+            String apellido = rs.getString("apellido");
+            int tipo = rs.getInt("fk_categoria_administrasdor");
+
+            switch (tipo) {
+                case 1:
+                    administrador = (T) new AdminEnvios(nombre, apellido, id, tipo, contrasena);
+                    break;
+                case 2:
+                    administrador = (T) new AdminVentas(nombre, apellido, id, tipo, contrasena);
+                    break;
+                default:
+                    System.out.println("Tipo de administrador desconocido: " + tipo);
+                    break;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return administrador;
     }
+
+	@Override
+	public <T> T logIn() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 

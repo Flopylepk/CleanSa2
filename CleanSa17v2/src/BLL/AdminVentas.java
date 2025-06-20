@@ -56,6 +56,7 @@ public void  RegistroProducto(Producto producto) {
 		if (db.encontrarProductos(nombre)) {
 			JOptionPane.showMessageDialog(null, "Ya existe este producto, no se puede agregar.");
 		}
+		
 		Producto nuevo = new Producto (nombre, stock, precio, categoriaId, peligroso);
 		
 		
