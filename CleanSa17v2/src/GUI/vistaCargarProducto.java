@@ -94,6 +94,7 @@ public class vistaCargarProducto extends JFrame {
 	
 	private void cargarProductos() {
 		
+		
 	}
 	
 	private void limpiarFormulario() {
