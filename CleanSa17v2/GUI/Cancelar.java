@@ -74,7 +74,7 @@ public class Cancelar extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Cancelar.class.getResource("/img/cancelado.png")));
-		lblNewLabel.setBounds(377, 267, 123, 76);
+		lblNewLabel.setBounds(355, 267, 145, 76);
 		contentPane.add(lblNewLabel);
 	}
 }

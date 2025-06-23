@@ -15,7 +15,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-import enums.Opcion1;
 import javax.swing.JList;
 import javax.swing.JTextPane;
 import javax.swing.JScrollBar;

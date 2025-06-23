@@ -11,7 +11,6 @@ public interface CarritoRepository {
 	List<Carrito> mostrarCarritosPagados();
 	List<Carrito> mostrarCarritoCancelados();
 	List<Carrito> mostrarCarritoporCliente(int id);
-	List<Carrito> mostrarCarritoporClienteEnProseso(int id);
 	List<Carrito> mostrarCarritoporClientePagados(int id);
 	List<Carrito> mostrarCarritoporClienteCancelados(int id);
 }

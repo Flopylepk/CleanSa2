@@ -109,33 +109,7 @@ public class ControllerProducto  {
 		}
 
 	
-	////FUNCION DE ELEGIR PARA USUARIOS TIPO PERSONAL 
-	public int elegirNoPeligroso() {
-		LinkedList<Producto> productos = mostrarProductosNoPeligrosos();
-        String []lista = new String[productos.size()];
-        for (int i = 0; i < productos.size(); i++) {
-        	lista[i] = productos.get(i).getNombre() +"/" + productos.get(i).getId();
-		}
-        String opcion = (String)JOptionPane.showInputDialog(null, "", "", 0,  null, lista, lista[0]);
-        
-        
-        int idElegido = Integer.parseInt( opcion.split("/")[1]);
-        return idElegido;
-	}
-	
-////FUNCION DE ELEGIR PARA USUARIOS TIPO EMPRESA
-	public int elegir() {
-		LinkedList<Producto> productos = mostrarProductos();
-        String []lista = new String[productos.size()];
-        for (int i = 0; i < productos.size(); i++) {
-        	lista[i] = productos.get(i).getNombre() +"/" + productos.get(i).getId();
-		}
-        String opcion = (String)JOptionPane.showInputDialog(null, "", "", 0,  null, lista, lista[0]);
-        
-        
-        int idElegido = Integer.parseInt( opcion.split("/")[1]);
-        return idElegido;
-	}
+
 	
 
 

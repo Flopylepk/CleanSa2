@@ -81,6 +81,11 @@ public class CarritosDetalle extends JFrame implements Validador {
 			}
 		});
 		contentPane.add(Salir);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(CarritosDetalle.class.getResource("/img/carrito1.png")));
+		lblNewLabel.setBounds(297, 323, 104, 116);
+		contentPane.add(lblNewLabel);
 
 		// Cargar datos
 		cargarTabla(id);
