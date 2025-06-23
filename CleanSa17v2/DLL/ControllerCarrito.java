@@ -342,23 +342,23 @@ public class ControllerCarrito implements  CarritoRepository{
 		String validar="";
 		String validar2="";
 		try {
-			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito where fk_cliente=? and estado=?");
-			stmt.setLong(1, id);
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM carrito WHERE fk_cliente=? AND estado=?");
+			stmt.setInt(1, id);
 			stmt.setString(2, "en proceso");
 			
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
 				
-					PreparedStatement detalle = con.prepareStatement("SELECT * FROM carrito_detalle where fk_carrito=?");
-					detalle.setInt(1, rs.getInt(id));
-					ResultSet rs2 = detalle.executeQuery();
+				stmt = con.prepareStatement("SELECT * FROM carrito_detalle WHERE fk_carrito=?");
+				stmt.setInt(1, rs.getInt("id_carrito"));
+					ResultSet rs2 = stmt.executeQuery();
 					int vueltas=0;
 					while(rs2.next()) {
-		            	vueltas=vueltas+1;
+		            	vueltas+=1;
 		            	int fk_producto=rs2.getInt("fk_producto");
 		            	int cantidad=rs2.getInt("cantidad");
 		            	
-		            	PreparedStatement producto = con.prepareStatement("SELECT * FROM producto where id_producto=?");
+		            	PreparedStatement producto = con.prepareStatement("SELECT * FROM producto WHERE id_producto=?");
 		            	producto.setInt(1, fk_producto);
 		            	ResultSet rs3 = producto.executeQuery();
 		            	
@@ -383,7 +383,7 @@ public class ControllerCarrito implements  CarritoRepository{
 						validar2="el carrito que esta modificando no tiene productos";
 						return validar2;
 					}
-					PreparedStatement cambio = con.prepareStatement("UPDATE carrito SET estado=? WHERE fk_cliente=? and estado=?");
+					PreparedStatement cambio = con.prepareStatement("UPDATE carrito SET estado=? WHERE fk_cliente=? AND estado=?");
 					cambio.setString(1, "cancelado");
 					cambio.setInt(2, id);
 					cambio.setString(3, "en proceso");
@@ -403,6 +403,8 @@ public class ControllerCarrito implements  CarritoRepository{
 		}
 		return validar;
 	}
+	
+	
 	public List<Carrito_detalle> mostrarDetalleCarrito(int id) {
 		LinkedList<Carrito_detalle> carrito_detalle = new LinkedList<>();
 		try {
