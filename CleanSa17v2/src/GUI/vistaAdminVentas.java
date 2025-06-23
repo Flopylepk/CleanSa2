@@ -48,11 +48,13 @@ public class vistaAdminVentas extends JFrame {
 		JButton btnNewButton = new JButton("Cargar Productos");
 		btnNewButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+			vistaCargarProducto ventana = new vistaCargarProducto();
+			ventana.setVisible(true);
 			
 			
 			}
 		});
-		btnNewButton.setBounds(14, 190, 125, 23);
+		btnNewButton.setBounds(19, 183, 125, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Actualizar stock");
@@ -62,7 +64,7 @@ public class vistaAdminVentas extends JFrame {
 			
 			}
 		});
-		btnNewButton_1.setBounds(153, 190, 125, 23);
+		btnNewButton_1.setBounds(163, 183, 125, 23);
 		contentPane.add(btnNewButton_1);
 		
 		
@@ -75,7 +77,7 @@ public class vistaAdminVentas extends JFrame {
 		        
 		    }
 		});
-		btnNewButton_2.setBounds(292, 190, 125, 23);
+		btnNewButton_2.setBounds(145, 227, 125, 23);
 		contentPane.add(btnNewButton_2);
 		
 		
@@ -83,8 +85,27 @@ public class vistaAdminVentas extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(vistaAdminEnvios.class.getResource("/img/logo.png")));
-		lblNewLabel.setBounds(55, 26, 369, 127);
+		lblNewLabel.setBounds(35, 0, 369, 127);
 		contentPane.add(lblNewLabel);
+		
+		JButton ver_productos = new JButton("Ver productos ");
+		ver_productos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		ver_productos.setBounds(307, 183, 106, 23);
+		contentPane.add(ver_productos);
+		
+		JButton btnNewButton_3 = new JButton("Ver clientes");
+		btnNewButton_3.setBounds(19, 153, 125, 23);
+		contentPane.add(btnNewButton_3);
+		
+		JButton btnNewButton_4 = new JButton("Ver balance");
+		btnNewButton_4.setBounds(163, 153, 125, 23);
+		contentPane.add(btnNewButton_4);
+		
+		JButton btnNewButton_5 = new JButton("Historial");
+		btnNewButton_5.setBounds(307, 153, 106, 23);
+		contentPane.add(btnNewButton_5);
 	}
-
 }

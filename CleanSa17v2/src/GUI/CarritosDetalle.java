@@ -47,7 +47,7 @@ public class CarritosDetalle extends JFrame implements Validador {
 		contentPane.add(lblSeleccionado);
 
 		model = new DefaultTableModel(
-				new String[] { "Id_carrito_detalle", "fk_carrito", "fk_producto", "Total_producto", "Cantidad"}, 0);
+				new String[] { "Id_carrito_detalle", "fk_carrito", "fk_producto", "Total _producto", "Cantidad"}, 0);
 		table = new JTable(model);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(10, 40, 760, 233);

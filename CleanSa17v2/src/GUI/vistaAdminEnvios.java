@@ -3,6 +3,9 @@ package GUI;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import GUI.CarritosDetalle;
+ 
+
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -44,15 +47,29 @@ public class vistaAdminEnvios extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		
+		/////VER CARRITOS/////
 		JButton btnNewButton = new JButton("Ver carritos");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				verCarrito ventana = new verCarrito(null );
+				ventana.setVisible(true);
+			}
+		});
+		 
 		btnNewButton.setBounds(14, 190, 125, 23);
 		contentPane.add(btnNewButton);
 		
+		
+		
+		/////ENVIAR PEDIDOS/////
 		JButton btnNewButton_1 = new JButton("Enviar pedidos");
 		btnNewButton_1.setBounds(153, 190, 125, 23);
 		contentPane.add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("Salir");
+		
+		////SALIR/////
+		JButton btnNewButton_2  = new JButton("Salir");
 		btnNewButton_2.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        LoginAdmin ventana = new LoginAdmin();
