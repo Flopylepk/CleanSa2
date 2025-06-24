@@ -20,9 +20,6 @@ public class compra extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -36,9 +33,6 @@ public class compra extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public compra(Cliente cliente) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 598, 479);
@@ -69,7 +63,7 @@ public class compra extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ControllerCliente.carrito2(cliente.getId());
-				Tabla tabla = new Tabla();
+				Tabla tabla =new Tabla();
 				tabla.setVisible(true);
 				dispose();
 			}
