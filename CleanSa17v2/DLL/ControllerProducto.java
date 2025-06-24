@@ -111,8 +111,37 @@ public class ControllerProducto  {
 	
 
 	
+<<<<<<< HEAD:CleanSa17v2/DLL/ControllerProducto.java
 
 
+=======
+	public void cargarStock (int cantidad) {
+			
+	}
+	
+	//Validacion para la base de datoos para saber si el productor que el Administrador quiere añadir ya esta en el sistema o no.
+	public boolean encontrarProductos (String nombre) {
+		try {
+			PreparedStatement stmt = con.prepareStatement("SELECT COUNT(*) FROM producto WHERE LOWER(nombre) = LOWER(?)");
+			stmt.setString(1, nombre);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1) > 0;
+			}		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	        
+	        
+	        
+	        
+	        
+	        
+	}
+>>>>>>> parent of 5fc4146 (.):CleanSa17v2/src/DLL/ControllerProducto.java
 
 }
  
