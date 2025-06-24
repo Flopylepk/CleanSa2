@@ -16,13 +16,17 @@ public class Producto implements Validador{
 	private int peligroso; 
 	private int id;
 	private static LinkedList<Producto> producto = new LinkedList<Producto>() ;
+<<<<<<< HEAD:CleanSa17v2/src/BLL/Producto.java
+	public Producto(String nombre, int stock, double precio, int categoria, int peligroso2) {
+=======
 	public Producto(String nombre, int stock, double precio, int categoria, int peligroso) {
+>>>>>>> main:CleanSa17v2/BLL/Producto.java
 		super();
 		this.nombre = nombre;
 		this.stock = stock;
 		this.precio = precio;
 		this.categoria = categoria;
-		this.peligroso = peligroso;
+		this.peligroso = peligroso2;
 	}
 	
 	public Producto(String nombre, double precio, int stock, int categoria, int peligroso, int id) {

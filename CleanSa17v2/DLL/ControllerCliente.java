@@ -86,6 +86,8 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	            e.printStackTrace();
 	        }
 	    }
+	
+	public static LinkedList<Cliente> mostrarClientes1() {
 
 
 	@Override
@@ -138,7 +140,7 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 	    }
 
 
-	public static <T> T validar2(String dni) {
+public <T> T validar(String dni) {
 		 T cliente = null;
 		try {
             PreparedStatement stmt = con.prepareStatement(
@@ -267,4 +269,6 @@ public class ControllerCliente <T extends Cliente> implements ClienteRepository,
 		// TODO Auto-generated method stub
 		
 	}
+
+
 }

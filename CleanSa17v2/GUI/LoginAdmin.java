@@ -73,50 +73,18 @@ public class LoginAdmin extends JFrame {
 		lblNewLabel_3.setFont(new Font("Verdana", Font.PLAIN, 16));
 		contentPane.add(lblNewLabel_3);
 
-		JLabel LblError = new JLabel("");
-		LblError.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		LblError.setForeground(new Color(255, 0, 0));
-		LblError.setBounds(52, 307, 372, 33);
-		contentPane.add(LblError);
-
-		JButton btnNewButton = new JButton("Iniciar sesión");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String nombre = inpNombre.getText();
-				String contrasena = new String(inpcontrasena.getPassword());
-
-				if (nombre.isEmpty() || contrasena.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
-					return;
-				}
-				ControllerAdmin<Administrador> controlador = new ControllerAdmin<>();
-				Administrador admin = controlador.logIn(inpNombre.getText(), inpcontrasena.getText()); // Asegúrate de
-																										// que logIn
-																										// esté
-																										// correctamente
-																										// implementado
-
-				if (admin == null) {
-					LblError.setText("Error, usuario incorrecto");
-				} else {
-					JOptionPane.showMessageDialog(null, "Bienvenido " + admin.getNombre());
-
-					dispose(); // Cierra la ventana por que se abria la vista del administrador correspondiente
-					switch (admin.getTipo()) {
-					case 1:
-						new vistaAdminVentas().setVisible(true);
-						break;
-					case 2:
-						new vistaAdminEnvios().setVisible(true);
-						break;
-					default:
-						JOptionPane.showMessageDialog(null, "Tipo de administrador desconocido.");
-						break;
-
-					}
-				}
+	btnNewButton.addActionListener(new ActionListener() {
+	public void actionPerformed(ActionEvent e) {
+		ControllerAdmin<Administrador> controlador = new ControllerAdmin<>();
+		Administrador admin = controlador.login(); // Asegúrate de que logIn esté correctamente implementado
+		
+		if (admin == null) {
+			JOptionPane.showMessageDialog(null, "Error, usuario incorrecto");
+		} else {
+		    JOptionPane.showMessageDialog(null, "Bienvenido " + admin.getNombre()); // Asegúrate de que getNombre exista
 			}
-		});
+		}
+	});
 		btnNewButton.setBackground(SystemColor.control);
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnNewButton.setBounds(129, 313, 206, 26);
