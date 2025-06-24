@@ -104,9 +104,34 @@ public class ControllerProducto  {
 	
 
 	
-	public void cargarStock (int cantidad) {
-			
+	public void eliminarProducto(String nombre) {
+	    try {
+	        
+	        PreparedStatement selectStmt = con.prepareStatement("SELECT * FROM producto WHERE nombre = ?"); //Existe?
+	        selectStmt.setString(1, nombre);
+	        ResultSet rs = selectStmt.executeQuery();
+
+	        if (rs.next()) {
+	            
+	            PreparedStatement deleteStmt = con.prepareStatement("DELETE FROM producto WHERE nombre = ?"); //Si existe, eliminar
+	            deleteStmt.setString(1, nombre);
+	            int filasAfectadas = deleteStmt.executeUpdate();
+
+	            if (filasAfectadas > 0) {
+	                System.out.println("Producto eliminado correctamente.");
+	            } else {
+	                System.out.println("No se pudo eliminar el producto.");
+	            }
+	        } else {
+	            System.out.println("No se encontró un producto con ese nombre.");
+	        }
+
+	    } catch (Exception e) {
+	        System.out.println("Error al intentar eliminar el producto.");
+	        e.printStackTrace();
+	    }
 	}
+
 	
 	//Validacion para la base de datoos para saber si el productor que el Administrador quiere añadir ya esta en el sistema o no.
 	public boolean encontrarProductos (String nombre) {

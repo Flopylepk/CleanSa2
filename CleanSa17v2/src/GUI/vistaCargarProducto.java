@@ -1,12 +1,10 @@
 package GUI;
 
-import java.awt.EventQueue;
-import java.awt.TextField;
-
-import DLL.*;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import BLL.Categoria;
@@ -14,21 +12,8 @@ import BLL.Producto;
 import DLL.ControllerProducto;
 import DLL.ControllerCategoria;
 
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JCheckBox;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.util.LinkedList;
-import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
-import javax.swing.ImageIcon;
-import java.awt.Color;
-
 public class vistaCargarProducto extends JFrame {
 	private ControllerProducto controller;
-
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
@@ -37,77 +22,113 @@ public class vistaCargarProducto extends JFrame {
 	private JComboBox<Categoria> comboBox;
 	private JLabel Agregado;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					vistaCargarProducto frame = new vistaCargarProducto();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		EventQueue.invokeLater(() -> {
+			try {
+				vistaCargarProducto frame = new vistaCargarProducto();
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public vistaCargarProducto() {
-		controller = new ControllerProducto(); // Llama a la clase ControllerProducto para poder usar sus metodos
-		
+		controller = new ControllerProducto();
+		setTitle("Agregar Producto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 550, 450);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new EmptyBorder(15, 15, 15, 15));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
+		Font labelFont = new Font("Segoe UI", Font.PLAIN, 14);
+		Font inputFont = new Font("Segoe UI", Font.PLAIN, 13);
+
+		// LOGO arriba
+		JLabel lblLogo = new JLabel("");
+		lblLogo.setIcon(new ImageIcon(vistaCargarProducto.class.getResource("/img/logo.png")));
+		lblLogo.setBounds(120, 10, 300, 100);
+		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(lblLogo);
+
+		JLabel lblNombre = new JLabel("Nombre:");
+		lblNombre.setFont(labelFont);
+		lblNombre.setBounds(20, 120, 100, 20);
+		contentPane.add(lblNombre);
+
 		textField = new JTextField();
-		textField.setBounds(10, 27, 86, 20);
+		textField.setFont(inputFont);
+		textField.setBounds(130, 120, 150, 25);
 		contentPane.add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblNewLabel = new JLabel("Nombre");
-		lblNewLabel.setBounds(10, 11, 46, 14);
-		contentPane.add(lblNewLabel);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(10, 70, 86, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
-		
-		JLabel lblPrecio = new JLabel("Precio");
-		lblPrecio.setBounds(10, 54, 46, 14);
+
+		JLabel lblPrecio = new JLabel("Precio:");
+		lblPrecio.setFont(labelFont);
+		lblPrecio.setBounds(20, 160, 100, 20);
 		contentPane.add(lblPrecio);
-		
-		JLabel lblStock = new JLabel("Stock");
-		lblStock.setBounds(10, 101, 46, 14);
+
+		textField_1 = new JTextField();
+		textField_1.setFont(inputFont);
+		textField_1.setBounds(130, 160, 150, 25);
+		contentPane.add(textField_1);
+
+		JLabel lblStock = new JLabel("Stock:");
+		lblStock.setFont(labelFont);
+		lblStock.setBounds(20, 200, 100, 20);
 		contentPane.add(lblStock);
-		
+
 		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(10, 117, 86, 20);
+		textField_2.setFont(inputFont);
+		textField_2.setBounds(130, 200, 150, 25);
 		contentPane.add(textField_2);
-		
+
+		JLabel lblCategoria = new JLabel("Categoría:");
+		lblCategoria.setFont(labelFont);
+		lblCategoria.setBounds(20, 240, 100, 20);
+		contentPane.add(lblCategoria);
+
 		comboBox = new JComboBox<>();
-		comboBox.setBounds(10, 164, 105, 22);
+		comboBox.setFont(inputFont);
+		comboBox.setBounds(130, 240, 150, 25);
 		contentPane.add(comboBox);
 		traerCategoria();
-		
-		JLabel lblCategoria = new JLabel("Categoria");
-		lblCategoria.setBounds(10, 148, 78, 14);
-		contentPane.add(lblCategoria);
-		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("Producto Peligroso");
-		chckbxNewCheckBox.setBounds(6, 195, 129, 23);
-		contentPane.add(chckbxNewCheckBox);
-		
+
+		JCheckBox chckbxPeligroso = new JCheckBox("Producto Peligroso");
+		chckbxPeligroso.setBackground(Color.WHITE);
+		chckbxPeligroso.setFont(labelFont);
+		chckbxPeligroso.setBounds(20, 280, 200, 25);
+		contentPane.add(chckbxPeligroso);
+
 		JButton cargarProducto = new JButton("Agregar Producto");
+		cargarProducto.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		cargarProducto.setBounds(346, 370, 180, 35);
+		contentPane.add(cargarProducto);
+
+		Agregado = new JLabel("");
+		Agregado.setOpaque(true);
+		Agregado.setHorizontalAlignment(SwingConstants.CENTER);
+		Agregado.setFont(new Font("Segoe UI", Font.BOLD, 12));
+		Agregado.setBounds(229, 335, 280, 25);
+		Agregado.setVisible(false);
+		contentPane.add(Agregado);
+
+		// Botón Volver
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+		btnVolver.setBounds(20, 373, 100, 30);
+		contentPane.add(btnVolver);
+
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vistaProductosAdmin admin = new vistaProductosAdmin();
+				admin.setVisible(true);
+				dispose(); // cerrar esta ventana
+			}
+		});
+
+		// Acción al presionar "Agregar Producto"
 		cargarProducto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -116,65 +137,39 @@ public class vistaCargarProducto extends JFrame {
 					int stock = Integer.parseInt(textField_2.getText());
 					Categoria categoriaSeleccionada = (Categoria) comboBox.getSelectedItem();
 					int idCategoria = categoriaSeleccionada.getId_categoria();
-					boolean peligroso = chckbxNewCheckBox.isSelected();
-					
-					int peligrosoInt = peligroso ? 1 : 2; // Lo convierte a boolean
-					
-					if (controller.encontrarProductos(nombre)) { //Implementa el metodo de encontrar productos para validar si existe
+					int peligrosoInt = chckbxPeligroso.isSelected() ? 1 : 2;
+
+					if (controller.encontrarProductos(nombre)) {
 						Agregado.setText("Ya existe un producto con ese nombre.");
-					    Agregado.setForeground(Color.RED);
-					    Agregado.setVisible(true);
-					    return; 
-						
+						Agregado.setForeground(Color.RED);
+						Agregado.setVisible(true);
+						return;
 					}
-					
-					Producto nuevoProducto = new Producto (nombre, precio, stock, idCategoria, peligrosoInt, 0);
+
+					Producto nuevoProducto = new Producto(nombre, precio, stock, idCategoria, peligrosoInt, 0);
 					controller.agregarProducto(nuevoProducto);
-					
+
 					textField.setText("");
 					textField_1.setText("");
 					textField_2.setText("");
 					comboBox.setSelectedIndex(0);
-					chckbxNewCheckBox.setSelected(false);
-					
+					chckbxPeligroso.setSelected(false);
+
 					Agregado.setText("Producto agregado exitosamente.");
-					Agregado.setForeground(Color.GREEN);
+					Agregado.setForeground(new Color(0, 128, 0));
 					Agregado.setVisible(true);
-				 
 				} catch (Exception e2) {
 					Agregado.setText("Error al cargar producto.");
 					Agregado.setForeground(Color.RED);
 					Agregado.setVisible(true);
 				}
-				
 			}
 		});
-		cargarProducto.setBounds(10, 227, 129, 23);
-		contentPane.add(cargarProducto);
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(vistaCargarProducto.class.getResource("/img/logo.png")));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblNewLabel_1.setBounds(117, 0, 309, 137);
-		contentPane.add(lblNewLabel_1);
-
-		
-		//Label de mensaje de confirmacion 
-		Agregado = new JLabel("");
-		Agregado.setOpaque(true);                
-		Agregado.setBackground(Color.GRAY);
-		Agregado.setBounds(159, 231, 250, 14); 
-		Agregado.setVisible(false); 
-		contentPane.add(Agregado);
-		
-		
-		
-		
 	}
-	private void traerCategoria() { //Trae las categorias desde la base de datos y las junta en una lista para el desplegable
+
+	private void traerCategoria() {
 		ControllerCategoria controllercategoria = new ControllerCategoria();
-		LinkedList<Categoria> categorias = controllercategoria.mostrarCategorias(); //Guarda las categorias
-		
+		LinkedList<Categoria> categorias = controllercategoria.mostrarCategorias();
 		for (Categoria c : categorias) {
 			comboBox.addItem(c);
 		}
