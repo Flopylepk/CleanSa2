@@ -69,7 +69,7 @@ public class compra extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ControllerCliente.carrito2(cliente.getId());
-				Tabla tabla =new Tabla();
+				Tabla tabla = new Tabla();
 				tabla.setVisible(true);
 				dispose();
 			}

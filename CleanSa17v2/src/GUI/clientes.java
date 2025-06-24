@@ -27,7 +27,8 @@ public class clientes extends JFrame {
     private DefaultTableModel model;
     private Cliente clienteSeleccionado;
     private JTextField inpFiltro;
-
+   
+    
 	/**
 	 * Launch the application.
 	 */
@@ -138,7 +139,8 @@ public class clientes extends JFrame {
 
     private void cargarTabla() {
         model.setRowCount(0);
-        LinkedList<Cliente> clientes =ControllerCliente.mostrarClientes();
+        ControllerCliente controller = new ControllerCliente(); // NUEVO
+        LinkedList<Cliente> clientes = controller.mostrarClientes(); // CAMBIO
         for (Cliente u : clientes) {
             model.addRow(
 
@@ -157,7 +159,8 @@ public class clientes extends JFrame {
     
     private void cargarTablaFiltro(String filtro) {
         model.setRowCount(0);
-        LinkedList<Cliente> clientes =ControllerCliente.mostrarClientes();
+        ControllerCliente controller = new ControllerCliente(); 
+        LinkedList<Cliente> clientes = controller.mostrarClientes(); 
         for (Cliente u : clientes) {
             if (u.getNombre().startsWith(filtro)) {
 		
