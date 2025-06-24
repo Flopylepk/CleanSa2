@@ -56,7 +56,7 @@ public class Cancelar extends JFrame {
 		
 		JLabel SI2 = new JLabel(segundo);
 		SI2.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-		SI2.setBounds(10, 233, 490, 26);
+		SI2.setBounds(10, 222, 490, 26);
 		contentPane.add(SI2);
 		
 		JButton Volver = new JButton("Volver");
@@ -69,7 +69,12 @@ public class Cancelar extends JFrame {
 		});
 		Volver.setBackground(SystemColor.menu);
 		Volver.setFont(new Font("Verdana", Font.PLAIN, 12));
-		Volver.setBounds(147, 288, 220, 26);
+		Volver.setBounds(86, 289, 220, 26);
 		contentPane.add(Volver);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(Cancelar.class.getResource("/img/cancelado.png")));
+		lblNewLabel.setBounds(355, 267, 145, 76);
+		contentPane.add(lblNewLabel);
 	}
 }

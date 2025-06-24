@@ -69,7 +69,17 @@ public class Pagar extends JFrame {
 		});
 		Volver.setBackground(SystemColor.menu);
 		Volver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		Volver.setBounds(191, 270, 124, 59);
+		Volver.setBounds(151, 270, 124, 59);
 		contentPane.add(Volver);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(Pagar.class.getResource("/img/pago1.png")));
+		lblNewLabel.setBounds(311, 273, 87, 56);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(Pagar.class.getResource("/img/pago2.png")));
+		lblNewLabel_1.setBounds(408, 279, 85, 50);
+		contentPane.add(lblNewLabel_1);
 	}
 }

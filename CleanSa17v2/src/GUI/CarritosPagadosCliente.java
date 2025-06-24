@@ -111,6 +111,22 @@ public class CarritosPagadosCliente extends JFrame implements Validador {
 			}
 		});
 
+		Detalle.setBackground(SystemColor.menu);
+		Detalle.setBounds(25, 386, 136, 64);
+		contentPane.add(Detalle);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(CarritosPagadosCliente.class.getResource("/img/pago1.png")));
+		lblNewLabel.setBounds(266, 386, 85, 64);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(CarritosPagadosCliente.class.getResource("/img/pago2.png")));
+		lblNewLabel_1.setBounds(382, 386, 99, 66);
+		contentPane.add(lblNewLabel_1);
+
+
+
 		// Cargar datos
 		cargarTabla(cliente);
 	}

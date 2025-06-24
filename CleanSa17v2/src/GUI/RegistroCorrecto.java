@@ -61,7 +61,12 @@ public class RegistroCorrecto extends JFrame {
 		});
 		Volver.setBackground(SystemColor.menu);
 		Volver.setFont(new Font("Verdana", Font.PLAIN, 12));
-		Volver.setBounds(150, 273, 210, 26);
+		Volver.setBounds(86, 273, 210, 26);
 		contentPane.add(Volver);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(RegistroCorrecto.class.getResource("/img/foto_user.png")));
+		lblNewLabel.setBounds(373, 251, 67, 70);
+		contentPane.add(lblNewLabel);
 	}
 }

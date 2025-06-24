@@ -12,12 +12,14 @@ import java.awt.Font;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+
 import java.awt.event.ActionEvent;
 
 public class compra extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -33,6 +35,7 @@ public class compra extends JFrame {
 	}
 
 	public compra(Cliente cliente) {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 570, 420);
 		contentPane = new JPanel();

@@ -102,34 +102,36 @@ public class ControllerProducto  {
 		}
 		}
 	
-	////FUNCION DE ELEGIR PARA USUARIOS TIPO PERSONAL 
-	public int elegirNoPeligroso() {
-		LinkedList<Producto> productos = mostrarProductosNoPeligrosos();
-        String []lista = new String[productos.size()];
-        for (int i = 0; i < productos.size(); i++) {
-        	lista[i] = productos.get(i).getNombre() +"/" + productos.get(i).getId();
-		}
-        String opcion = (String)JOptionPane.showInputDialog(null, "", "", 0,  null, lista, lista[0]);       
-        int idElegido = Integer.parseInt( opcion.split("/")[1]);
-        return idElegido;
-	}	
-////FUNCION DE ELEGIR PARA USUARIOS TIPO EMPRESA
-	public int elegir() {
-		LinkedList<Producto> productos = mostrarProductos();
-        String []lista = new String[productos.size()];
-        for (int i = 0; i < productos.size(); i++) {
-        	lista[i] = productos.get(i).getNombre() +"/" + productos.get(i).getId();
-		}
-        String opcion = (String)JOptionPane.showInputDialog(null, "", "", 0,  null, lista, lista[0]);
-        
-        
-        int idElegido = Integer.parseInt( opcion.split("/")[1]);
-        return idElegido;
-	}
+
 	
-	public void cargarStock (int cantidad) {
-			
+	public void eliminarProducto(String nombre) {
+	    try {
+	        
+	        PreparedStatement selectStmt = con.prepareStatement("SELECT * FROM producto WHERE nombre = ?"); //Existe?
+	        selectStmt.setString(1, nombre);
+	        ResultSet rs = selectStmt.executeQuery();
+
+	        if (rs.next()) {
+	            
+	            PreparedStatement deleteStmt = con.prepareStatement("DELETE FROM producto WHERE nombre = ?"); //Si existe, eliminar
+	            deleteStmt.setString(1, nombre);
+	            int filasAfectadas = deleteStmt.executeUpdate();
+
+	            if (filasAfectadas > 0) {
+	                System.out.println("Producto eliminado correctamente.");
+	            } else {
+	                System.out.println("No se pudo eliminar el producto.");
+	            }
+	        } else {
+	            System.out.println("No se encontró un producto con ese nombre.");
+	        }
+
+	    } catch (Exception e) {
+	        System.out.println("Error al intentar eliminar el producto.");
+	        e.printStackTrace();
+	    }
 	}
+
 	
 	//Validacion para la base de datoos para saber si el productor que el Administrador quiere añadir ya esta en el sistema o no.
 	public boolean encontrarProductos (String nombre) {

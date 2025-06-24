@@ -16,14 +16,14 @@ public class ControllerEnvio {
 		try {
 			LocalDate fechaEntrega = LocalDate.now().plusDays(3);
 			Date fechaEntregaBD = Date.valueOf(fechaEntrega);
-			PreparedStatement stm = con.prepareStatement("INSERT INTO envio (fk_pedido, fecha_entrega, direccion) VALUES (?, ?, ?)");
+			PreparedStatement stm = con.prepareStatement("INSERT INTO envio (fk_carrito, fecha_entrega, direccion) VALUES (?, ?, ?)");
 			
 			stm.setInt(1, carrito.getId_carrito());
 			stm.setDate(2, fechaEntregaBD);
 			stm.setString(3, direccion);
 			
 			PreparedStatement stm2 = con.prepareStatement("UPDATE carrito SET estado=? WHERE id_carrito=?");
-			stm2.setString(1, "Enviado");
+			stm2.setString(1, "enviado");
 			stm2.setInt(2, carrito.getId_carrito());
 			
 			
