@@ -34,13 +34,6 @@ public class Producto implements Validador{
 		this.peligroso = peligroso;
 		this.id = id;
 	}
-	public Producto(String nombre, int stock, double precio, int categoria, boolean peligroso) { //Contrusctor para que nos deje usar peligroso como boolean 
-		this.nombre = nombre;
-		this.stock = stock;
-		this.precio = precio;
-		this.categoria = categoria;
-		this.peligroso = peligroso ? 1 : 0;
-	}
 	
 	public int getId() {
 		return id;
