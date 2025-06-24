@@ -34,5 +34,45 @@ public class ControllerCategoria {
 		return categoria;
 		
 	}
+	
+	
+	public void crearCategoria(Categoria categoria) { //Consulta para agregar categoria
+		try {
+			PreparedStatement stmt = con.prepareStatement("INSERT INTO categoria(nombre) VALUES (?)");
+			
+			stmt.setString(1, categoria.getNombre()); 
+			stmt.executeUpdate(); 
+			
+			System.out.println("Categoria agregada correctamente.");
+			
+			
+		} catch (Exception e) {
+			System.out.println("Error, no se agrego.");
+		}
+		
+		
+		
+		
+	}
+	
+	public boolean encontrarCategorias(String nombre) {
+		try {
+			PreparedStatement stmt = con.prepareStatement("SELECT COUNT(*) from categoria where LOWER(nombre) = LOWER(?)");
+			stmt.setString(1, nombre);
+			
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1) > 0;
+				
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return false;
+		
+	}
 }
 

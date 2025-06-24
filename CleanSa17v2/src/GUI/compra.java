@@ -6,10 +6,9 @@ import DLL.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 import java.awt.Font;
-import java.awt.SystemColor;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -20,9 +19,6 @@ public class compra extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -36,45 +32,47 @@ public class compra extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public compra(Cliente cliente) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 598, 479);
+		setBounds(100, 100, 570, 420);
 		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.controlShadow);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Compra");
-		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 40));
-		lblNewLabel.setBounds(182, 69, 212, 53);
-		contentPane.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setBounds(126, 110, 46, 14);
-		contentPane.add(lblNewLabel_1);
-		
-		JTextPane txtpnEnEsteApartado = new JTextPane();
-		txtpnEnEsteApartado.setBackground(SystemColor.controlShadow);
-		txtpnEnEsteApartado.setFont(new Font("Times New Roman", Font.PLAIN, 19));
-		txtpnEnEsteApartado.setText("En este apartado podras realizar la compra y agregar lo productos al carrito");
-		txtpnEnEsteApartado.setBounds(109, 171, 341, 62);
-		contentPane.add(txtpnEnEsteApartado);
-		
-		JButton btnNewButton = new JButton("Continuar");
-		btnNewButton.addActionListener(new ActionListener() {
+
+		// Logo
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(compra.class.getResource("/img/logo.png")));
+		logo.setBounds(100, 10, 369, 80);
+		contentPane.add(logo);
+
+		// Título
+		JLabel lblTitulo = new JLabel("Compra");
+		lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 36));
+		lblTitulo.setBounds(210, 100, 200, 40);
+		contentPane.add(lblTitulo);
+
+		// Texto descriptivo
+		JTextPane descripcion = new JTextPane();
+		descripcion.setEditable(false);
+		descripcion.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		descripcion.setText("En este apartado podrás realizar la compra y agregar los productos al carrito.");
+		descripcion.setBounds(80, 160, 410, 60);
+		descripcion.setOpaque(false);
+		contentPane.add(descripcion);
+
+		// Botón Continuar
+		JButton btnContinuar = new JButton("Continuar");
+		btnContinuar.setFont(new Font("Verdana", Font.PLAIN, 13));
+		btnContinuar.setBounds(220, 250, 130, 40);
+		btnContinuar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ControllerCliente.carrito2(cliente.getId());
-				Tabla tabla =new Tabla();
+				Tabla tabla = new Tabla();
 				tabla.setVisible(true);
 				dispose();
 			}
 		});
-		btnNewButton.setBounds(206, 302, 92, 43);
-		contentPane.add(btnNewButton);
+		contentPane.add(btnContinuar);
 	}
 }

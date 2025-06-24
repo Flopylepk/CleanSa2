@@ -1,11 +1,8 @@
 package GUI;
 
 import repositorio.*;
-
-import javax.print.attribute.standard.JobPrioritySupported;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,10 +14,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.LinkedList;
 import java.util.List;
 
 public class CarritosPagadosCliente extends JFrame implements Validador {
@@ -31,50 +24,65 @@ public class CarritosPagadosCliente extends JFrame implements Validador {
 	private DefaultTableModel model;
 	private Carrito carritoSeleccionado;
 
-
 	public CarritosPagadosCliente(Cliente cliente) {
-		setTitle("carritopagados");
-		
+		setTitle("Carritos Pagados");
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 500);
+		setBounds(100, 100, 800, 540); // altura ajustada para logo + tabla + botones
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(174, 174, 174));
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
-		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setContentPane(contentPane);
 
-		JLabel lblSeleccionado = new JLabel("Seleccionado:");
-		lblSeleccionado.setBounds(10, 10, 760, 24);
-		contentPane.add(lblSeleccionado);
+		// Logo arriba centrado
+		JLabel logoLabel = new JLabel("");
+		logoLabel.setIcon(new ImageIcon(CarritosPagadosCliente.class.getResource("/img/logo.png")));
+		logoLabel.setBounds(200, 10, 400, 80);
+		contentPane.add(logoLabel);
 
-		model = new DefaultTableModel(
-				new String[] { "Id_carrito", "Fecha", "Estado", "Total", "Codigo_envio", "fk_cliente"}, 0);
+		// Tabla y scroll
+		model = new DefaultTableModel(new String[] {
+			"Id_carrito", "Fecha", "Estado", "Total", "Codigo_envio", "fk_cliente"
+		}, 0);
+
 		table = new JTable(model);
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(10, 40, 760, 233);
+		scrollPane.setBounds(10, 100, 760, 230);
 		contentPane.add(scrollPane);
 
-		// Acción al seleccionar fila
-		table.getSelectionModel().addListSelectionListener(e -> {
-			if (!e.getValueIsAdjusting()) {
-				int row = table.getSelectedRow();
-				if (row != -1) {
+		// Label selección
+		JLabel lblSeleccionado = new JLabel("Seleccionado:");
+		lblSeleccionado.setBounds(10, 340, 760, 20);
+		contentPane.add(lblSeleccionado);
 
-					carritoSeleccionado = new Carrito((int) model.getValueAt(row, 0),
-							(Date) model.getValueAt(row, 1), (String) model.getValueAt(row, 2),
-							(double) model.getValueAt(row, 3), (int) model.getValueAt(row, 4),
-							(int) model.getValueAt(row, 5)
+		// Label error
+		JLabel LblError = new JLabel("");
+		LblError.setFont(new Font("Verdana", Font.PLAIN, 13));
+		LblError.setForeground(Color.RED);
+		LblError.setBounds(10, 370, 400, 20);
+		contentPane.add(LblError);
 
-					);
-
-					lblSeleccionado.setText(carritoSeleccionado.toString());
-
+		// Botón Ver Detalle
+		JButton Detalle = new JButton("Ver detalle");
+		Detalle.setFont(new Font("Verdana", Font.PLAIN, 13));
+		Detalle.setBounds(30, 410, 140, 35);
+		Detalle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (carritoSeleccionado == null) {
+					LblError.setText("Error. No se eligió ningún producto.");
+				} else {
+					CarritosDetalle carritosdetalle = new CarritosDetalle(cliente, carritoSeleccionado.getId_carrito());
+					carritosdetalle.setVisible(true);
+					dispose();
 				}
 			}
 		});
+		contentPane.add(Detalle);
 
+		// Botón salir
 		JButton Salir = new JButton("Salir");
-		Salir.setBounds(651, 400, 123, 50);
+		Salir.setFont(new Font("Verdana", Font.PLAIN, 13));
+		Salir.setBounds(630, 410, 140, 35);
 		Salir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				OpcionesCarritosCliente opcionescarritoscliente = new OpcionesCarritosCliente(cliente);
@@ -83,47 +91,44 @@ public class CarritosPagadosCliente extends JFrame implements Validador {
 			}
 		});
 		contentPane.add(Salir);
-		JLabel LblError = new JLabel("");
-		LblError.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		LblError.setForeground(new Color(255, 0, 0));
-		LblError.setBounds(10, 312, 372, 33);
-		contentPane.add(LblError);
-		
-		JButton Detalle = new JButton("Ver Detalle");
-		Detalle.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (carritoSeleccionado==null) {
-					LblError.setText("Error. No se eligió ningun producto");
-				} else {
-					CarritosDetalle carritosdetalle = new CarritosDetalle(cliente,carritoSeleccionado.getId_carrito());
-					carritosdetalle.setVisible(true);;
-					dispose();
+
+		// Listener para selección de tabla
+		table.getSelectionModel().addListSelectionListener(e -> {
+			if (!e.getValueIsAdjusting()) {
+				int row = table.getSelectedRow();
+				if (row != -1) {
+					carritoSeleccionado = new Carrito(
+						(int) model.getValueAt(row, 0),
+						(Date) model.getValueAt(row, 1),
+						(String) model.getValueAt(row, 2),
+						(double) model.getValueAt(row, 3),
+						(int) model.getValueAt(row, 4),
+						(int) model.getValueAt(row, 5)
+					);
+					lblSeleccionado.setText(carritoSeleccionado.toString());
+					LblError.setText("");
 				}
 			}
 		});
-		Detalle.setBackground(SystemColor.menu);
-		Detalle.setBounds(25, 386, 136, 64);
-		contentPane.add(Detalle);
 
 		// Cargar datos
 		cargarTabla(cliente);
-
 	}
 
 	private void cargarTabla(Cliente cliente) {
-		System.out.println(cliente);
 		model.setRowCount(0);
-		ControllerCarrito controller=new ControllerCarrito();
+		ControllerCarrito controller = new ControllerCarrito();
 		List<Carrito> carritos = controller.mostrarCarritoporClientePagados(cliente.getId());
-			
-		
-		for (Carrito u : carritos) {
-			System.out.println(u);
-			model.addRow(
 
-					new Object[] { u.getId_carrito(), u.getFecha(),u.getEstado() ,u.getTotal_compra(), u.getCodigo_envio(),
-							u.getFk_cliente()
-					});
+		for (Carrito u : carritos) {
+			model.addRow(new Object[] {
+				u.getId_carrito(),
+				u.getFecha(),
+				u.getEstado(),
+				u.getTotal_compra(),
+				u.getCodigo_envio(),
+				u.getFk_cliente()
+			});
 		}
 	}
 }
