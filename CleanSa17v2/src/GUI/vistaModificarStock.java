@@ -63,8 +63,7 @@ public class vistaModificarStock extends JFrame {
 		});
 		contentPane.add(botonVolver);
 
-		// Opcional: cargar productos reales si lo implementás luego
-		// cargarProductos();
+	
 	}
 
 	// Este método es solo placeholder
