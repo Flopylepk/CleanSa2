@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -8,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import BLL.Carrito;
 import BLL.Cliente;
 
+import java.awt.SystemColor;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,69 +21,64 @@ public class CarritosEnProcesoCliente extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
+	/**
+	 * Launch the application.
+	 */
+	
+
+	/**
+	 * Create the frame.
+	 */
 	public CarritosEnProcesoCliente(Cliente cliente, Carrito carrito) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 650, 450); // Tamaño ajustado
+		setBounds(100, 100, 654, 441);
 		contentPane = new JPanel();
+		contentPane.setBackground(SystemColor.controlShadow);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		// Logo centrado arriba
-		JLabel lblNewLabel = new JLabel("");
+		
+		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(CarritosEnProcesoCliente.class.getResource("/img/logo.png")));
-		lblNewLabel.setBounds(165, 10, 319, 90);
+		lblNewLabel.setBounds(163, 23, 319, 102);
 		contentPane.add(lblNewLabel);
-
-		// Info del carrito
-		JLabel id_carrito = new JLabel("ID carrito: " + carrito.getId_carrito());
-		id_carrito.setBounds(80, 130, 500, 20);
+		
+		JLabel id_carrito = new JLabel("id_carrito: "+carrito.getId_carrito());
+		id_carrito.setBounds(89, 161, 425, 14);
 		contentPane.add(id_carrito);
-
-		JLabel Fecha = new JLabel("Fecha: " + carrito.getFecha());
-		Fecha.setBounds(80, 160, 500, 20);
+		
+		JLabel Fecha = new JLabel("Fecha: "+carrito.getFecha());
+		Fecha.setBounds(89, 186, 397, 14);
 		contentPane.add(Fecha);
-
-		JLabel Estado = new JLabel("Estado: " + carrito.getEstado());
-		Estado.setBounds(80, 190, 500, 20);
+		
+		JLabel Estado = new JLabel("Estado: "+carrito.getEstado());
+		Estado.setBounds(89, 211, 393, 14);
 		contentPane.add(Estado);
-
-		JLabel total = new JLabel("Total: $" + carrito.getTotal_compra());
-		total.setBounds(80, 220, 500, 20);
+		
+		JLabel total = new JLabel("Total: "+carrito.getTotal_compra());
+		total.setBounds(89, 236, 393, 14);
 		contentPane.add(total);
-
-		JLabel codigo_envio = new JLabel("Código de envío: " + carrito.getCodigo_envio());
-		codigo_envio.setBounds(80, 250, 500, 20);
+		
+		JLabel codigo_envio = new JLabel("Codigo de envio: "+carrito.getCodigo_envio());
+		codigo_envio.setBounds(89, 261, 393, 14);
 		contentPane.add(codigo_envio);
-
-		JLabel fk_cliente = new JLabel("Cliente ID: " + carrito.getFk_cliente());
-		fk_cliente.setBounds(80, 280, 500, 20);
+		
+		JLabel fk_cliente = new JLabel("fk_cliente: "+carrito.getFk_cliente());
+		fk_cliente.setBounds(89, 286, 397, 14);
 		contentPane.add(fk_cliente);
-
-		// Botón Ver detalle
-		JButton Detalle = new JButton("Ver detalle");
-		Detalle.setBounds(70, 350, 130, 35);
-		Detalle.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CarritosDetalle carritosdetalle = new CarritosDetalle(cliente, carrito.getId_carrito());
-				carritosdetalle.setVisible(true);
-				dispose();
-			}
-		});
-		contentPane.add(Detalle);
-
-		// Botón Salir
+		
 		JButton Salir = new JButton("Salir");
-		Salir.setBounds(450, 350, 130, 35);
 		Salir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				generalCliente generalcliente = new generalCliente(cliente);
-				generalcliente.setVisible(true);
+				generalcliente.setVisible(true);;
 				dispose();
 			}
 		});
+		Salir.setBackground(SystemColor.menu);
+		Salir.setBounds(467, 349, 121, 42);
 		contentPane.add(Salir);
-
 		
 		JButton Detalle = new JButton("Ver detalle");
 		Detalle.addActionListener(new ActionListener() {
@@ -94,12 +91,6 @@ public class CarritosEnProcesoCliente extends JFrame {
 		Detalle.setBackground(SystemColor.menu);
 		Detalle.setBounds(70, 349, 121, 42);
 		contentPane.add(Detalle);
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(CarritosEnProcesoCliente.class.getResource("/img/carrito1.png")));
-		lblNewLabel_1.setBounds(416, 186, 141, 89);
-		contentPane.add(lblNewLabel_1);
-
-
 	}
+
 }
