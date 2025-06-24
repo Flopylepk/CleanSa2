@@ -111,10 +111,7 @@ public class ControllerProducto  {
 	
 
 	
-<<<<<<< HEAD:CleanSa17v2/DLL/ControllerProducto.java
 
-
-=======
 	public void cargarStock (int cantidad) {
 			
 	}
@@ -141,7 +138,7 @@ public class ControllerProducto  {
 	        
 	        
 	}
->>>>>>> parent of 5fc4146 (.):CleanSa17v2/src/DLL/ControllerProducto.java
 
-}
+
+
  
