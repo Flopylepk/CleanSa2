@@ -10,5 +10,6 @@ public interface CarritoRepository {
 	
 	String pagar(int id);
 	String cancelar(int id);
+
 	
 }

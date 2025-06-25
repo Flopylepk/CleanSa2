@@ -12,7 +12,7 @@ import BLL.Pedido;
 import BLL.Producto;
 import repositorio.*;
 
-public class ControllerDetalle implements  DetalleRepository{
+public class ControllerDetalle{
 	private static Connection con = Conexion.getInstance().getConnection();
 
 	public ControllerDetalle() {
