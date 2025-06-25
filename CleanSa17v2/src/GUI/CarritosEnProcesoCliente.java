@@ -91,6 +91,11 @@ public class CarritosEnProcesoCliente extends JFrame {
 		Detalle.setBackground(SystemColor.menu);
 		Detalle.setBounds(70, 349, 121, 42);
 		contentPane.add(Detalle);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(CarritosEnProcesoCliente.class.getResource("/img/carrito1.png")));
+		lblNewLabel_1.setBounds(416, 186, 141, 89);
+		contentPane.add(lblNewLabel_1);
 	}
 
 }

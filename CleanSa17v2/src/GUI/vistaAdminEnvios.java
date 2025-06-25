@@ -1,11 +1,6 @@
 package GUI;
 
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import GUI.CarritosDetalle;
- 
-
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -47,19 +42,11 @@ public class vistaAdminEnvios extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		
-		/////VER CARRITOS/////
 		JButton btnNewButton = new JButton("Ver carritos");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				verCarrito ventana = new verCarrito(null );
-				ventana.setVisible(true);
-			}
-		});
-		 
 		btnNewButton.setBounds(14, 190, 125, 23);
 		contentPane.add(btnNewButton);
 		
+
 		/////VER DETALLE CARRITO///// POSIBLE BOTON EXTRA PARA VER DETALLE DE CARRITO
 		/// JButton btnNewButton_1 = new JButton("Ver detalle carrito");
 		/// btnNewButton_1.addActionListener(new ActionListener() {
@@ -71,22 +58,14 @@ public class vistaAdminEnvios extends JFrame {
 		
 		
 		
+
 		
-		
-		////SALIR/////
-		JButton btnNewButton_2  = new JButton("Salir");
-		btnNewButton_2.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        LoginAdmin ventana = new LoginAdmin();
-		        ventana.setVisible(true);
-		        
-		    }
-		});
+		JButton btnNewButton_2 = new JButton("Salir");
 		btnNewButton_2.setBounds(292, 190, 125, 23);
 		contentPane.add(btnNewButton_2);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(vistaAdminEnvios.class.getResource("/img/logo.png")));
+		lblNewLabel.setIcon(new ImageIcon(vistaAdminVentas.class.getResource("/img/logo.png")));
 		lblNewLabel.setBounds(55, 26, 369, 127);
 		contentPane.add(lblNewLabel);
 	}

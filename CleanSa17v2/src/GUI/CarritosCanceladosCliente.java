@@ -86,7 +86,7 @@ public class CarritosCanceladosCliente extends JFrame implements Validador {
 		JLabel LblError = new JLabel("");
 		LblError.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		LblError.setForeground(new Color(255, 0, 0));
-		LblError.setBounds(54, 330, 372, 33);
+		LblError.setBounds(52, 327, 372, 33);
 		contentPane.add(LblError);
 		
 		JButton Detalle = new JButton("Ver Detalle");
@@ -105,6 +105,11 @@ public class CarritosCanceladosCliente extends JFrame implements Validador {
 		Detalle.setBackground(SystemColor.menu);
 		Detalle.setBounds(25, 386, 136, 64);
 		contentPane.add(Detalle);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(CarritosCanceladosCliente.class.getResource("/img/cancelado.png")));
+		lblNewLabel.setBounds(332, 351, 189, 99);
+		contentPane.add(lblNewLabel);
 
 		// Cargar datos
 		cargarTabla(cliente);

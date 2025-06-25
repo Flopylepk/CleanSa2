@@ -1,4 +1,4 @@
- package GUI;
+package GUI;
 
 import java.awt.EventQueue;
 
@@ -75,6 +75,11 @@ public class VerCliente extends JFrame {
 		Salir.setBackground(SystemColor.menu);
 		Salir.setBounds(477, 368, 111, 23);
 		contentPane.add(Salir);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(VerCliente.class.getResource("/img/foto_user.png")));
+		lblNewLabel_1.setBounds(384, 161, 98, 107);
+		contentPane.add(lblNewLabel_1);
 	}
 
 }

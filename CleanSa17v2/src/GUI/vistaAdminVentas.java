@@ -1,16 +1,13 @@
 package GUI;
 
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.security.PublicKey;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class vistaAdminVentas extends JFrame {
 
@@ -24,7 +21,7 @@ public class vistaAdminVentas extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					vistaAdminEnvios frame = new vistaAdminEnvios();
+					vistaAdminVentas frame = new vistaAdminVentas();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,48 +42,21 @@ public class vistaAdminVentas extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Cargar Productos");
-		btnNewButton.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			vistaCargarProducto ventana = new vistaCargarProducto();
-			ventana.setVisible(true);
-			
-			
-			}
-		});
+		JButton btnNewButton = new JButton("Cargar Stock");
 		btnNewButton.setBounds(14, 190, 125, 23);
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Actualizar stock");
-		btnNewButton.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			
-			
-			}
-		});
+		JButton btnNewButton_1 = new JButton("Cargar Producto");
 		btnNewButton_1.setBounds(153, 190, 125, 23);
 		contentPane.add(btnNewButton_1);
 		
-		
-		///////SALIR
 		JButton btnNewButton_2 = new JButton("Salir");
-		btnNewButton_2.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        LoginAdmin ventana = new LoginAdmin();
-		        ventana.setVisible(true);
-		        
-		    }
-		});
 		btnNewButton_2.setBounds(292, 190, 125, 23);
 		contentPane.add(btnNewButton_2);
 		
-		
-		
-		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(vistaAdminEnvios.class.getResource("/img/logo.png")));
+		lblNewLabel.setIcon(new ImageIcon(vistaAdminVentas.class.getResource("/img/logo.png")));
 		lblNewLabel.setBounds(55, 26, 369, 127);
 		contentPane.add(lblNewLabel);
 	}
-
 }

@@ -239,6 +239,7 @@ public class Main {
 								// logear=ventas.logIn(ventas);
 								if (logear = false) {
 									JOptionPane.showMessageDialog(null, "Error 404");
+<<<<<<< HEAD:CleanSa17v2/src/GUI/Main.java
 								} else
 
 									do {
@@ -283,6 +284,42 @@ public class Main {
 
 										}
 									} while (opcionadminventas != 6);
+=======
+								}else
+									
+									
+								do {
+									opcionadminventas=JOptionPane.showOptionDialog(null, "Menu principal, elija una opcion", null, 0, 0, null, OpcionVenta.values(), OpcionVenta.values());
+									switch (opcionadminventas) {
+								 	case 0:
+										//Cargar_productos
+										JOptionPane.showMessageDialog(null, "le vendedor podra cargar productos nuevos distinguendolos entre peligrosos y no peligrosos");
+										//Controller prodcuto, controller categoria
+										break;
+									case 1:
+										//Rellenar_stock
+										JOptionPane.showMessageDialog(null, "el vendedor podra cargar estock al ya existente");
+										break;
+									case 2:
+										//Eliminar_productos
+										JOptionPane.showMessageDialog(null, "el vendedor podra eliminar productos a la lista ya existente");
+										break;
+									case 3:
+										//Modificar_productos
+										JOptionPane.showMessageDialog(null, "el vendedor podra modificar productos a la lista ya existente");
+										break;
+									case 4:
+										//Ver_clientes
+										JOptionPane.showMessageDialog(null, "el vendedor podra ver a los clientes distinguiendolos entre empresas y generales");
+										break;
+									case 5:
+										//Ver_historial
+										JOptionPane.showMessageDialog(null, "el vendedor podra ver el historial de compras distingiendolo entre en proceso, cancelador y realizados");
+										break;
+									case 6:
+										JOptionPane.showMessageDialog(null, "nos vemos la proxima, gracias por usar CleanSA");
+										break;
+>>>>>>> main:CleanSa17v2/GUI/Main.java
 
 							case 1:
 
