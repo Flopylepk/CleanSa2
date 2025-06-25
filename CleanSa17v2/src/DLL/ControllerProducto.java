@@ -123,6 +123,18 @@ public class ControllerProducto  {
 		return false;
 	}
 	
+	public boolean eliminarProductoPorNombre(String nombre) {
+		try {
+			PreparedStatement stmt = con.prepareStatement("DELETE FROM producto WHERE nombre = ?");
+			stmt.setString(1, nombre);
+			int filas = stmt.executeUpdate();
+			return filas > 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 	        
 	        
 	        

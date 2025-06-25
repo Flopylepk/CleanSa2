@@ -79,12 +79,15 @@ public class vistaEliminarProducto extends JFrame {
 			if (!e.getValueIsAdjusting()) {
 				int row = table.getSelectedRow();
 				if (row != -1) {
-					productoSeleccionado = new Producto((String) model.getValueAt(row, 0),
-							(int) model.getValueAt(row, 2),
-							(double) model.getValueAt(row, 1),
-							(int) model.getValueAt(row, 3),
+					productoSeleccionado = new Producto(
+							(String) model.getValueAt(row, 0), 
+							(double) model.getValueAt(row, 1), 
+							(int) model.getValueAt(row, 2),    
+							(int) model.getValueAt(row, 3),    
+							0,
 							0
-					);
+						);
+
 					lblSeleccionado.setText("Seleccionado: " + productoSeleccionado.getNombre());
 					btnSiguiente.setEnabled(true);
 				}
