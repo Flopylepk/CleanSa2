@@ -7,24 +7,23 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import BLL.Carrito;
+import BLL.Producto;
 
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JList;
 
 public class verCarrito extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
+    private JTable table;
+    private JLabel lblSeleccionado;
     private JButton btnNewButton;
 
     public verCarrito(Carrito carrito) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 450, 300);
+        setBounds(100, 100, 800, 400);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -32,20 +31,32 @@ public class verCarrito extends JFrame {
 
         // Modelo de datos para la tabla
         DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("ID Carrito" + carrito.getId_carrito());
-        model.addColumn("Cliente " + carrito.getFk_cliente());
-        model.addColumn("Total compra: " + carrito.getTotal_compra());
-        
-        
+        model.addColumn("ID Carrito");
+        model.addColumn("Cliente");
+        model.addColumn("Total Compra");
+
+        // Agregar datos del carrito al modelo
+        model.addRow(new Object[] { carrito.getId_carrito(), carrito.getFk_cliente(), carrito.getTotal_compra() });
+
+        // Configuración de la tabla
+        table = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(10, 40, 760, 128);
+        contentPane.add(scrollPane);
+
+        // Etiqueta para mostrar información seleccionada
+        lblSeleccionado = new JLabel("Carrito seleccionado: ");
+        lblSeleccionado.setBounds(10, 180, 400, 20);
+        contentPane.add(lblSeleccionado);
+
         // Botón para salir
         btnNewButton = new JButton("Salir");
         btnNewButton.setBounds(10, 240, 89, 23);
-    		btnNewButton.addActionListener(new ActionListener() {
-    		    public void actionPerformed(ActionEvent e) {
-    		        LoginAdmin ventana = new LoginAdmin();
-    		        ventana.setVisible(true);    		        
-    		    }
-    		});
+        btnNewButton.addActionListener(e -> {
+            LoginAdmin ventana = new LoginAdmin();
+            ventana.setVisible(true);
+            dispose();
+        });
         contentPane.add(btnNewButton);
     }
 }

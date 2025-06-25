@@ -60,12 +60,17 @@ public class vistaAdminEnvios extends JFrame {
 		btnNewButton.setBounds(14, 190, 125, 23);
 		contentPane.add(btnNewButton);
 		
+		/////VER DETALLE CARRITO///// POSIBLE BOTON EXTRA PARA VER DETALLE DE CARRITO
+		/// JButton btnNewButton_1 = new JButton("Ver detalle carrito");
+		/// btnNewButton_1.addActionListener(new ActionListener() {
+	//public void actionPerformed(ActionEvent e) {
+      //          CarritosDetalle ventana = new CarritosDetalle();
+        //        ventana.setVisible(true);
+          //  }
+        //});
 		
 		
-		/////ENVIAR PEDIDOS/////
-		JButton btnNewButton_1 = new JButton("Enviar pedidos");
-		btnNewButton_1.setBounds(153, 190, 125, 23);
-		contentPane.add(btnNewButton_1);
+		
 		
 		
 		////SALIR/////
