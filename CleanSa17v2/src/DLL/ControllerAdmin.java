@@ -14,6 +14,7 @@ public class ControllerAdmin <T extends Administrador> implements AdministradorR
 
 	private static Connection con = Conexion.getInstance().getConnection();// Poner esto en todos los controladores
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T logIn(String nombre, String contrasena) {
 	    System.out.println("Iniciando sesión para el administrador...");
@@ -25,9 +26,11 @@ public class ControllerAdmin <T extends Administrador> implements AdministradorR
 	        PreparedStatement stmt = con.prepareStatement(
 	            "SELECT * FROM administrador WHERE nombre = ? AND contrasena = ?"
 	        );
+	        
+	        String encriptar=encriptar(contrasena);
 
-	        stmt.setString(1, nombre.trim());
-	        stmt.setString(2, contrasena.trim());
+	        stmt.setString(1, nombre);
+	        stmt.setString(2, encriptar);
 
 	        ResultSet rs = stmt.executeQuery();
 

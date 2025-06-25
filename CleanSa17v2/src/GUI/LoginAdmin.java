@@ -76,9 +76,9 @@ public LoginAdmin() {
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel LblError = new JLabel("");
-		LblError.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		LblError.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		LblError.setForeground(new Color(255, 0, 0));
-		LblError.setBounds(52, 307, 372, 33);
+		LblError.setBounds(32, 344, 372, 26);
 		contentPane.add(LblError);
 		
 		JButton btnNewButton = new JButton("Iniciar sesión");
