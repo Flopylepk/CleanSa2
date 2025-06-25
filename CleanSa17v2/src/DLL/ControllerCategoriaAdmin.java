@@ -41,4 +41,10 @@ public class ControllerCategoriaAdmin implements AdministradorRepository, Valida
         // TODO Auto-generated method stub
         return null;
     }
+
+	@Override
+	public <T> T logIn(String nombre, String contrasena) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

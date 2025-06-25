@@ -115,9 +115,9 @@ public class ControllerCarrito implements  CarritoRepository{
 	    return carrito;
 	}
 
+	
 
-	@Override
-	public LinkedList<Carrito> mostrarCarritoCancelados() {
+	public static LinkedList<Carrito> mostrarCarritoCancelados() {
 
 		LinkedList<Carrito> carrito = new LinkedList<>();
 		try {

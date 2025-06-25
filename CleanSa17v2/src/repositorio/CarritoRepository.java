@@ -1,5 +1,6 @@
 package repositorio;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import BLL.*;
@@ -7,6 +8,7 @@ import BLL.*;
 
 public interface CarritoRepository {
 	
-	void pagar(int id);
-	void cancelar(int id);
+	String pagar(int id);
+	String cancelar(int id);
+	
 }
