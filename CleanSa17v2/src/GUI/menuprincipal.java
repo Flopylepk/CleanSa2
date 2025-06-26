@@ -15,7 +15,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-import enums.Opcion1;
 import javax.swing.JList;
 import javax.swing.JTextPane;
 import javax.swing.JScrollBar;
@@ -65,14 +64,14 @@ public class menuprincipal extends JFrame {
 		lblNewLabel.setBounds(117, 205, 171, 56);
 		contentPane.add(lblNewLabel);
 		
+		JLabel lblNewLabel_1 = new JLabel("Elija que quiere ser...");
+		lblNewLabel_1.setFont(new Font("Verdana", Font.PLAIN, 14));
+		lblNewLabel_1.setBounds(140, 67, 234, 29);
+		contentPane.add(lblNewLabel_1);
+		
 		JButton btnAdministrador = new JButton("Administrador");
 		btnAdministrador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LoginAdmin loginadmin = new LoginAdmin();
-				loginadmin.setVisible(true);
-				dispose();
-
-				
 			}
 		});
 		

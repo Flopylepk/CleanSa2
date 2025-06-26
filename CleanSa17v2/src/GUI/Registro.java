@@ -18,7 +18,6 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-import enums.OpcionCliente;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
