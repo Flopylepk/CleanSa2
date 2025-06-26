@@ -105,6 +105,11 @@ public class CarritosEnviadosCliente extends JFrame implements Validador {
 		Detalle.setBackground(SystemColor.menu);
 		Detalle.setBounds(25, 386, 136, 64);
 		contentPane.add(Detalle);
+		
+		JLabel lblNewLabel = new JLabel("\r\n");
+		lblNewLabel.setIcon(new ImageIcon(CarritosEnviadosCliente.class.getResource("/img/envio.png")));
+		lblNewLabel.setBounds(262, 374, 209, 76);
+		contentPane.add(lblNewLabel);
 
 		// Cargar datos
 		cargarTabla(cliente);

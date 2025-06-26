@@ -50,6 +50,11 @@ public class vistaAdminVentas extends JFrame {
 
 		JButton btnNewButton_1 = new JButton("Actualizar stock");
 		btnNewButton_1.setBounds(210, 183, 150, 23);
+		btnNewButton_1.addActionListener(e -> {
+			vistaModificarStock ventana = new vistaModificarStock();
+			ventana.setVisible(true);
+			dispose();
+		});
 		contentPane.add(btnNewButton_1);
 
 		JButton btnNewButton_2 = new JButton("Salir");
@@ -73,10 +78,20 @@ public class vistaAdminVentas extends JFrame {
 
 		JButton ver_clientes_btn = new JButton("Ver clientes");
 		ver_clientes_btn.setBounds(30, 153, 150, 23);
+		ver_clientes_btn.addActionListener(e -> {
+			clientes ventana = new clientes(); // si tenés una vista específica para productos la podés poner acá
+			ventana.setVisible(true);
+			dispose();
+		});
 		contentPane.add(ver_clientes_btn);
 
 		JButton eliminar_productos_btn = new JButton("Eliminar producto");
 		eliminar_productos_btn.setBounds(210, 153, 150, 23);
+		eliminar_productos_btn.addActionListener(e -> {
+			vistaEliminarProducto ventana = new vistaEliminarProducto(this);
+			ventana.setVisible(true);
+			dispose();
+		});
 		contentPane.add(eliminar_productos_btn);
 
 		JButton crear_categoria_btn = new JButton("Crear categoria");

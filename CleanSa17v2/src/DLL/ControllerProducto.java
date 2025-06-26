@@ -102,30 +102,7 @@ public class ControllerProducto  {
 		}
 		}
 	
-	////FUNCION DE ELEGIR PARA USUARIOS TIPO PERSONAL 
-	public int elegirNoPeligroso() {
-		LinkedList<Producto> productos = mostrarProductosNoPeligrosos();
-        String []lista = new String[productos.size()];
-        for (int i = 0; i < productos.size(); i++) {
-        	lista[i] = productos.get(i).getNombre() +"/" + productos.get(i).getId();
-		}
-        String opcion = (String)JOptionPane.showInputDialog(null, "", "", 0,  null, lista, lista[0]);       
-        int idElegido = Integer.parseInt( opcion.split("/")[1]);
-        return idElegido;
-	}	
-////FUNCION DE ELEGIR PARA USUARIOS TIPO EMPRESA
-	public int elegir() {
-		LinkedList<Producto> productos = mostrarProductos();
-        String []lista = new String[productos.size()];
-        for (int i = 0; i < productos.size(); i++) {
-        	lista[i] = productos.get(i).getNombre() +"/" + productos.get(i).getId();
-		}
-        String opcion = (String)JOptionPane.showInputDialog(null, "", "", 0,  null, lista, lista[0]);
-        
-        
-        int idElegido = Integer.parseInt( opcion.split("/")[1]);
-        return idElegido;
-	}
+
 	
 	public void cargarStock (int cantidad) {
 			
@@ -146,6 +123,18 @@ public class ControllerProducto  {
 		return false;
 	}
 	
+	public boolean eliminarProductoPorNombre(String nombre) {
+		try {
+			PreparedStatement stmt = con.prepareStatement("DELETE FROM producto WHERE nombre = ?");
+			stmt.setString(1, nombre);
+			int filas = stmt.executeUpdate();
+			return filas > 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 	        
 	        
 	        

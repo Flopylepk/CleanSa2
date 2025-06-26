@@ -81,8 +81,8 @@ public class OpcionesCarritosCliente extends JFrame {
 		JButton Pagado = new JButton("Pagado");
 		Pagado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ControllerCarrito controller=new ControllerCarrito();
-				List<Carrito> carrito=controller.mostrarCarritoporClientePagados(cliente.getId());
+				
+				List<Carrito> carrito=ControllerCarrito.mostrarCarritoporClientePagados(cliente.getId());
 				if (carrito.isEmpty()) {
 					LblError.setText("Error. No se encontraron carritos pagados");
 				} else {
@@ -100,8 +100,7 @@ public class OpcionesCarritosCliente extends JFrame {
 		JButton Cancelado = new JButton("Cancelado");
 		Cancelado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ControllerCarrito controller=new ControllerCarrito();
-				List<Carrito> carrito=controller.mostrarCarritoporClienteCancelados(cliente.getId());
+				List<Carrito> carrito=ControllerCarrito.mostrarCarritoporClienteCancelados(cliente.getId());
 				if (carrito.isEmpty()) {
 					LblError.setText("Error. No se encontraron carritos cancelados");
 				} else {

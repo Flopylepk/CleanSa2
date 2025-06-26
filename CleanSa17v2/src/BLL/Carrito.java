@@ -26,14 +26,30 @@ public class Carrito {
 	public Carrito() {
 		super();
 	}
+	public Carrito(int id_carrito, Date fecha, String estado, double total_compra, int codigo_envio, int fk_cliente) {
+	    this.id_carrito = id_carrito;
+	    this.fecha = fecha;
+	    this.estado = estado;
+	    this.total_compra = total_compra;
+	    this.codigo_envio = codigo_envio;
+	    this.fk_cliente = fk_cliente;
+	}
 	
 
-		this.id_carrito= id_carrito;
-	
+	public Cliente getCliente() {
+		return cliente;
 	}
+
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
 	public int getId_carrito() {
 		return id_carrito;
 	}
+
 
 	public void setId_carrito(int id_carrito) {
 		this.id_carrito = id_carrito;

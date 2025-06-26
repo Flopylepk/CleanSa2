@@ -55,7 +55,7 @@ public class CompraExitosa extends JFrame {
 		contentPane.add(SI2);
 		
 		JButton Volver = new JButton("Volver");
-		Volver.setBounds(273, 282, 137, 20);
+		Volver.setBounds(236, 282, 137, 20);
 		Volver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (cliente.getTipo()==1) {
@@ -88,7 +88,12 @@ public class CompraExitosa extends JFrame {
 		});
 		Salir.setFont(new Font("Verdana", Font.PLAIN, 12));
 		Salir.setBackground(SystemColor.menu);
-		Salir.setBounds(82, 282, 137, 20);
+		Salir.setBounds(56, 282, 137, 20);
 		contentPane.add(Salir);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(CompraExitosa.class.getResource("/img/carrito1.png")));
+		lblNewLabel.setBounds(394, 269, 106, 74);
+		contentPane.add(lblNewLabel);
 	}
 }

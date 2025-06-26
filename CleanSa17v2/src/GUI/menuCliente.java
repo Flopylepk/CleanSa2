@@ -1,13 +1,19 @@
 package GUI;
 
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+
+
+import java.awt.SystemColor;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 
@@ -16,6 +22,9 @@ public class menuCliente extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
+	/**
+	 * Launch the application.
+	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -29,63 +38,67 @@ public class menuCliente extends JFrame {
 		});
 	}
 
+	/**
+	 * Create the frame.
+	 */
 	public menuCliente() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 570, 350); // Más espacio
+		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(SystemColor.controlShadow);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		// Logo centrado arriba
-		JLabel logoLabel = new JLabel("");
-		logoLabel.setIcon(new ImageIcon(menuCliente.class.getResource("/img/logo.png")));
-		logoLabel.setBounds(100, 10, 369, 100);
-		contentPane.add(logoLabel);
-
-		// Título
-		JLabel lblNewLabel = new JLabel("¿Qué desea realizar?");
-		lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 16));
-		lblNewLabel.setBounds(190, 120, 250, 30);
+		
+		JLabel lblNewLabel = new JLabel("Que quiere realizar");
+		lblNewLabel.setFont(new Font("Verdana", Font.ITALIC, 14));
+		lblNewLabel.setBounds(138, 67, 141, 33);
 		contentPane.add(lblNewLabel);
-
-		// Botón Registro
+		
 		JButton btnRegistro = new JButton("Registrarse");
-		btnRegistro.setFont(new Font("Verdana", Font.PLAIN, 13));
-		btnRegistro.setBounds(80, 180, 140, 30);
 		btnRegistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				Registro registro = new Registro();
-				registro.setVisible(true);
+				registro.setVisible(true);;
 				dispose();
 			}
 		});
+		btnRegistro.setBackground(SystemColor.menu);
+		btnRegistro.setFont(new Font("Verdana", Font.ITALIC, 11));
+		btnRegistro.setBounds(49, 129, 149, 23);
 		contentPane.add(btnRegistro);
-
-		// Botón Login
+		
 		JButton btnLogin = new JButton("Login");
-		btnLogin.setFont(new Font("Verdana", Font.PLAIN, 13));
-		btnLogin.setBounds(220, 180, 140, 30);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Login login = new Login();
-				login.setVisible(true);
+				login.setVisible(true);;
 				dispose();
 			}
 		});
+		btnLogin.setFont(new Font("Verdana", Font.ITALIC, 11));
+		btnLogin.setBackground(SystemColor.menu);
+		btnLogin.setBounds(237, 129, 149, 23);
 		contentPane.add(btnLogin);
-
-		// Botón Salir
-		JButton btnSalir = new JButton("Salir");
-		btnSalir.setFont(new Font("Verdana", Font.PLAIN, 13));
-		btnSalir.setBounds(360, 180, 140, 30);
-		btnSalir.addActionListener(new ActionListener() {
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(menuCliente.class.getResource("/img/logochico.png")));
+		lblNewLabel_1.setBounds(273, 228, 177, 33);
+		contentPane.add(lblNewLabel_1);
+		
+		JButton btnNewButton = new JButton("salir");
+		btnNewButton.setBackground(SystemColor.menu);
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				menuprincipal Menupricipal = new menuprincipal();
-				Menupricipal.setVisible(true);
+				Menupricipal.setVisible(true);;
 				dispose();
+				
 			}
 		});
-		contentPane.add(btnSalir);
+		btnNewButton.setBounds(20, 228, 69, 23);
+		contentPane.add(btnNewButton);
 	}
-}
+} 
