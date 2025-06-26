@@ -65,11 +65,6 @@ public class menuprincipal extends JFrame {
 		lblNewLabel.setBounds(117, 205, 171, 56);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Elija que quiere ser...");
-		lblNewLabel_1.setFont(new Font("Verdana", Font.PLAIN, 14));
-		lblNewLabel_1.setBounds(140, 67, 234, 29);
-		contentPane.add(lblNewLabel_1);
-		
 		JButton btnAdministrador = new JButton("Administrador");
 		btnAdministrador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
